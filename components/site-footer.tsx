@@ -36,11 +36,11 @@ export function SiteFooter() {
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Brand column */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-2.5">
-              <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <Link href="/" className="inline-flex items-center gap-2.5 transition-opacity hover:opacity-80">
+              <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground glow-sm">
                 <Terminal className="size-4" />
               </div>
-              <span className="font-semibold tracking-tight">Six1Five Devs</span>
+              <span className="font-semibold tracking-tight text-foreground">Six1Five Devs</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground leading-relaxed">
               Building in public. Shipping real tools. Documenting the journey for developers and indie hackers.

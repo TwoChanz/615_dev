@@ -31,7 +31,7 @@ export function SiteHeader() {
             href="/" 
             className="group flex items-center gap-2.5 transition-opacity hover:opacity-80"
           >
-            <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+            <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground glow-sm">
               <Terminal className="size-4" />
             </div>
             <span className="font-semibold tracking-tight text-foreground">
@@ -102,10 +102,10 @@ export function SiteHeader() {
                 className="flex items-center gap-2.5"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground glow-sm">
                   <Terminal className="size-4" />
                 </div>
-                <span className="font-semibold tracking-tight">Six1Five Devs</span>
+                <span className="font-semibold tracking-tight text-foreground">Six1Five Devs</span>
               </Link>
               <Button
                 variant="ghost"
