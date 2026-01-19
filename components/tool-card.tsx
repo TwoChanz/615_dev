@@ -14,6 +14,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { getToolIcon } from "@/components/icons/tool-icons"
 
 interface ToolCardProps {
   tool: Tool
@@ -42,28 +43,36 @@ const statusConfig: Record<ToolStatus, { label: string; className: string }> = {
 export function ToolCard({ tool, className }: ToolCardProps) {
   const status = statusConfig[tool.status]
   const isAccessible = tool.status !== "coming-soon" && !tool.comingSoon
+  const ToolIcon = getToolIcon(tool.slug)
 
   return (
     <Card
       className={cn(
-        "group relative flex flex-col overflow-hidden transition-all duration-200 hover:border-primary/40 hover:shadow-md",
+        "group relative flex flex-col overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5",
         className
       )}
     >
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-4">
-          <div>
-            <CardTitle className="text-lg text-foreground">{tool.name}</CardTitle>
-            <Badge
-              variant="outline"
-              className={cn("mt-1.5 font-medium", status.className)}
-            >
-              {status.label}
-            </Badge>
+          <div className="flex items-start gap-3">
+            {ToolIcon && (
+              <div className="shrink-0 rounded-lg overflow-hidden shadow-md shadow-primary/10 transition-transform duration-300 group-hover:scale-105">
+                <ToolIcon size="sm" />
+              </div>
+            )}
+            <div>
+              <CardTitle className="text-lg text-foreground">{tool.name}</CardTitle>
+              <Badge
+                variant="outline"
+                className={cn("mt-1.5 font-medium", status.className)}
+              >
+                {status.label}
+              </Badge>
+            </div>
           </div>
         </div>
         {tool.tagline && (
-          <p className="mt-2 text-sm font-medium text-primary">{tool.tagline}</p>
+          <p className="mt-3 text-sm font-medium text-gradient">{tool.tagline}</p>
         )}
       </CardHeader>
 

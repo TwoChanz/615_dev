@@ -3,11 +3,12 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, Terminal } from "lucide-react"
+import { Menu, X } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { BrandLogo } from "@/components/icons/brand-logo"
 
 const navigation = [
   { name: "Tools", href: "/tools" },
@@ -27,16 +28,11 @@ export function SiteHeader() {
       <nav className="container-page flex items-center justify-between h-16">
         {/* Logo */}
         <div className="flex lg:flex-1">
-          <Link 
-            href="/" 
-            className="group flex items-center gap-2.5 transition-opacity hover:opacity-80"
+          <Link
+            href="/"
+            className="group transition-opacity hover:opacity-80"
           >
-            <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground glow-sm">
-              <Terminal className="size-4" />
-            </div>
-            <span className="font-semibold tracking-tight text-foreground">
-              Six1Five Devs
-            </span>
+            <BrandLogo size="sm" showText />
           </Link>
         </div>
         
@@ -97,15 +93,11 @@ export function SiteHeader() {
           />
           <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm overflow-y-auto bg-background border-l border-border shadow-xl">
             <div className="flex items-center justify-between px-6 h-16 border-b border-border">
-              <Link 
-                href="/" 
-                className="flex items-center gap-2.5"
+              <Link
+                href="/"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground glow-sm">
-                  <Terminal className="size-4" />
-                </div>
-                <span className="font-semibold tracking-tight text-foreground">Six1Five Devs</span>
+                <BrandLogo size="sm" showText />
               </Link>
               <Button
                 variant="ghost"

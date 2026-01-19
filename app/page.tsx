@@ -27,24 +27,25 @@ export default function HomePage() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative overflow-hidden border-b border-border">
-        {/* Subtle gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/30" />
+        {/* Gradient background with purple undertone */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-secondary/5" />
 
-        {/* Glow effect */}
-        <div className="absolute left-1/2 top-0 -z-10 -translate-x-1/2 -translate-y-1/2 size-[800px] rounded-full bg-primary/5 blur-[120px]" />
+        {/* Dual glow effects - cyan and purple */}
+        <div className="absolute left-1/4 top-0 -z-10 -translate-x-1/2 -translate-y-1/2 size-[600px] rounded-full bg-primary/8 blur-[120px]" />
+        <div className="absolute right-1/4 top-1/4 -z-10 translate-x-1/2 size-[500px] rounded-full bg-secondary/10 blur-[100px]" />
 
         <div className="container-page relative py-24 sm:py-32 lg:py-40">
           <div className="mx-auto max-w-3xl text-center">
             <Badge
               variant="secondary"
-              className="mb-6 border border-primary/20 bg-primary/10 text-primary"
+              className="mb-6 border border-primary/30 bg-primary/10 text-primary"
             >
               Building in Public
             </Badge>
 
             <h1 className="text-foreground">
               Build. Ship.{" "}
-              <span className="text-primary">Document.</span>
+              <span className="text-gradient">Document.</span>
             </h1>
 
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl">
@@ -223,14 +224,14 @@ function FeatureCard({
   return (
     <Link
       href={href}
-      className="group flex flex-col rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:border-primary/40 hover:shadow-md"
+      className="group flex flex-col rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5"
     >
-      <div className="flex size-11 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors duration-200 group-hover:bg-primary group-hover:text-primary-foreground">
+      <div className="flex size-11 items-center justify-center rounded-lg bg-gradient-to-br from-primary/15 to-secondary/15 text-primary transition-all duration-300 group-hover:from-primary group-hover:to-secondary group-hover:text-primary-foreground group-hover:shadow-lg group-hover:shadow-primary/20">
         {icon}
       </div>
       <h3 className="mt-4 text-lg font-semibold text-foreground">{title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
-      <div className="mt-4 flex items-center text-sm font-medium text-primary">
+      <div className="mt-4 flex items-center text-sm font-medium text-primary group-hover:text-gradient">
         Explore
         <ArrowRight className="ml-1.5 size-4 transition-transform duration-200 group-hover:translate-x-1" />
       </div>
