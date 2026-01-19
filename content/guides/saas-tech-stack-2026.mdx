@@ -1,0 +1,348 @@
+---
+title: "The Optimal SaaS Tech Stack for Solo Developers in 2026"
+description: "A no-nonsense guide to choosing your SaaS tech stack. Benchmarks, costs, and recommendations from someone who's shipped multiple products."
+date: "2026-01-25"
+author: "Six1Five"
+type: "guide"
+pillar: false
+pillarLink: "indie-saas-guide"
+targetKeyword: "saas tech stack"
+searchIntent: "commercial"
+readingTime: "15 min read"
+tags: ["saas", "nextjs", "tech-stack", "vercel", "supabase"]
+featured: true
+---
+
+# The Optimal SaaS Tech Stack for Solo Developers in 2026
+
+Your tech stack should help you ship fast, not slow you down with decisions. After building multiple SaaS products, I've landed on a stack that optimizes for the only metric that matters: **time to revenue**.
+
+This guide breaks down every choice with honest pros, cons, and alternatives.
+
+## The 2026 Indie SaaS Stack
+
+Here's what I recommend and use:
+
+| Layer | Choice | Alternatives |
+|-------|--------|--------------|
+| **Framework** | Next.js 14+ | Remix, SvelteKit |
+| **Styling** | Tailwind + shadcn/ui | Chakra, Mantine |
+| **Database** | Supabase | Neon, PlanetScale |
+| **ORM** | Drizzle | Prisma, raw SQL |
+| **Auth** | Supabase Auth | Auth.js, Clerk |
+| **Payments** | Stripe | Lemon Squeezy |
+| **Hosting** | Vercel | Railway, Render |
+| **Email** | Resend | Postmark, SendGrid |
+| **Analytics** | PostHog | Plausible, Amplitude |
+
+Let's break down each choice.
+
+---
+
+## Framework: Next.js
+
+**Why Next.js?**
+
+- Server components reduce client bundle
+- Server actions simplify data mutations
+- App Router is production-ready
+- Incredible DX with fast refresh
+- Deploy to Vercel in seconds
+- Massive ecosystem and community
+
+**When to consider alternatives:**
+
+- **Remix** - If you prefer loaders/actions pattern
+- **SvelteKit** - If you want smaller bundles, different paradigm
+- **Astro** - If mostly static content
+
+**My take:** Next.js is the safe, productive choice. The ecosystem, tooling, and deployment story are unmatched.
+
+---
+
+## Styling: Tailwind + shadcn/ui
+
+**Why this combo?**
+
+- **Tailwind** - Utility classes that ship with your code
+- **shadcn/ui** - Copy-paste accessible components
+
+Together: Beautiful UIs without fighting CSS or learning a component library's opinions.
+
+**The shadcn/ui advantage:**
+
+```tsx
+// You own the code - customize freely
+import { Button } from "@/components/ui/button"
+
+<Button variant="outline" size="sm">
+  Click me
+</Button>
+```
+
+**Alternatives:**
+
+- **Chakra UI** - More opinionated, good for teams
+- **Mantine** - Feature-rich, heavier
+- **Plain CSS/CSS Modules** - If you enjoy pain
+
+---
+
+## Database: Supabase
+
+**Why Supabase?**
+
+- PostgreSQL with a great dashboard
+- Auth, storage, realtime built in
+- Generous free tier
+- Edge functions for serverless
+- Row Level Security for data protection
+
+**Setup in Next.js:**
+
+```typescript
+import { createBrowserClient } from '@supabase/ssr'
+
+export const supabase = createBrowserClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
+```
+
+**Alternatives:**
+
+- **Neon** - Serverless Postgres, branching, great DX
+- **PlanetScale** - MySQL, excellent branching
+- **Turso** - SQLite at the edge
+
+**My take:** Supabase gives you auth + database + storage in one. For MVPs, this bundle is unbeatable.
+
+---
+
+## ORM: Drizzle
+
+**Why Drizzle?**
+
+- Type-safe queries
+- Lightweight (unlike Prisma)
+- SQL-like syntax
+- Great migrations
+
+**Example:**
+
+```typescript
+import { drizzle } from 'drizzle-orm/postgres-js'
+import { users } from './schema'
+
+const db = drizzle(connection)
+
+// Type-safe queries
+const allUsers = await db.select().from(users)
+const user = await db.select().from(users).where(eq(users.id, 1))
+```
+
+**Alternatives:**
+
+- **Prisma** - More features, heavier, slower cold starts
+- **Kysely** - Type-safe query builder
+- **Raw SQL** - Full control, no abstraction
+
+**My take:** Drizzle hits the sweet spot of type safety without Prisma's overhead.
+
+---
+
+## Auth: Supabase Auth
+
+**Why Supabase Auth?**
+
+- Comes free with Supabase
+- Social login, magic links, email/password
+- JWT tokens that work with RLS
+- Good Next.js integration with `@supabase/ssr`
+
+**Basic setup:**
+
+```typescript
+// Sign up
+const { data, error } = await supabase.auth.signUp({
+  email: 'user@example.com',
+  password: 'password',
+})
+
+// Sign in
+const { data, error } = await supabase.auth.signInWithPassword({
+  email: 'user@example.com',
+  password: 'password',
+})
+```
+
+**Alternatives:**
+
+- **Clerk** - Best DX, more expensive
+- **Auth.js** - Flexible, more setup
+- **Lucia** - DIY approach, full control
+
+---
+
+## Payments: Stripe
+
+**Why Stripe?**
+
+- Industry standard
+- Subscription management built in
+- Customer portal (users manage their own billing)
+- Webhooks for all events
+- Test mode that actually works
+
+**Essential integrations:**
+
+1. **Checkout Session** - Hosted payment page
+2. **Customer Portal** - Self-service billing
+3. **Webhooks** - Handle subscription events
+
+**Alternatives:**
+
+- **Lemon Squeezy** - Handles taxes globally (MoR)
+- **Paddle** - Similar to Lemon Squeezy
+
+**My take:** Stripe for US/simple international. Lemon Squeezy if tax handling is your nightmare.
+
+---
+
+## Hosting: Vercel
+
+**Why Vercel?**
+
+- Deploy with `git push`
+- Preview deployments on every PR
+- Edge functions worldwide
+- Built by the Next.js team
+- Generous free tier
+
+**Alternatives:**
+
+- **Railway** - Great for backends, databases
+- **Render** - Good all-around platform
+- **Fly.io** - Edge deployment, more control
+
+**Cost at scale:**
+
+| Stage | Monthly Cost |
+|-------|-------------|
+| Hobby | $0 |
+| Launching | $20 |
+| Growing | $50-150 |
+| Scale | $150+ |
+
+---
+
+## Email: Resend
+
+**Why Resend?**
+
+- Built for developers
+- React email components
+- Simple API
+- Good deliverability
+- Generous free tier (3000/month)
+
+**Example:**
+
+```typescript
+import { Resend } from 'resend'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
+
+await resend.emails.send({
+  from: 'hello@yoursaas.com',
+  to: 'user@example.com',
+  subject: 'Welcome!',
+  react: WelcomeEmail({ name: 'User' }),
+})
+```
+
+---
+
+## The Complete Stack Cost
+
+### Free Tier (MVP)
+
+| Service | Free Tier |
+|---------|-----------|
+| Vercel | $0 (hobby) |
+| Supabase | $0 (500MB, 50K auth users) |
+| Stripe | 2.9% + $0.30 per transaction |
+| Resend | $0 (3K emails/month) |
+| PostHog | $0 (1M events/month) |
+| **Total** | **$0 + Stripe fees** |
+
+### Growth Stage ($1K-10K MRR)
+
+| Service | Cost |
+|---------|------|
+| Vercel Pro | $20/month |
+| Supabase Pro | $25/month |
+| Resend | $20/month |
+| PostHog | $0-50/month |
+| Domain | $15/year |
+| **Total** | **~$70-120/month** |
+
+---
+
+## Stack Decision Flowchart
+
+```
+Do you need auth + database + storage?
+├─ Yes → Supabase
+└─ No → Neon/PlanetScale + Auth.js
+
+Do you need global tax handling?
+├─ Yes → Lemon Squeezy
+└─ No → Stripe
+
+Do you value DX over cost?
+├─ Yes → Vercel
+└─ No → Railway/Render
+```
+
+---
+
+## My Exact Stack
+
+For reference, here's what powers my products:
+
+- **Framework:** Next.js 14 (App Router)
+- **Styling:** Tailwind CSS + shadcn/ui
+- **Database:** Supabase (PostgreSQL)
+- **ORM:** Drizzle
+- **Auth:** Supabase Auth
+- **Payments:** Stripe
+- **Email:** Resend
+- **Hosting:** Vercel
+- **Analytics:** PostHog
+- **Error tracking:** Sentry
+- **Domains:** Cloudflare
+
+---
+
+## Next Steps
+
+1. **Set up your stack** with the free tiers
+2. **Clone a starter template** to save setup time
+3. **Focus on your product**, not infrastructure
+
+<AffiliateBlock 
+  title="Skip the setup"
+  description="AppPilot comes with this entire stack pre-configured. Auth, billing, dashboard—ready to customize."
+  product="apppilot"
+/>
+
+---
+
+## Related Reading
+
+<ArticleGrid>
+  <ArticleCard slug="indie-saas-guide" />
+  <ArticleCard slug="validate-saas-idea-weekend" />
+  <ArticleCard slug="stripe-subscriptions-nextjs" />
+</ArticleGrid>

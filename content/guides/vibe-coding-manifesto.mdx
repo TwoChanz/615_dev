@@ -1,0 +1,352 @@
+---
+title: "Vibe Coding: Building Software with AI as Your Pair Programmer"
+description: "The art of coding with AI. How to think, prompt, and iterate when AI handles the syntax and you handle the vision."
+date: "2026-05-01"
+author: "Six1Five"
+type: "guide"
+pillar: true
+targetKeyword: "vibe coding"
+searchIntent: "informational"
+readingTime: "20 min read"
+tags: ["vibe-coding", "ai", "cursor", "productivity", "future"]
+featured: true
+toc:
+  - id: "introduction"
+    title: "What is Vibe Coding?"
+  - id: "mindset"
+    title: "The Vibe Coder Mindset"
+  - id: "workflow"
+    title: "The Workflow"
+  - id: "prompting"
+    title: "Prompting for Code"
+  - id: "boundaries"
+    title: "Knowing the Boundaries"
+  - id: "future"
+    title: "The Future"
+relatedArticles:
+  - slug: "ai-pair-programming-workflow"
+    type: "blog"
+  - slug: "prompt-engineering-for-code"
+    type: "guide"
+  - slug: "v0-to-production"
+    type: "guide"
+monetization:
+  - type: "affiliate"
+    tools: ["Cursor", "v0", "Claude"]
+---
+
+# Vibe Coding: Building Software with AI as Your Pair Programmer
+
+Something fundamental has shifted in how we write software. The best developers aren't the fastest typists anymore—they're the best collaborators with AI.
+
+This is vibe coding: the art of building software by describing intent, iterating through conversation, and letting AI handle the syntax while you focus on the vision.
+
+<TableOfContents items={toc} />
+
+## What is Vibe Coding? {#introduction}
+
+Vibe coding is a new paradigm for software development where:
+
+- **You describe what you want** in natural language
+- **AI generates the implementation** based on your description
+- **You iterate through conversation** until it's right
+- **You focus on architecture and decisions** while AI handles details
+
+It's not about replacing coding skills—it's about augmenting them. The developers who thrive in this era understand both traditional programming AND how to effectively collaborate with AI.
+
+### The Spectrum
+
+```
+Pure Manual Coding ←──────────────→ Pure AI Generation
+                      ↑
+                  Vibe Coding
+           (Human intent + AI execution)
+```
+
+You're still making all the decisions. You're still responsible for quality. But the mechanics of implementation? That's increasingly handled by AI.
+
+<Callout type="info">
+The term "vibe coding" captures the essence: you set the vibe—the direction, the feel, the requirements—and AI helps manifest it into code.
+</Callout>
+
+---
+
+## The Vibe Coder Mindset {#mindset}
+
+To vibe code effectively, you need to shift how you think about development.
+
+### Old Mindset vs. New Mindset
+
+| Old Mindset | Vibe Coder Mindset |
+|-------------|-------------------|
+| "Let me write this function" | "Let me describe what this function needs to do" |
+| "I need to remember the syntax" | "I need to clearly express the intent" |
+| "I'll debug by reading line by line" | "I'll explain the bug and ask for solutions" |
+| "Let me look up the API docs" | "Let me ask how to use this API" |
+
+### Core Principles
+
+1. **Think in outcomes, not code**
+   - What should happen?
+   - What are the edge cases?
+   - What constraints exist?
+
+2. **Iterate rapidly**
+   - First output is rarely perfect
+   - Refine through conversation
+   - Small adjustments, not rewrites
+
+3. **Stay in control**
+   - Review all generated code
+   - Understand what's being written
+   - Don't accept magic you can't explain
+
+4. **Trust but verify**
+   - AI makes mistakes
+   - Test the output
+   - Security-critical code needs extra scrutiny
+
+---
+
+## The Workflow {#workflow}
+
+Here's my actual workflow for building features with AI.
+
+### Phase 1: Planning
+
+Before touching any AI tool:
+
+1. **Define the outcome**
+   - What exactly should this do?
+   - What does success look like?
+
+2. **Identify constraints**
+   - Existing patterns in codebase
+   - Technical limitations
+   - Performance requirements
+
+3. **Break it down**
+   - What are the logical pieces?
+   - What order makes sense?
+
+### Phase 2: Generation
+
+Now engage the AI:
+
+```markdown
+I need to build [feature] that does [specific behavior].
+
+Context:
+- Using Next.js 14 with App Router
+- Database is Supabase with these tables: [tables]
+- Auth is already set up with [method]
+
+Requirements:
+- [Requirement 1]
+- [Requirement 2]
+- Handle these edge cases: [cases]
+
+Start with [specific first step].
+```
+
+### Phase 3: Iteration
+
+The first output is a starting point:
+
+```markdown
+This is good, but:
+- The error handling should use [pattern]
+- Add loading states
+- Extract this logic into a hook
+
+Update the code with these changes.
+```
+
+### Phase 4: Integration
+
+Once the code is right:
+
+1. **Review thoroughly**
+2. **Test edge cases**
+3. **Commit with clear message**
+4. **Document if complex**
+
+<RelatedArticle 
+  slug="ai-pair-programming-workflow" 
+  title="My AI Pair Programming Workflow: From Idea to Deployed"
+  description="Detailed walkthrough of how I ship features with AI assistance."
+/>
+
+---
+
+## Prompting for Code {#prompting}
+
+The quality of your prompts determines the quality of the output.
+
+### The CONTEXT Framework
+
+**C**ontext - What's the environment?
+**O**utcome - What should happen?
+**N**uances - What edge cases exist?
+**T**echnical constraints - What patterns/tools to use?
+**E**xamples - Any similar code to reference?
+**X**tra - Any other relevant info?
+
+### Example: Good vs. Bad Prompts
+
+**Bad prompt:**
+```
+Make a login form
+```
+
+**Good prompt:**
+```
+Create a login form component for Next.js 14 with these specs:
+
+Context:
+- Using shadcn/ui components
+- Auth through Supabase auth helpers
+- App Router with server actions
+
+Requirements:
+- Email and password fields
+- Client-side validation with Zod
+- Server action for submission
+- Loading state during submission
+- Error display for failed login
+- Redirect to /dashboard on success
+- "Forgot password" link to /forgot-password
+
+Style:
+- Card container with subtle border
+- Centered on page
+- Match existing auth pages
+
+Return the component and the server action separately.
+```
+
+### Prompting Patterns
+
+**For new features:**
+```
+Build [feature] that [behavior].
+Tech stack: [stack]
+Pattern to follow: [reference]
+```
+
+**For debugging:**
+```
+This code has a bug: [description of bug]
+Expected: [behavior]
+Actual: [what happens]
+Here's the code: [code]
+What's wrong and how do I fix it?
+```
+
+**For refactoring:**
+```
+Refactor this code to:
+- [Improvement 1]
+- [Improvement 2]
+Maintain the same functionality.
+[code]
+```
+
+<RelatedArticle 
+  slug="prompt-engineering-for-code" 
+  title="Prompt Engineering for Code: Get Better AI Output Every Time"
+  description="Advanced prompting techniques for code generation."
+/>
+
+---
+
+## Knowing the Boundaries {#boundaries}
+
+AI isn't magic. Know where it excels and where it fails.
+
+### Where AI Excels
+
+- **Boilerplate** - Forms, CRUD, standard patterns
+- **Syntax** - API usage, language features
+- **Transformations** - Refactoring, converting formats
+- **Common problems** - Well-documented solutions
+- **Explanation** - Understanding existing code
+
+### Where AI Struggles
+
+- **Novel architecture** - Truly new patterns
+- **Deep domain logic** - Complex business rules
+- **Security-critical code** - Auth, encryption, permissions
+- **Performance optimization** - Requires profiling
+- **System design** - High-level decisions
+
+### Red Flags
+
+Stop and review carefully when:
+
+- AI suggests code you don't understand
+- Security or auth logic is generated
+- Performance-critical paths
+- Code looks overly complex
+- Different approach than codebase patterns
+
+<RelatedArticle 
+  slug="when-not-to-use-ai-coding" 
+  title="When NOT to Use AI for Coding (And What to Do Instead)"
+  description="Understanding AI limitations saves debugging time."
+/>
+
+---
+
+## The Future {#future}
+
+Vibe coding is the beginning, not the end.
+
+### What's Coming
+
+- **Better context understanding** - AI that knows your full codebase
+- **Autonomous agents** - AI that can plan and execute multi-step tasks
+- **Real-time collaboration** - AI in your IDE, PR reviews, documentation
+- **Domain-specific models** - AI trained on your patterns and preferences
+
+### How to Prepare
+
+1. **Master the fundamentals** - Understanding is still crucial
+2. **Practice prompting** - It's a skill that improves
+3. **Stay updated** - Tools evolve rapidly
+4. **Build intuition** - Know when to trust, when to verify
+
+### The Vibe Coder Advantage
+
+The developers who embrace this shift will:
+
+- Ship 2-10x faster
+- Focus on higher-level problems
+- Reduce mundane work
+- Stay relevant as tools improve
+
+Those who resist will find themselves competing with developers who have AI as a force multiplier.
+
+---
+
+## Start Vibe Coding Today
+
+1. **Get Cursor** or upgrade your AI tooling
+2. **Practice the CONTEXT framework** on your next feature
+3. **Iterate consciously** - refine prompts, learn what works
+
+<NewsletterCTA 
+  title="Master vibe coding"
+  description="Weekly techniques for AI-augmented development."
+/>
+
+---
+
+## Related Articles
+
+<ArticleGrid>
+  <ArticleCard slug="ai-pair-programming-workflow" />
+  <ArticleCard slug="prompt-engineering-for-code" />
+  <ArticleCard slug="v0-to-production" />
+  <ArticleCard slug="when-not-to-use-ai-coding" />
+</ArticleGrid>

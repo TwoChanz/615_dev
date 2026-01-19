@@ -1,0 +1,316 @@
+---
+title: "How to Validate Your SaaS Idea in One Weekend"
+description: "A step-by-step framework for testing your SaaS idea before writing any code. Templates, scripts, and real examples included."
+date: "2026-01-22"
+author: "Six1Five"
+type: "guide"
+pillar: false
+pillarLink: "indie-saas-guide"
+targetKeyword: "validate saas idea"
+searchIntent: "informational"
+readingTime: "12 min read"
+tags: ["saas", "validation", "indie-hacker", "startup"]
+featured: false
+---
+
+# How to Validate Your SaaS Idea in One Weekend
+
+The graveyard of failed SaaS products is filled with "great ideas" that nobody wanted to pay for. Don't join them.
+
+This guide walks you through my weekend validation framework—the same process I use before committing to any new project. By Sunday night, you'll know if your idea is worth pursuing.
+
+## Why Weekend Validation?
+
+Most developers spend months building before getting real feedback. That's backwards.
+
+**The old way:**
+```
+Idea → Build for 3 months → Launch → "Why isn't anyone signing up?"
+```
+
+**The validation way:**
+```
+Idea → Validate in 48 hours → Build only if validated
+```
+
+You can't validate everything in a weekend, but you can answer the critical question: **Is there a market willing to pay for this?**
+
+---
+
+## Friday Night: Problem Research (2-3 hours)
+
+Before validating your solution, validate the problem.
+
+### Step 1: Define the Problem Clearly
+
+Write one sentence that describes the problem you're solving:
+
+```
+[Target user] struggles with [specific problem] when trying to [goal],
+which causes [negative outcome].
+```
+
+**Example:**
+> Solo developers struggle with tracking multiple SaaS subscriptions when trying to manage expenses, which causes them to overpay and miss cancellation windows.
+
+### Step 2: Find Problem Evidence
+
+Look for proof this problem exists and matters:
+
+**Where to look:**
+- Reddit: r/SaaS, r/entrepreneur, r/[your niche]
+- Twitter/X: Search for complaints
+- Indie Hackers: Forum discussions
+- Product Hunt: Comment sections on competitors
+- G2/Capterra: Negative reviews of similar tools
+
+**What to look for:**
+- Repeated complaints about the same issue
+- Workarounds people have built
+- "I wish there was..." statements
+- People asking for recommendations
+
+**Document everything:**
+
+| Source | Quote | Link | Sentiment |
+|--------|-------|------|-----------|
+| Reddit | "I spent 2 hours this month tracking subscriptions" | [link] | Frustrated |
+| Twitter | "Just got charged for a SaaS I forgot to cancel" | [link] | Annoyed |
+
+### Step 3: Assess Existing Solutions
+
+Who else is solving this problem?
+
+- Direct competitors
+- Adjacent tools that partially solve it
+- Manual workarounds
+
+**Key questions:**
+- Why might people be unhappy with current solutions?
+- What gap could you fill?
+- Is the market growing or shrinking?
+
+---
+
+## Saturday Morning: Landing Page (3-4 hours)
+
+Create a simple landing page to test interest. Don't build anything—just capture intent.
+
+### Minimum Viable Landing Page
+
+You need:
+1. **Clear headline** describing the benefit
+2. **Problem statement** they'll relate to
+3. **Solution preview** (can be mockup)
+4. **Email capture** for waitlist
+5. **Optional: Pricing tiers** (to test willingness to pay)
+
+### Tools for Quick Landing Pages
+
+- **v0** - Describe your page, get code instantly
+- **Carrd** - No-code, dead simple
+- **Framer** - Beautiful, flexible
+- **Webflow** - More complex, more control
+
+### Copy Framework
+
+```markdown
+# [Benefit-focused headline]
+
+[One sentence problem statement that triggers recognition]
+
+[Product name] helps you [main benefit] so you can [desired outcome].
+
+## How it works
+1. [Simple step 1]
+2. [Simple step 2]  
+3. [Simple step 3]
+
+## Join the waitlist
+Be first to know when we launch.
+[Email input] [Join button]
+
+Coming [Q1 2026] · [Optional: Starting at $X/month]
+```
+
+### Adding Pricing (Optional but Recommended)
+
+Including pricing tests willingness to pay. If people sign up knowing the price, they're more qualified.
+
+```markdown
+## Pricing
+- **Starter** $19/mo - For individuals
+- **Pro** $49/mo - For power users
+- **Team** $99/mo - For small teams
+```
+
+---
+
+## Saturday Afternoon: Drive Traffic (3-4 hours)
+
+Your landing page is useless without visitors. Get it in front of your target users.
+
+### Distribution Channels
+
+**Immediate reach:**
+- Share on Twitter/X with context about the problem
+- Post in relevant subreddits (follow rules!)
+- Indie Hackers community post
+- Relevant Discord/Slack communities
+- Personal newsletter if you have one
+
+**Sample post template:**
+```
+I've been frustrated with [problem] for years.
+
+Existing solutions [why they're lacking].
+
+So I'm exploring building [solution concept].
+
+Would love feedback from others who deal with this:
+- Does this resonate?
+- What would you need in a solution?
+- Would you pay for it?
+
+Early landing page: [link]
+```
+
+### Track Everything
+
+Use Vercel Analytics or Plausible to track:
+- Visitors
+- Time on page
+- Scroll depth
+- Conversion rate (signups / visitors)
+
+---
+
+## Sunday: Customer Interviews (4-5 hours)
+
+The most valuable validation: talking to potential customers.
+
+### Getting Interviews
+
+Reach out to people who:
+- Signed up for your waitlist
+- Engaged with your posts
+- Are in your target demographic
+
+**Outreach template:**
+```
+Hey [name],
+
+I saw you [signed up for X / commented about Y problem].
+
+I'm researching solutions in this space and would love to hear about your experience. Would you have 15 minutes for a quick call?
+
+I'm not selling anything—just trying to understand the problem better before building.
+
+[Your name]
+```
+
+### Interview Script (15-20 minutes)
+
+**Opening (2 min)**
+- Thank them for their time
+- Explain you're researching, not selling
+- Ask permission to take notes
+
+**Problem exploration (8 min)**
+- "Tell me about the last time you dealt with [problem]"
+- "How often does this happen?"
+- "What solutions have you tried?"
+- "What's frustrating about current options?"
+
+**Solution reaction (5 min)**
+- Briefly describe your concept
+- "What's your initial reaction?"
+- "What would make this a must-have for you?"
+- "What concerns would you have?"
+
+**Closing (3 min)**
+- "If this existed at [$X/month], would you consider it?"
+- "Anyone else who deals with this problem I should talk to?"
+- Thank them, offer to share updates
+
+### What to Listen For
+
+**Strong signals:**
+- "I would definitely pay for that"
+- "I've been looking for something like this"
+- They lean in, ask questions, get excited
+- They refer you to others
+
+**Weak signals:**
+- "That's interesting"
+- "Maybe, depends on the price"
+- They don't have strong opinions
+- They can't articulate their current workflow
+
+---
+
+## Sunday Night: Analyze and Decide
+
+Review all your data and make a decision.
+
+### Scorecard
+
+| Signal | Strong (3) | Medium (2) | Weak (1) | Score |
+|--------|------------|------------|----------|-------|
+| Problem evidence | Clear, repeated complaints | Some mentions | Sparse | |
+| Existing solutions | Gaps identified | Competitive but room | Saturated | |
+| Landing page conversion | >10% | 5-10% | <5% | |
+| Interview enthusiasm | "Take my money" | "Interesting" | "Meh" | |
+| Willingness to pay | Clear yes at price | Maybe | Unlikely | |
+
+**Total score interpretation:**
+- 12-15: Strong validation—build it
+- 8-11: Promising—dig deeper on weak areas
+- 5-7: Risky—reconsider or pivot
+- <5: Don't build this
+
+### Go/No-Go Decision
+
+Before deciding to build, ask:
+- Do I have evidence of willingness to pay?
+- Can I clearly articulate the differentiation?
+- Do I have a path to first customers?
+- Am I excited enough to persist through hard times?
+
+If yes to all: **Go.**
+If no to any: **Dig deeper or pivot.**
+
+---
+
+## What's Next?
+
+If validated:
+1. Thank your early signups
+2. Start building your MVP
+3. Keep those interview contacts warm
+4. Document your validation for future marketing
+
+If not validated:
+1. Thank participants anyway
+2. Analyze what you learned
+3. Pivot the concept or move to next idea
+4. This weekend wasn't wasted—it saved you months
+
+---
+
+## Templates and Resources
+
+**Problem research template:** [Notion link]
+**Landing page copy template:** [Google Doc link]  
+**Interview script:** [Google Doc link]
+**Validation scorecard:** [Spreadsheet link]
+
+---
+
+## Related Reading
+
+<ArticleGrid>
+  <ArticleCard slug="indie-saas-guide" />
+  <ArticleCard slug="first-10-saas-customers" />
+  <ArticleCard slug="saas-tech-stack-2026" />
+</ArticleGrid>
