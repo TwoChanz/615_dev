@@ -13,6 +13,7 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://six1five.dev"),
   title: {
     default: "Six1Five Devs | Build. Ship. Document.",
     template: "%s | Six1Five Devs",
@@ -39,6 +40,14 @@ export const metadata: Metadata = {
     title: "Six1Five Devs | Build. Ship. Document.",
     description:
       "Developer brand building in public. Shipping real tools like SubSense and AppPilot.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Six1Five Devs - Build. Ship. Document.",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -75,7 +84,7 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-icon.png",
   },
-    generator: 'v0.app'
+  manifest: "/manifest.json",
 }
 
 export const viewport: Viewport = {
