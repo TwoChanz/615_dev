@@ -1,0 +1,349 @@
+---
+title: "Cursor AI: The Complete Guide to AI-Powered Development"
+description: "Master Cursor AI with advanced techniques, keyboard shortcuts, and workflows that 10x your productivity. From beginner to power user."
+date: "2026-03-15"
+author: "Six1Five"
+type: "guide"
+pillar: false
+pillarLink: "ai-tools-developers-guide"
+targetKeyword: "cursor ai guide"
+searchIntent: "commercial"
+readingTime: "18 min read"
+tags: ["ai", "cursor", "productivity", "vibe-coding"]
+featured: true
+---
+
+# Cursor AI: The Complete Guide to AI-Powered Development
+
+Cursor has fundamentally changed how I write code. What used to take hours now takes minutes. This guide shares everything I've learned using Cursor daily for the past year.
+
+## What is Cursor?
+
+Cursor is VS Code rebuilt from the ground up for AI-first development. It's not just another Copilot plugin—it's a complete reimagining of the IDE experience.
+
+**Key capabilities:**
+- **Tab completion** that actually understands context
+- **Inline editing** with natural language
+- **Chat** for complex questions about your code
+- **Composer** for multi-file changes
+- **@ mentions** to bring context into prompts
+
+---
+
+## Getting Started
+
+### Installation
+
+1. Download from [cursor.sh](https://cursor.sh)
+2. Import VS Code settings (one-click)
+3. Sign up for Pro ($20/month—worth it)
+4. Configure your preferences
+
+### Essential Settings
+
+```json
+{
+  "cursor.ai.autocomplete": true,
+  "cursor.ai.chat.autoContext": true,
+  "cursor.ai.preferredModel": "gpt-4o"
+}
+```
+
+### Keyboard Shortcuts to Memorize
+
+| Action | Shortcut (Mac) | Shortcut (Win) |
+|--------|---------------|----------------|
+| Inline edit | Cmd+K | Ctrl+K |
+| Chat | Cmd+L | Ctrl+L |
+| Composer | Cmd+I | Ctrl+I |
+| Accept suggestion | Tab | Tab |
+| Reject suggestion | Esc | Esc |
+| New chat | Cmd+Shift+L | Ctrl+Shift+L |
+
+---
+
+## Core Features
+
+### 1. Tab Completion
+
+The most frequent feature. Cursor predicts what you'll type next based on:
+- Current file context
+- Recent edits
+- Project patterns
+- Your coding style
+
+**Pro tips:**
+- Let it finish typing before accepting
+- Tab multiple times for multi-line suggestions
+- Type a comment to guide suggestions
+
+**Example:**
+```typescript
+// Function to validate email and return error message if invalid
+// [Tab] → Cursor completes the entire function
+```
+
+### 2. Inline Edit (Cmd+K)
+
+Select code, press Cmd+K, describe changes in natural language.
+
+**Example workflow:**
+1. Select a function
+2. Cmd+K
+3. Type: "Add error handling and logging"
+4. Review diff
+5. Accept or reject
+
+**Good prompts:**
+- "Convert to async/await"
+- "Add TypeScript types"
+- "Refactor to use [pattern]"
+- "Add validation for [cases]"
+
+### 3. Chat (Cmd+L)
+
+Conversational interface for questions and complex tasks.
+
+**Use cases:**
+- Understanding unfamiliar code
+- Debugging errors
+- Exploring approaches
+- Learning APIs
+
+**Context tricks:**
+- `@file.tsx` - Reference specific file
+- `@folder` - Reference entire folder
+- `@docs` - Reference documentation
+- `@web` - Search the web
+
+**Example chat:**
+```
+Me: @schema.ts How do I add a new field for user preferences?
+
+Cursor: Based on your schema, you'd add...
+[Shows specific migration and type changes]
+```
+
+### 4. Composer (Cmd+I)
+
+The power feature. Make changes across multiple files with one prompt.
+
+**When to use:**
+- Adding a new feature (component + API + types)
+- Refactoring patterns across files
+- Setting up new pages or routes
+- Adding tests for existing code
+
+**Example:**
+```
+Create a settings page with:
+- Route at /settings
+- Tabs for profile, notifications, billing
+- Form for updating profile with server action
+- Use existing Button, Card, Tabs components
+- Follow the pattern in @app/dashboard/page.tsx
+```
+
+Cursor creates all files, wires them together, and shows you a diff for each.
+
+---
+
+## Advanced Techniques
+
+### 1. Context Engineering
+
+The quality of output depends on context quality.
+
+**Always include:**
+- Relevant files with @ mentions
+- Examples of similar code in your project
+- Constraints and requirements
+
+**Template for complex tasks:**
+```
+Task: [What you want]
+
+Context:
+- Using @lib/utils.ts patterns
+- Follow style in @components/Button.tsx
+- Database schema: @db/schema.ts
+
+Requirements:
+- [Requirement 1]
+- [Requirement 2]
+- Handle these edge cases: [list]
+
+Constraints:
+- No external dependencies
+- TypeScript strict mode
+- Must work with existing auth
+```
+
+### 2. Iterative Refinement
+
+First output is rarely perfect. Iterate:
+
+```
+Attempt 1: "Create a form for user settings"
+→ Basic form generated
+
+Attempt 2: "Add validation with zod, error states, and loading indicator"
+→ Validation added
+
+Attempt 3: "Extract the validation schema to a separate file and add tests"
+→ Clean architecture
+```
+
+### 3. Using Cursor Rules
+
+Create a `.cursorrules` file in your project root:
+
+```markdown
+# Cursor Rules for This Project
+
+## Code Style
+- Use TypeScript strict mode
+- Prefer async/await over .then()
+- Use named exports, not default exports
+
+## Framework Patterns
+- Use Next.js App Router conventions
+- Server components by default
+- Server actions for mutations
+
+## Component Patterns
+- Use shadcn/ui components from @/components/ui
+- Tailwind for styling, no CSS files
+- Extract reusable logic to hooks
+
+## Testing
+- Test files next to source: Component.test.tsx
+- Use React Testing Library
+- Mock external services
+```
+
+Cursor reads this and follows your project's conventions.
+
+### 4. Multi-Step Workflows
+
+For complex features, break it down:
+
+**Step 1: Planning**
+```
+I need to add user invitations to my SaaS. Talk through the approach:
+- Database changes
+- API endpoints needed  
+- UI components
+- Email templates
+```
+
+**Step 2: Database**
+```
+Based on our plan, create the database migration for invitations.
+Reference @db/schema.ts for patterns.
+```
+
+**Step 3: API**
+```
+Create the API routes for invitations.
+Reference @app/api patterns.
+```
+
+**Step 4: UI**
+```
+Create the invitation UI components.
+Reference @components patterns.
+```
+
+---
+
+## Common Pitfalls
+
+### 1. Accepting Without Reading
+
+AI makes mistakes. Always review:
+- Security-sensitive code
+- Business logic
+- Data mutations
+- Authentication checks
+
+### 2. Prompts That Are Too Vague
+
+**Bad:** "Make this better"
+**Good:** "Improve this by adding error handling, removing the deprecated API call, and using our standard logging pattern from @lib/logger"
+
+### 3. Ignoring Project Patterns
+
+If Cursor generates code that doesn't match your project:
+- Add examples to your prompt
+- Create a `.cursorrules` file
+- Explicitly reference files to follow
+
+### 4. Over-Relying on Composer
+
+Composer is powerful but:
+- Review each file change
+- Test incrementally
+- Don't accept 20-file changes blindly
+
+---
+
+## Productivity Patterns
+
+### Morning Setup
+1. Open Cursor
+2. Chat: "What did I work on yesterday?" (@git recent commits)
+3. Review TODOs in codebase
+4. Pick first task
+
+### Feature Development
+1. Start with chat to plan
+2. Use Composer for initial scaffolding
+3. Inline edit for refinements
+4. Tab completion for implementation
+
+### Debugging
+1. Select error + stack trace
+2. Cmd+L: "Why is this failing?"
+3. Follow suggestions
+4. Use @web if it's a library issue
+
+### Code Review
+1. Open PR diff
+2. Select concerning code
+3. Cmd+L: "Review this code for issues"
+4. Address suggestions
+
+---
+
+## Cursor vs. Alternatives
+
+| Feature | Cursor | Copilot | Cody |
+|---------|--------|---------|------|
+| Tab completion | Excellent | Excellent | Good |
+| Inline editing | Excellent | Good | Good |
+| Multi-file (Composer) | Excellent | Limited | Limited |
+| Context awareness | Excellent | Good | Excellent |
+| Price | $20/mo | $10/mo | Free tier |
+| IDE | Custom VS Code | VS Code | VS Code |
+
+**My recommendation:** Cursor for serious development. The Composer feature alone justifies the cost.
+
+---
+
+## Next Steps
+
+1. **Download Cursor** and import your VS Code settings
+2. **Complete the onboarding** to learn shortcuts
+3. **Create a .cursorrules** file for your project
+4. **Practice Cmd+K** on your next feature
+
+---
+
+## Related Reading
+
+<ArticleGrid>
+  <ArticleCard slug="ai-tools-developers-guide" />
+  <ArticleCard slug="vibe-coding-manifesto" />
+  <ArticleCard slug="prompt-engineering-for-code" />
+</ArticleGrid>
