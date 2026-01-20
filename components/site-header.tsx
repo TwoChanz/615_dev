@@ -102,78 +102,80 @@ export function SiteHeader() {
           </Button>
         </div>
       </nav>
+    </header>
 
-      {/* Mobile menu */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-[60] lg:hidden">
-          <div
-            className="fixed inset-0 z-[60] bg-background/80 backdrop-blur-sm"
-            onClick={() => setMobileMenuOpen(false)}
-            aria-hidden="true"
-          />
-          <div className="fixed inset-y-0 right-0 z-[70] w-full max-w-sm overflow-y-auto bg-background border-l border-border shadow-xl">
-            <div className="flex items-center justify-between px-6 h-16 border-b border-border">
-              <Link
-                href="/"
-                className="flex items-center gap-2.5"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Image
-                  src="/logo-mark.svg"
-                  alt="Six1Five Devs"
-                  width={32}
-                  height={32}
-                  className="size-8"
-                />
-                <span className="flex items-baseline gap-0.5">
-                  <span className="font-bold tracking-tight text-gradient">Six1Five</span>
-                  <span className="font-medium text-muted-foreground">Devs</span>
-                </span>
-              </Link>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setMobileMenuOpen(false)}
-                aria-label="Close menu"
-                className="text-muted-foreground hover:text-foreground"
-              >
-                <X className="size-5" />
-              </Button>
-            </div>
-            
-            <div className="px-6 py-6">
-              <nav className="flex flex-col gap-1">
-                {navigation.map((item) => {
-                  const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
-                  return (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={cn(
-                        "flex items-center rounded-lg px-3 py-3 text-base font-medium transition-colors",
-                        isActive
-                          ? "bg-primary/10 text-primary"
-                          : "text-foreground hover:bg-muted"
-                      )}
-                    >
-                      {item.name}
-                    </Link>
-                  )
-                })}
-              </nav>
-              
-              <div className="mt-6 pt-6 border-t border-border">
-                <Button asChild className="w-full font-medium">
-                  <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                    Get in Touch
+    {/* Mobile menu - portaled to body to avoid stacking context issues */}
+    {mounted && mobileMenuOpen && createPortal(
+      <div className="fixed inset-0 z-[100] lg:hidden">
+        <div
+          className="fixed inset-0 bg-background/80 backdrop-blur-sm"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+        <div className="fixed inset-y-0 right-0 z-[101] w-full max-w-sm overflow-y-auto bg-background border-l border-border shadow-xl">
+          <div className="flex items-center justify-between px-6 h-16 border-b border-border">
+            <Link
+              href="/"
+              className="flex items-center gap-2.5"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <Image
+                src="/logo-mark.svg"
+                alt="Six1Five Devs"
+                width={32}
+                height={32}
+                className="size-8"
+              />
+              <span className="flex items-baseline gap-0.5">
+                <span className="font-bold tracking-tight text-gradient">Six1Five</span>
+                <span className="font-medium text-muted-foreground">Devs</span>
+              </span>
+            </Link>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close menu"
+              className="text-muted-foreground hover:text-foreground"
+            >
+              <X className="size-5" />
+            </Button>
+          </div>
+
+          <div className="px-6 py-6">
+            <nav className="flex flex-col gap-1">
+              {navigation.map((item) => {
+                const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      "flex items-center rounded-lg px-3 py-3 text-base font-medium transition-colors",
+                      isActive
+                        ? "bg-primary/10 text-primary"
+                        : "text-foreground hover:bg-muted"
+                    )}
+                  >
+                    {item.name}
                   </Link>
-                </Button>
-              </div>
+                )
+              })}
+            </nav>
+
+            <div className="mt-6 pt-6 border-t border-border">
+              <Button asChild className="w-full font-medium">
+                <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+                  Get in Touch
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
-      )}
-    </header>
+      </div>,
+      document.body
+    )}
+    </>
   )
 }
