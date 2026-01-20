@@ -52,6 +52,44 @@ Teal/Purple gradient brand (dark mode optimized). Custom utilities in `app/globa
 
 Primary color: `oklch(0.70 0.15 175)` (teal), Secondary: `oklch(0.55 0.20 280)` (purple/indigo)
 
+### Brand Assets
+
+**Logos** (`public/`):
+
+| File | Size | Use Case |
+|------|------|----------|
+| `logo.svg` | 48x48 | Full site logo (header, footer, OG images) |
+| `logo-mark.svg` | 32x32 | "615" monogram icon (compact spaces, favicons) |
+| `icon.svg` | 32x32 | Favicon SVG source |
+
+**PWA/Platform Icons** (`public/`):
+
+| File | Size | Platform |
+|------|------|----------|
+| `favicon.ico` | 32x32 | Browser tab |
+| `icon-192.png` | 192x192 | PWA manifest |
+| `icon-512.png` | 512x512 | PWA manifest (splash) |
+| `apple-icon.png` | 180x180 | iOS home screen |
+| `icon-light-32x32.png` | 32x32 | Light theme favicon |
+| `icon-dark-32x32.png` | 32x32 | Dark theme favicon |
+
+**Tool Logos** (`public/tools/`):
+
+| File | Product | Status |
+|------|---------|--------|
+| `subsense.png` | SubSense (subscription tracker) | beta |
+| `apppilot.png` | AppPilot (SaaS starter kit) | live |
+| `flightwindow.png` | FlightWindow (flight tracking) | beta |
+| `devdash.svg` | DevDash (developer dashboard) | coming-soon |
+
+**Brand Colors**:
+
+| Role | OKLCH | Hex | Usage |
+|------|-------|-----|-------|
+| Primary (Teal) | `oklch(0.70 0.15 175)` | #14b8a6 | Buttons, links, primary accents |
+| Secondary (Purple) | `oklch(0.55 0.20 280)` | #8b5cf6 | Gradients, hover states, badges |
+| Gradient | teal → purple | - | Logos, CTAs, text highlights |
+
 ### API Routes
 - `app/api/analytics/track/route.ts` - Event tracking endpoint
 - `app/api/newsletter/subscribe/route.ts` - Newsletter subscription

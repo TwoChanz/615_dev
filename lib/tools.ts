@@ -70,7 +70,7 @@ export const toolsData: Tool[] = [
   {
     slug: "apppilot",
     name: "AppPilot",
-    status: "beta",
+    status: "live",
     logo: "/tools/apppilot.png",
     tagline: "SaaS Starter Kit for Indie Hackers",
     description: "Launch your SaaS faster with pre-built authentication, billing, and dashboard components. AppPilot gives you a production-ready foundation so you can focus on your unique features instead of boilerplate.",
