@@ -281,7 +281,7 @@ export function ProductCTA({
   return (
     <div
       className={cn(
-        "rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:border-primary/40 hover:shadow-md",
+        "rounded-xl border border-border bg-card p-6 card-interactive",
         className
       )}
     >
@@ -501,7 +501,7 @@ export function ExternalLinkCTA({
       rel="noopener noreferrer"
       onClick={handleClick}
       className={cn(
-        "group flex items-center justify-between gap-4 rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:border-primary/40 hover:shadow-md",
+        "group flex items-center justify-between gap-4 rounded-xl border border-border bg-card p-6 card-interactive",
         className
       )}
     >

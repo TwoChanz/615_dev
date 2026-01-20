@@ -47,7 +47,7 @@ export function ToolCard({ tool, className }: ToolCardProps) {
   return (
     <Card
       className={cn(
-        "group relative flex flex-col overflow-hidden transition-all duration-200 hover:border-primary/40 hover:shadow-md",
+        "group relative flex flex-col overflow-hidden card-interactive",
         className
       )}
     >

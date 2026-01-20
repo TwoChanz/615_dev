@@ -241,7 +241,7 @@ export function NewsletterForm({
   return (
     <div
       className={cn(
-        "rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:border-primary/30",
+        "rounded-xl border border-border bg-card p-6 card-interactive",
         className
       )}
     >

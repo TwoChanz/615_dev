@@ -11,14 +11,19 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 
-const navigation = [
+const primaryNavigation = [
   { name: "Tools", href: "/tools" },
   { name: "Labs", href: "/labs" },
   { name: "Guides", href: "/guides" },
   { name: "Resources", href: "/resources" },
+]
+
+const secondaryNavigation = [
   { name: "Blog", href: "/blog" },
   { name: "About", href: "/about" },
 ]
+
+const navigation = [...primaryNavigation, ...secondaryNavigation]
 
 export function SiteHeader() {
   const pathname = usePathname()
@@ -143,8 +148,9 @@ export function SiteHeader() {
           </div>
 
           <div className="px-6 py-6">
+            {/* Primary Navigation */}
             <nav className="flex flex-col gap-1">
-              {navigation.map((item) => {
+              {primaryNavigation.map((item) => {
                 const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
                 return (
                   <Link
@@ -152,7 +158,7 @@ export function SiteHeader() {
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={cn(
-                      "flex items-center rounded-lg px-3 py-3 text-base font-medium transition-colors",
+                      "flex items-center rounded-lg px-3 py-3.5 text-base font-semibold transition-colors",
                       isActive
                         ? "bg-primary/10 text-primary"
                         : "text-foreground hover:bg-muted"
@@ -163,6 +169,33 @@ export function SiteHeader() {
                 )
               })}
             </nav>
+
+            {/* Secondary Navigation */}
+            <div className="mt-6 pt-6 border-t border-border">
+              <p className="px-3 mb-3 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                More
+              </p>
+              <nav className="flex flex-col gap-1">
+                {secondaryNavigation.map((item) => {
+                  const isActive = pathname === item.href || pathname.startsWith(item.href + "/")
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={cn(
+                        "flex items-center rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                        isActive
+                          ? "bg-primary/10 text-primary"
+                          : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                      )}
+                    >
+                      {item.name}
+                    </Link>
+                  )
+                })}
+              </nav>
+            </div>
 
             <div className="mt-6 pt-6 border-t border-border">
               <Button asChild className="w-full font-medium">
