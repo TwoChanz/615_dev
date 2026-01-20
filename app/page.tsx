@@ -16,6 +16,7 @@ import { ArticleCard } from "@/components/article-card"
 import { NewsletterForm } from "@/components/newsletter-form"
 import { AffiliateBlock } from "@/components/affiliate-block"
 import { PrimaryCTA } from "@/components/cta-blocks"
+import { LeadMagnetWidget } from "@/components/lead-magnet"
 import { tools, getRecentContent } from "@/lib/content"
 import { getFeaturedAffiliates } from "@/lib/monetization"
 
@@ -202,6 +203,23 @@ export default function HomePage() {
               badge="Most Popular"
               placement="homepage-product"
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Lead Magnet Section */}
+      <section className="section border-t border-border">
+        <div className="container-page">
+          <div className="mx-auto max-w-2xl text-center mb-10">
+            <h2 className="text-2xl font-bold sm:text-3xl">Free Resources</h2>
+            <p className="mt-2 text-muted-foreground">
+              Actionable guides and templates to help you ship faster
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <LeadMagnetWidget magnetId="saas-checklist" />
+            <LeadMagnetWidget magnetId="tech-stack-guide" />
+            <LeadMagnetWidget magnetId="automation-starter" />
           </div>
         </div>
       </section>
