@@ -5,11 +5,8 @@ const nextConfig = {
     ignoreBuildErrors: false,
   },
   images: {
-    // Enable modern image formats for better performance
-    formats: ["image/avif", "image/webp"],
-    // Responsive image sizes for different viewports
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    // Keep images unoptimized for static export compatibility
+    unoptimized: true,
   },
   async redirects() {
     return [
