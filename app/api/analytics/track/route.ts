@@ -1,24 +1,68 @@
 import { NextResponse } from "next/server"
+import {
+  trackEventSchema,
+  trackBatchSchema,
+  getSafeErrorMessage,
+  isAllowedOrigin,
+} from "@/lib/validation"
 
-// Server-side analytics tracking endpoint
-// This can forward events to your analytics service
+// CORS headers helper
+function getCorsHeaders(request: Request): HeadersInit {
+  const origin = request.headers.get("origin")
+  const headers: HeadersInit = {
+    "Access-Control-Allow-Methods": "POST, PUT, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Max-Age": "86400",
+  }
 
-interface TrackRequest {
-  name: string
-  category: string
-  properties?: Record<string, string | number | boolean>
+  if (origin && isAllowedOrigin(origin)) {
+    headers["Access-Control-Allow-Origin"] = origin
+  }
+
+  return headers
+}
+
+// Handle preflight requests
+export async function OPTIONS(request: Request) {
+  return new NextResponse(null, {
+    status: 204,
+    headers: getCorsHeaders(request),
+  })
 }
 
 export async function POST(request: Request) {
-  try {
-    const body: TrackRequest = await request.json()
-    const { name, category, properties = {} } = body
+  const corsHeaders = getCorsHeaders(request)
 
-    // Add server-side metadata
+  try {
+    // Parse JSON body safely
+    let rawBody: unknown
+    try {
+      rawBody = await request.json()
+    } catch {
+      return NextResponse.json(
+        { error: "Invalid JSON body" },
+        { status: 400, headers: corsHeaders }
+      )
+    }
+
+    // Validate with Zod schema
+    const result = trackEventSchema.safeParse(rawBody)
+    if (!result.success) {
+      return NextResponse.json(
+        { error: getSafeErrorMessage(result.error) },
+        { status: 400, headers: corsHeaders }
+      )
+    }
+
+    // Extract validated data (safe - explicitly pick fields to prevent prototype pollution)
+    const { name, category, properties } = result.data
+
+    // Build enriched event with explicitly picked fields
     const enrichedEvent = {
-      ...body,
+      name,
+      category,
       properties: {
-        ...properties,
+        ...(properties || {}),
         serverTimestamp: new Date().toISOString(),
       },
     }
@@ -37,38 +81,46 @@ export async function POST(request: Request) {
     //     api_key: process.env.POSTHOG_API_KEY,
     //     event: name,
     //     properties: enrichedEvent.properties,
-    //     distinct_id: properties.sessionId || "anonymous",
+    //     distinct_id: properties?.sessionId || "anonymous",
     //   }),
     // })
 
-    // Example with custom webhook:
-    // await fetch(process.env.ANALYTICS_WEBHOOK_URL, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(enrichedEvent),
-    // })
-
-    return NextResponse.json({ success: true })
+    return NextResponse.json({ success: true }, { headers: corsHeaders })
   } catch (error) {
     console.error("[Analytics] Track error:", error)
     return NextResponse.json(
       { error: "Failed to track event" },
-      { status: 500 }
+      { status: 500, headers: corsHeaders }
     )
   }
 }
 
 // Batch tracking endpoint for multiple events
 export async function PUT(request: Request) {
-  try {
-    const { events }: { events: TrackRequest[] } = await request.json()
+  const corsHeaders = getCorsHeaders(request)
 
-    if (!Array.isArray(events)) {
+  try {
+    // Parse JSON body safely
+    let rawBody: unknown
+    try {
+      rawBody = await request.json()
+    } catch {
       return NextResponse.json(
-        { error: "Events must be an array" },
-        { status: 400 }
+        { error: "Invalid JSON body" },
+        { status: 400, headers: corsHeaders }
       )
     }
+
+    // Validate with Zod schema (enforces max 50 events)
+    const result = trackBatchSchema.safeParse(rawBody)
+    if (!result.success) {
+      return NextResponse.json(
+        { error: getSafeErrorMessage(result.error) },
+        { status: 400, headers: corsHeaders }
+      )
+    }
+
+    const { events } = result.data
 
     // Log batch for development
     if (process.env.NODE_ENV === "development") {
@@ -77,15 +129,18 @@ export async function PUT(request: Request) {
 
     // TODO: Forward batch to analytics service
 
-    return NextResponse.json({
-      success: true,
-      processed: events.length,
-    })
+    return NextResponse.json(
+      {
+        success: true,
+        processed: events.length,
+      },
+      { headers: corsHeaders }
+    )
   } catch (error) {
     console.error("[Analytics] Batch track error:", error)
     return NextResponse.json(
       { error: "Failed to track events" },
-      { status: 500 }
+      { status: 500, headers: corsHeaders }
     )
   }
 }

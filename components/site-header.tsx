@@ -69,9 +69,11 @@ export function SiteHeader() {
             size="icon"
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Open menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
             className="text-muted-foreground hover:text-foreground"
           >
-            <Menu className="size-5" />
+            <Menu className="size-5" aria-hidden="true" />
           </Button>
         </div>
         
@@ -111,7 +113,12 @@ export function SiteHeader() {
 
     {/* Mobile menu - portaled to body to avoid stacking context issues */}
     {mounted && mobileMenuOpen && createPortal(
-      <div className="fixed inset-0 z-[100] lg:hidden">
+      <div
+        className="fixed inset-0 z-[100] lg:hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mobile-menu-title"
+      >
         <div
           className="fixed inset-0 bg-background/80 backdrop-blur-sm"
           onClick={() => setMobileMenuOpen(false)}
@@ -131,7 +138,7 @@ export function SiteHeader() {
                 height={32}
                 className="size-8"
               />
-              <span className="flex items-baseline gap-0.5">
+              <span id="mobile-menu-title" className="flex items-baseline gap-0.5">
                 <span className="font-bold tracking-tight text-gradient">Six1Five</span>
                 <span className="font-medium text-muted-foreground">Devs</span>
               </span>
@@ -143,7 +150,7 @@ export function SiteHeader() {
               aria-label="Close menu"
               className="text-muted-foreground hover:text-foreground"
             >
-              <X className="size-5" />
+              <X className="size-5" aria-hidden="true" />
             </Button>
           </div>
 

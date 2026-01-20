@@ -59,7 +59,7 @@ export function AffiliateBlock({
             variant === "compact" ? "size-8" : "size-9"
           )}>
             {variant === "featured" ? (
-              <Sparkles className={cn(variant === "compact" ? "size-3.5" : "size-4", "text-primary")} />
+              <Sparkles className={cn("size-4", "text-primary")} />
             ) : (
               <Star className={cn(variant === "compact" ? "size-3.5" : "size-4", "text-primary")} />
             )}

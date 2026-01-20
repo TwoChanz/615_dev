@@ -111,19 +111,27 @@ export function LeadMagnetCTA({
             )}
             onClick={() => trackEngagement.ctaClick(`lead-magnet-${magnetId}`, "open", placement)}
           >
-            <Download className="size-4" />
+            <Download className="size-4" aria-hidden="true" />
             Get the {magnet.name}
-            <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" />
+            <ArrowRight className="size-3 transition-transform group-hover:translate-x-1" aria-hidden="true" />
           </button>
         ) : variant === "featured" ? (
           <div
+            role="button"
+            tabIndex={0}
             className={cn(
-              "group relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-gradient-to-br from-primary/10 via-purple-500/5 to-transparent p-6 cursor-pointer transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10",
+              "group relative overflow-hidden rounded-2xl border-2 border-primary/30 bg-gradient-to-br from-primary/10 via-purple-500/5 to-transparent p-6 cursor-pointer transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
               className
             )}
             onClick={() => trackEngagement.ctaClick(`lead-magnet-${magnetId}`, "open", placement)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault()
+                trackEngagement.ctaClick(`lead-magnet-${magnetId}`, "open", placement)
+              }
+            }}
           >
-            <div className="absolute -right-10 -top-10 size-40 rounded-full bg-primary/10 blur-3xl" />
+            <div className="absolute -right-10 -top-10 size-40 rounded-full bg-primary/10 blur-3xl" aria-hidden="true" />
             <div className="relative">
               {magnet.badge && (
                 <Badge className="mb-3 bg-gradient-to-r from-primary to-purple-500 text-white border-0">
@@ -132,33 +140,41 @@ export function LeadMagnetCTA({
               )}
               <div className="flex items-start gap-4">
                 <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-purple-500 text-white">
-                  <FileText className="size-6" />
+                  <FileText className="size-6" aria-hidden="true" />
                 </div>
                 <div className="flex-1">
                   <h4 className="text-lg font-bold text-foreground">{magnet.name}</h4>
                   <p className="mt-1 text-sm text-muted-foreground">{magnet.description}</p>
                   <div className="mt-3 flex items-center gap-2 text-sm">
-                    <Lock className="size-3.5 text-primary" />
+                    <Lock className="size-3.5 text-primary" aria-hidden="true" />
                     <span className="text-muted-foreground">Free download • {magnet.deliverable}</span>
                   </div>
                 </div>
               </div>
               <Button className="mt-4 w-full bg-gradient-to-r from-primary to-purple-500 hover:from-primary/90 hover:to-purple-500/90">
                 Get Free Access
-                <ArrowRight className="ml-2 size-4" />
+                <ArrowRight className="ml-2 size-4" aria-hidden="true" />
               </Button>
             </div>
           </div>
         ) : (
           <div
+            role="button"
+            tabIndex={0}
             className={cn(
-              "my-8 flex items-start gap-4 rounded-xl border border-primary/20 bg-primary/5 p-6 cursor-pointer transition-all hover:border-primary/40 hover:bg-primary/10",
+              "my-8 flex items-start gap-4 rounded-xl border border-primary/20 bg-primary/5 p-6 cursor-pointer transition-all hover:border-primary/40 hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
               className
             )}
             onClick={() => trackEngagement.ctaClick(`lead-magnet-${magnetId}`, "open", placement)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault()
+                trackEngagement.ctaClick(`lead-magnet-${magnetId}`, "open", placement)
+              }
+            }}
           >
             <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-              <Download className="size-5" />
+              <Download className="size-5" aria-hidden="true" />
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-2">
@@ -176,7 +192,7 @@ export function LeadMagnetCTA({
             </div>
             <Button variant="outline" size="sm" className="shrink-0 bg-transparent">
               Get It
-              <ArrowRight className="ml-1.5 size-3" />
+              <ArrowRight className="ml-1.5 size-3" aria-hidden="true" />
             </Button>
           </div>
         )}
@@ -196,6 +212,11 @@ function LeadMagnetModal({ magnet, placement }: LeadMagnetModalProps) {
   const [email, setEmail] = useState("")
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
   const [errorMessage, setErrorMessage] = useState("")
+
+  // Generate unique IDs for accessibility
+  const formId = React.useId()
+  const emailInputId = `${formId}-email`
+  const errorMessageId = `${formId}-error`
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -233,7 +254,7 @@ function LeadMagnetModal({ magnet, placement }: LeadMagnetModalProps) {
     <DialogContent className="sm:max-w-md">
       <DialogHeader>
         <DialogTitle className="flex items-center gap-2">
-          <Sparkles className="size-5 text-primary" />
+          <Sparkles className="size-5 text-primary" aria-hidden="true" />
           {magnet.name}
         </DialogTitle>
         <DialogDescription>{magnet.description}</DialogDescription>
@@ -242,7 +263,7 @@ function LeadMagnetModal({ magnet, placement }: LeadMagnetModalProps) {
       {status === "success" ? (
         <div className="py-6 text-center">
           <div className="mx-auto flex size-16 items-center justify-center rounded-full bg-primary/10">
-            <CheckCircle2 className="size-8 text-primary" />
+            <CheckCircle2 className="size-8 text-primary" aria-hidden="true" />
           </div>
           <h3 className="mt-4 text-lg font-semibold text-foreground">Check Your Email!</h3>
           <p className="mt-2 text-sm text-muted-foreground">
@@ -251,7 +272,7 @@ function LeadMagnetModal({ magnet, placement }: LeadMagnetModalProps) {
           {magnet.downloadUrl && (
             <Button asChild className="mt-4" variant="outline">
               <a href={magnet.downloadUrl} download>
-                <Download className="mr-2 size-4" />
+                <Download className="mr-2 size-4" aria-hidden="true" />
                 Download Now
               </a>
             </Button>
@@ -266,7 +287,7 @@ function LeadMagnetModal({ magnet, placement }: LeadMagnetModalProps) {
               <ul className="space-y-1.5">
                 {magnet.previewPoints.map((point, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <CheckCircle2 className="size-4 shrink-0 text-primary mt-0.5" />
+                    <CheckCircle2 className="size-4 shrink-0 text-primary mt-0.5" aria-hidden="true" />
                     {point}
                   </li>
                 ))}
@@ -275,11 +296,15 @@ function LeadMagnetModal({ magnet, placement }: LeadMagnetModalProps) {
           )}
 
           {/* Email Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4" aria-busy={status === "loading"}>
             <div className="space-y-2">
+              <label htmlFor={emailInputId} className="sr-only">
+                Email address
+              </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <Mail className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
                 <Input
+                  id={emailInputId}
                   type="email"
                   placeholder="you@example.com"
                   value={email}
@@ -287,10 +312,14 @@ function LeadMagnetModal({ magnet, placement }: LeadMagnetModalProps) {
                   className="pl-10"
                   required
                   disabled={status === "loading"}
+                  aria-invalid={status === "error"}
+                  aria-describedby={status === "error" ? errorMessageId : undefined}
                 />
               </div>
               {status === "error" && (
-                <p className="text-sm text-destructive">{errorMessage}</p>
+                <p id={errorMessageId} role="alert" className="text-sm text-destructive">
+                  {errorMessage}
+                </p>
               )}
             </div>
 
@@ -301,12 +330,12 @@ function LeadMagnetModal({ magnet, placement }: LeadMagnetModalProps) {
             >
               {status === "loading" ? (
                 <>
-                  <Loader2 className="mr-2 size-4 animate-spin" />
+                  <Loader2 className="mr-2 size-4 animate-spin" aria-hidden="true" />
                   Sending...
                 </>
               ) : (
                 <>
-                  <Download className="mr-2 size-4" />
+                  <Download className="mr-2 size-4" aria-hidden="true" />
                   Get Free {magnet.deliverable}
                 </>
               )}
@@ -353,15 +382,23 @@ export function LeadMagnetBar({ magnetId, className }: LeadMagnetBarProps) {
     <Dialog>
       <DialogTrigger asChild>
         <div
+          role="button"
+          tabIndex={0}
           className={cn(
-            "fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background/95 backdrop-blur-sm p-4 shadow-lg cursor-pointer transition-transform hover:bg-muted/50",
+            "fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background/95 backdrop-blur-sm p-4 shadow-lg cursor-pointer transition-transform hover:bg-muted/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset",
             className
           )}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault()
+              // Dialog will handle the trigger
+            }
+          }}
         >
           <div className="container-page flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-purple-500 text-white">
-                <FileText className="size-5" />
+                <FileText className="size-5" aria-hidden="true" />
               </div>
               <div className="hidden sm:block">
                 <p className="font-medium text-foreground">{magnet.name}</p>
@@ -371,7 +408,7 @@ export function LeadMagnetBar({ magnetId, className }: LeadMagnetBarProps) {
             </div>
             <Button className="bg-gradient-to-r from-primary to-purple-500 hover:from-primary/90 hover:to-purple-500/90">
               Get Free Access
-              <ArrowRight className="ml-2 size-4" />
+              <ArrowRight className="ml-2 size-4" aria-hidden="true" />
             </Button>
           </div>
         </div>
