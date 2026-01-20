@@ -5,6 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
 import { Menu, X } from "lucide-react"
+import { createPortal } from "react-dom"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -22,25 +23,35 @@ const navigation = [
 export function SiteHeader() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
+    <>
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
       <nav className="container-page flex items-center justify-between h-16">
         {/* Logo */}
         <div className="flex lg:flex-1">
           <Link
             href="/"
-            className="group flex items-center gap-2.5 transition-opacity hover:opacity-80"
+            className="group flex items-center gap-2.5 transition-all duration-200 hover:opacity-90"
           >
-            <Image
-              src="/logo-mark.svg"
-              alt="Six1Five Devs"
-              width={32}
-              height={32}
-              className="size-8"
-            />
-            <span className="font-semibold tracking-tight text-foreground">
-              Six1Five Devs
+            <div className="relative">
+              <Image
+                src="/logo-mark.svg"
+                alt="Six1Five Devs"
+                width={32}
+                height={32}
+                className="size-8 transition-transform duration-200 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 rounded-lg bg-primary/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 -z-10" />
+            </div>
+            <span className="flex items-baseline gap-0.5">
+              <span className="font-bold tracking-tight text-gradient">Six1Five</span>
+              <span className="font-medium text-muted-foreground">Devs</span>
             </span>
           </Link>
         </div>
@@ -94,13 +105,13 @@ export function SiteHeader() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <div 
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm" 
+        <div className="fixed inset-0 z-[60] lg:hidden">
+          <div
+            className="fixed inset-0 z-[60] bg-background/80 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
             aria-hidden="true"
           />
-          <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm overflow-y-auto bg-background border-l border-border shadow-xl">
+          <div className="fixed inset-y-0 right-0 z-[70] w-full max-w-sm overflow-y-auto bg-background border-l border-border shadow-xl">
             <div className="flex items-center justify-between px-6 h-16 border-b border-border">
               <Link
                 href="/"
@@ -114,7 +125,10 @@ export function SiteHeader() {
                   height={32}
                   className="size-8"
                 />
-                <span className="font-semibold tracking-tight">Six1Five Devs</span>
+                <span className="flex items-baseline gap-0.5">
+                  <span className="font-bold tracking-tight text-gradient">Six1Five</span>
+                  <span className="font-medium text-muted-foreground">Devs</span>
+                </span>
               </Link>
               <Button
                 variant="ghost"

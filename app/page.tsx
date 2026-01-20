@@ -197,7 +197,7 @@ export default function HomePage() {
               description="Get the complete Next.js starter kit with auth, billing, and dashboard components. Launch in days, not months."
               buttonText="Get AppPilot"
               buttonHref="/tools/apppilot"
-              variant="outline"
+              variant="highlight"
               icon={<Rocket className="size-6" />}
               badge="Most Popular"
               placement="homepage-product"
