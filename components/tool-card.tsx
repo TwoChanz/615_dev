@@ -1,5 +1,6 @@
 import React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { ExternalLink, ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -52,14 +53,25 @@ export function ToolCard({ tool, className }: ToolCardProps) {
     >
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-4">
-          <div>
-            <CardTitle className="text-lg text-foreground">{tool.name}</CardTitle>
-            <Badge
-              variant="outline"
-              className={cn("mt-1.5 font-medium", status.className)}
-            >
-              {status.label}
-            </Badge>
+          <div className="flex items-start gap-3">
+            {tool.logo && (
+              <Image
+                src={tool.logo}
+                alt={`${tool.name} logo`}
+                width={48}
+                height={48}
+                className="size-12 rounded-lg"
+              />
+            )}
+            <div>
+              <CardTitle className="text-lg text-foreground">{tool.name}</CardTitle>
+              <Badge
+                variant="outline"
+                className={cn("mt-1.5 font-medium", status.className)}
+              >
+                {status.label}
+              </Badge>
+            </div>
           </div>
         </div>
         {tool.tagline && (

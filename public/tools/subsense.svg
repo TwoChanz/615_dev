@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#g)"/>
+  <!-- Dollar sign with circular arrows (subscription/recurring) -->
+  <g stroke="#0a0a0f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Circular arrows -->
+    <path d="M44 24a14 14 0 01-2.5 8"/>
+    <path d="M20 40a14 14 0 012.5-8"/>
+    <path d="M41.5 32l3-4 4 3"/>
+    <path d="M22.5 32l-3 4-4-3"/>
+    <!-- Dollar sign -->
+    <path d="M32 18v28"/>
+    <path d="M26 26c0-2.2 2.7-4 6-4s6 1.8 6 4-2.7 4-6 4-6 1.8-6 4 2.7 4 6 4 6-1.8 6-4"/>
+  </g>
+</svg>
