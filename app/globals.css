@@ -8,42 +8,41 @@
    ===========================================
 
    Color Philosophy:
-   - Primary: Teal (~#14b8a6 / oklch 0.70 0.15 175) - Brand identity
-   - Secondary: Indigo/Purple (~#6366f1 / oklch 0.55 0.20 280) - Accent
-   - Background: Deep charcoal with subtle blue tint
+   - Primary: Teal (#14b8a6 / oklch 0.62 0.15 175) - Brand identity
+   - Secondary: Purple for accents
+   - Background: Deep navy with purple undertone
    - Glows: Teal and purple radial effects
 
    Typography:
    - Geist Sans for UI and body
    - Geist Mono for code and technical elements
-
    =========================================== */
 
 :root {
   /* Background Scale */
-  --background: oklch(0.985 0 0);
-  --background-subtle: oklch(0.97 0.005 195 / 0.4);
-  
+  --background: oklch(0.985 0.005 280);
+  --background-subtle: oklch(0.97 0.01 280 / 0.4);
+
   /* Foreground Scale */
-  --foreground: oklch(0.12 0 0);
-  --foreground-muted: oklch(0.45 0 0);
-  
+  --foreground: oklch(0.12 0.02 280);
+  --foreground-muted: oklch(0.40 0.02 280);
+
   /* Card/Surface */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.12 0 0);
-  
+  --card-foreground: oklch(0.12 0.02 280);
+
   /* Popover */
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.12 0 0);
-  
+
   /* Primary - Teal Brand Color */
   --primary: oklch(0.62 0.15 175);
   --primary-foreground: oklch(0.98 0 0);
-  
-  /* Secondary */
-  --secondary: oklch(0.96 0.005 195);
-  --secondary-foreground: oklch(0.18 0 0);
-  
+
+  /* Secondary - Purple */
+  --secondary: oklch(0.96 0.01 280);
+  --secondary-foreground: oklch(0.18 0.02 280);
+
   /* Muted */
   --muted: oklch(0.96 0 0);
   --muted-foreground: oklch(0.40 0 0);
@@ -51,26 +50,26 @@
   /* Accent - Same as Primary for brand consistency */
   --accent: oklch(0.62 0.15 175);
   --accent-foreground: oklch(0.98 0 0);
-  
+
   /* Destructive */
   --destructive: oklch(0.55 0.22 27);
   --destructive-foreground: oklch(0.98 0 0);
-  
+
   /* Border & Input */
   --border: oklch(0.82 0.005 175);
   --input: oklch(0.82 0.005 175);
   --ring: oklch(0.62 0.15 175);
-  
+
   /* Chart Colors */
   --chart-1: oklch(0.62 0.16 195);
   --chart-2: oklch(0.55 0.12 185);
   --chart-3: oklch(0.48 0.08 195);
   --chart-4: oklch(0.75 0.15 145);
   --chart-5: oklch(0.70 0.12 85);
-  
+
   /* Radius */
   --radius: 0.5rem;
-  
+
   /* Sidebar */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.12 0 0);
@@ -83,70 +82,70 @@
 }
 
 .dark {
-  /* Background Scale - Deep charcoal with subtle blue tint */
-  --background: oklch(0.06 0.01 270);
-  --background-subtle: oklch(0.10 0.015 270 / 0.5);
+  /* Background Scale - Deep navy with purple undertone (DevDash palette) */
+  --background: oklch(0.05 0.02 280);
+  --background-subtle: oklch(0.08 0.025 280 / 0.6);
 
   /* Foreground Scale */
-  --foreground: oklch(0.97 0 0);
-  --foreground-muted: oklch(0.6 0 0);
+  --foreground: oklch(0.97 0.01 280);
+  --foreground-muted: oklch(0.65 0.02 280);
 
-  /* Card/Surface - Elevated with subtle purple tint */
-  --card: oklch(0.10 0.01 270);
-  --card-foreground: oklch(0.95 0 0);
+  /* Card/Surface - Elevated with rich purple tint */
+  --card: oklch(0.08 0.025 280);
+  --card-foreground: oklch(0.96 0 0);
 
   /* Popover */
-  --popover: oklch(0.10 0.01 270);
-  --popover-foreground: oklch(0.95 0 0);
+  --popover: oklch(0.08 0.025 280);
+  --popover-foreground: oklch(0.96 0 0);
 
-  /* Primary - Teal accent */
-  --primary: oklch(0.70 0.15 175);
-  --primary-foreground: oklch(0.05 0 0);
+  /* Primary - Bright Cyan (#22d3ee) */
+  --primary: oklch(0.82 0.14 195);
+  --primary-foreground: oklch(0.05 0.02 280);
 
-  /* Secondary - Indigo/Purple */
-  --secondary: oklch(0.55 0.20 280);
-  --secondary-foreground: oklch(0.95 0 0);
+  /* Secondary - Deep Purple (#7c3aed) */
+  --secondary: oklch(0.55 0.24 290);
+  --secondary-foreground: oklch(0.96 0 0);
 
   /* Muted */
-  --muted: oklch(0.18 0.01 270);
-  --muted-foreground: oklch(0.6 0 0);
+  --muted: oklch(0.15 0.025 280);
+  --muted-foreground: oklch(0.60 0.02 280);
 
-  /* Accent - Purple glow */
-  --accent: oklch(0.60 0.22 290);
-  --accent-foreground: oklch(0.95 0 0);
+  /* Accent - Vibrant Purple */
+  --accent: oklch(0.58 0.26 290);
+  --accent-foreground: oklch(0.96 0 0);
 
   /* Destructive */
-  --destructive: oklch(0.45 0.18 27);
-  --destructive-foreground: oklch(0.95 0 0);
+  --destructive: oklch(0.50 0.20 25);
+  --destructive-foreground: oklch(0.96 0 0);
 
-  /* Border & Input - Subtle purple tint */
-  --border: oklch(0.20 0.02 280);
-  --input: oklch(0.20 0.02 280);
-  --ring: oklch(0.70 0.15 175);
+  /* Border & Input - Purple-tinted edges */
+  --border: oklch(0.18 0.04 280);
+  --input: oklch(0.18 0.04 280);
+  --ring: oklch(0.82 0.14 195);
 
-  /* Chart Colors - Teal to purple spectrum */
-  --chart-1: oklch(0.70 0.15 175);
-  --chart-2: oklch(0.65 0.18 200);
-  --chart-3: oklch(0.58 0.20 250);
-  --chart-4: oklch(0.55 0.20 280);
-  --chart-5: oklch(0.60 0.22 290);
+  /* Chart Colors - Cyan to purple spectrum */
+  --chart-1: oklch(0.82 0.14 195);
+  --chart-2: oklch(0.72 0.16 210);
+  --chart-3: oklch(0.62 0.20 260);
+  --chart-4: oklch(0.55 0.24 290);
+  --chart-5: oklch(0.58 0.26 290);
 
   /* Sidebar */
-  --sidebar: oklch(0.08 0.01 270);
+  --sidebar: oklch(0.06 0.02 280);
   --sidebar-foreground: oklch(0.97 0 0);
-  --sidebar-primary: oklch(0.70 0.15 175);
-  --sidebar-primary-foreground: oklch(0.05 0 0);
-  --sidebar-accent: oklch(0.55 0.20 280);
-  --sidebar-accent-foreground: oklch(0.95 0 0);
-  --sidebar-border: oklch(0.20 0.02 280);
-  --sidebar-ring: oklch(0.70 0.15 175);
+  --sidebar-primary: oklch(0.82 0.14 195);
+  --sidebar-primary-foreground: oklch(0.05 0.02 280);
+  --sidebar-accent: oklch(0.55 0.24 290);
+  --sidebar-accent-foreground: oklch(0.96 0 0);
+  --sidebar-border: oklch(0.18 0.04 280);
+  --sidebar-ring: oklch(0.82 0.14 195);
 }
 
 @theme inline {
   /* Fonts */
   --font-sans: 'Geist', 'Geist Fallback', system-ui, -apple-system, sans-serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback', ui-monospace, monospace;
-  
+
   /* Color tokens */
   --color-background: var(--background);
   --color-background-subtle: var(--background-subtle);
@@ -173,13 +172,13 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  
+
   /* Radius tokens */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  
+
   /* Sidebar tokens */
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
@@ -199,51 +198,51 @@
   * {
     @apply border-border outline-ring/50;
   }
-  
+
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
-  
+
   /* Heading styles */
   h1, h2, h3, h4, h5, h6 {
     @apply text-foreground font-semibold tracking-tight text-balance;
   }
-  
+
   h1 {
     @apply text-4xl sm:text-5xl lg:text-6xl font-bold;
   }
-  
+
   h2 {
     @apply text-3xl sm:text-4xl font-bold;
   }
-  
+
   h3 {
     @apply text-2xl;
   }
-  
+
   h4 {
     @apply text-xl;
   }
-  
+
   /* Prose text */
   p {
     @apply leading-relaxed;
   }
-  
+
   /* Code blocks */
   code {
     @apply font-mono text-sm;
   }
-  
+
   pre {
     @apply font-mono rounded-lg;
   }
-  
+
   /* Selection color */
   ::selection {
     @apply bg-primary/20 text-foreground;
@@ -255,61 +254,78 @@
    =========================================== */
 
 @layer utilities {
-  /* Text gradient - brand signature (teal → purple) */
+  /* Text gradient - brand signature (cyan → purple) */
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(
       135deg,
-      oklch(0.70 0.15 175) 0%,
-      oklch(0.60 0.22 290) 100%
+      oklch(0.82 0.14 195) 0%,
+      oklch(0.58 0.26 290) 100%
     );
   }
-  
-  /* Glow effects - dual teal/purple */
+
+  /* Glow effects - dual cyan/purple (DevDash style) */
   .glow {
     box-shadow:
-      0 0 20px oklch(0.70 0.15 175 / 0.25),
-      0 0 40px oklch(0.55 0.20 280 / 0.15);
+      0 0 20px oklch(0.82 0.14 195 / 0.3),
+      0 0 40px oklch(0.55 0.24 290 / 0.2);
   }
 
   .glow-sm {
     box-shadow:
-      0 0 10px oklch(0.70 0.15 175 / 0.15),
-      0 0 20px oklch(0.55 0.20 280 / 0.10);
+      0 0 12px oklch(0.82 0.14 195 / 0.2),
+      0 0 24px oklch(0.55 0.24 290 / 0.12);
   }
 
   .glow-lg {
     box-shadow:
-      0 0 40px oklch(0.70 0.15 175 / 0.3),
-      0 0 60px oklch(0.55 0.20 280 / 0.2);
+      0 0 50px oklch(0.82 0.14 195 / 0.35),
+      0 0 80px oklch(0.55 0.24 290 / 0.25);
   }
 
   .glow-purple {
-    box-shadow: 0 0 30px oklch(0.55 0.20 280 / 0.3);
+    box-shadow: 0 0 35px oklch(0.55 0.24 290 / 0.4);
   }
 
-  .glow-teal {
-    box-shadow: 0 0 30px oklch(0.70 0.15 175 / 0.3);
+  .glow-cyan {
+    box-shadow: 0 0 35px oklch(0.82 0.14 195 / 0.4);
   }
-  
+
+  /* Legacy alias */
+  .glow-teal {
+    box-shadow: 0 0 35px oklch(0.82 0.14 195 / 0.4);
+  }
+
   /* Subtle background with brand tint */
   .bg-subtle {
     background-color: var(--background-subtle);
   }
-  
-  /* Border gradient - teal to purple */
+
+  /* Border gradient - cyan to purple */
   .border-gradient {
     border: 1px solid transparent;
     background:
       linear-gradient(var(--background), var(--background)) padding-box,
-      linear-gradient(135deg, oklch(0.70 0.15 175 / 0.5), oklch(0.55 0.20 280 / 0.3)) border-box;
+      linear-gradient(135deg, oklch(0.82 0.14 195 / 0.6), oklch(0.55 0.24 290 / 0.4)) border-box;
   }
-  
+
+  /* Neon border effect (DevDash OG image style) */
+  .border-neon {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--background), var(--background)) padding-box,
+      linear-gradient(180deg, oklch(0.82 0.14 195 / 0.8), oklch(0.55 0.24 290 / 0.8)) border-box;
+    box-shadow:
+      0 0 15px oklch(0.82 0.14 195 / 0.2),
+      0 0 30px oklch(0.55 0.24 290 / 0.15),
+      inset 0 0 15px oklch(0.82 0.14 195 / 0.05);
+  }
+
   /* Animation utilities */
   .animate-in {
     animation: fadeIn 0.3s ease-out forwards;
   }
-  
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -320,22 +336,22 @@
       transform: translateY(0);
     }
   }
-  
+
   /* Focus ring style */
   .focus-ring {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
   }
-  
+
   /* Container utility */
   .container-page {
     @apply mx-auto max-w-7xl px-4 lg:px-8;
   }
-  
+
   /* Section spacing */
   .section {
     @apply py-16 md:py-24;
   }
-  
+
   .section-lg {
     @apply py-24 md:py-32;
   }
@@ -362,20 +378,20 @@
       0 0 15px oklch(0.70 0.15 175 / 0.12),
       0 0 25px oklch(0.55 0.20 280 / 0.08);
   }
-  
+
   /* Link underline animation */
   .link-underline {
     @apply relative;
   }
-  
+
   .link-underline::after {
     @apply absolute bottom-0 left-0 h-px w-0 bg-primary transition-all duration-200 content-[''];
   }
-  
+
   .link-underline:hover::after {
     @apply w-full;
   }
-  
+
   /* Icon button styling */
   .icon-button {
     @apply inline-flex items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground;

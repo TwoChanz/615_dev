@@ -24,19 +24,19 @@ interface ToolCardProps {
 const statusConfig: Record<ToolStatus, { label: string; className: string }> = {
   live: {
     label: "Live",
-    className: "bg-primary/10 text-primary border-primary/20",
+    className: "bg-primary/15 text-primary border-primary/30",
   },
   beta: {
     label: "Beta",
-    className: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20",
+    className: "bg-amber-500/15 text-amber-500 dark:text-amber-400 border-amber-500/30",
   },
   alpha: {
     label: "Alpha",
-    className: "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20",
+    className: "bg-secondary/15 text-secondary border-secondary/30",
   },
   "coming-soon": {
     label: "Coming Soon",
-    className: "bg-muted text-muted-foreground border-border",
+    className: "bg-accent/10 text-accent border-accent/20",
   },
 }
 
@@ -75,7 +75,7 @@ export function ToolCard({ tool, className }: ToolCardProps) {
           </div>
         </div>
         {tool.tagline && (
-          <p className="mt-2 text-sm font-medium text-primary">{tool.tagline}</p>
+          <p className="mt-3 text-sm font-medium text-gradient">{tool.tagline}</p>
         )}
       </CardHeader>
 

@@ -60,7 +60,7 @@ export function SiteHeader() {
             </span>
           </Link>
         </div>
-        
+
         {/* Mobile menu button */}
         <div className="flex items-center gap-2 lg:hidden">
           <ThemeToggle />
@@ -76,7 +76,7 @@ export function SiteHeader() {
             <Menu className="size-5" aria-hidden="true" />
           </Button>
         </div>
-        
+
         {/* Desktop navigation */}
         <div className="hidden lg:flex lg:items-center lg:gap-1">
           {navigation.map((item) => {
@@ -87,8 +87,8 @@ export function SiteHeader() {
                 href={item.href}
                 className={cn(
                   "relative px-3 py-2 text-sm font-medium transition-colors rounded-md",
-                  isActive 
-                    ? "text-primary" 
+                  isActive
+                    ? "text-primary"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                 )}
               >
@@ -100,7 +100,7 @@ export function SiteHeader() {
             )
           })}
         </div>
-        
+
         {/* Desktop actions */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-3">
           <ThemeToggle />
