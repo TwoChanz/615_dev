@@ -176,6 +176,31 @@ export const affiliatePrograms: AffiliateProgram[] = [
     discount: "Free tier available",
     tier: "essential",
   },
+  {
+    id: "clerk",
+    name: "Clerk",
+    url: "https://clerk.com",
+    affiliateUrl: "https://clerk.com/?ref=six1five",
+    description: "Drop-in authentication. User management, OAuth, MFA built-in.",
+    category: "development",
+    commission: "20% recurring",
+    cookieDuration: "30 days",
+    featured: true,
+    discount: "Free up to 10k MAUs",
+    tier: "essential",
+  },
+  {
+    id: "openrouter",
+    name: "OpenRouter",
+    url: "https://openrouter.ai",
+    affiliateUrl: "https://openrouter.ai/?ref=six1five",
+    description: "Unified API for all LLMs. GPT-4, Claude, Llama, and more.",
+    category: "ai",
+    commission: "5% recurring",
+    cookieDuration: "30 days",
+    featured: true,
+    tier: "essential",
+  },
 
   // RECOMMENDED TIER (Strong alternatives)
   {

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Six1Five Devs developer website - a Next.js 16 content site synced with v0.app deployments. Serves as the discovery/SEO layer for external product domains (SubSense, AppPilot, FlightWindow, DevDash).
+Six1Five Devs developer website - a Next.js 16 content site serving as the discovery/SEO layer for external product domains (SubSense, AppPilot, FlightWindow, DevDash). Content is stored as TypeScript arrays, not a CMS.
 
 ## Commands
 
@@ -22,34 +22,80 @@ npm run start    # Start production server
 - **Styling:** Tailwind CSS 4 with shadcn/ui (new-york style, CSS variables)
 - **Fonts:** Geist Sans + Geist Mono
 - **Analytics:** Vercel Analytics
+- **Theme:** next-themes with system/light/dark support
 
 ### Path Aliases
 `@/*` maps to project root - use `@/components`, `@/lib`, etc.
 
-### Directory Structure
-- `app/` - App Router pages with `[slug]` dynamic routes for blog, guides, labs, tools
-- `components/` - React components; `components/ui/` contains shadcn primitives
-- `lib/` - Data models and utilities
-  - `lib/tools.ts` - Centralized tool/product data (single source of truth)
-  - `lib/content.ts` - Blog posts, guides, labs content arrays
-  - `lib/utils.ts` - `cn()` helper for className merging
-
 ### Content Model
-Content is stored as TypeScript arrays in `lib/content.ts` and `lib/tools.ts`:
-- Add tools to `toolsData` array in `lib/tools.ts` - automatically creates `/tools/[slug]` pages
-- Add articles to `blogPosts`, `guides`, or `labs` arrays in `lib/content.ts`
+Content is stored as TypeScript arrays (not a database or CMS):
+
+**Tools** (`lib/tools.ts`):
+- Add to `toolsData` array → automatically creates `/tools/[slug]` page
+- Type: `Tool` with required fields: `slug`, `name`, `status`, `tagline`, `description`, `websiteUrl`, `tags`
+- Status options: `"live" | "beta" | "alpha" | "coming-soon"`
+
+**Articles** (`lib/content.ts`):
+- Three arrays: `blogPosts`, `guides`, `labs`
+- Type: `Article` with fields: `title`, `slug`, `description`, `date`, `readingTime`, `tags`, `type`, optional `featured`
+- Article types determine URL path: `/blog/[slug]`, `/guides/[slug]`, `/labs/[slug]`
 
 ### Brand System
-Cyan primary color (#22d3ee / oklch 0.72 0.14 195). Custom utilities defined in `app/globals.css`:
-- `.text-gradient` - Brand gradient text
-- `.glow`, `.glow-sm`, `.glow-lg` - Cyan glow effects
-- `.container-page` - Max-width container with padding
+Teal/Purple gradient brand (dark mode optimized). Custom utilities in `app/globals.css`:
+- `.text-gradient` - Teal→Purple gradient text
+- `.glow`, `.glow-sm`, `.glow-lg` - Dual teal/purple glow effects
+- `.glow-teal`, `.glow-purple` - Single-color glows
+- `.container-page` - Max-width 7xl container with padding
 - `.section`, `.section-lg` - Vertical section spacing
+- `.border-gradient` - Teal/purple border effect
+- `.card-interactive` - Hover state for cards
+
+Primary color: `oklch(0.70 0.15 175)` (teal), Secondary: `oklch(0.55 0.20 280)` (purple/indigo)
+
+### Brand Assets
+
+**Logos** (`public/`):
+
+| File | Size | Use Case |
+|------|------|----------|
+| `logo.svg` | 48x48 | Full site logo (header, footer, OG images) |
+| `logo-mark.svg` | 32x32 | "615" monogram icon (compact spaces, favicons) |
+| `icon.svg` | 32x32 | Favicon SVG source |
+
+**PWA/Platform Icons** (`public/`):
+
+| File | Size | Platform |
+|------|------|----------|
+| `favicon.ico` | 32x32 | Browser tab |
+| `icon-192.png` | 192x192 | PWA manifest |
+| `icon-512.png` | 512x512 | PWA manifest (splash) |
+| `apple-icon.png` | 180x180 | iOS home screen |
+| `icon-light-32x32.png` | 32x32 | Light theme favicon |
+| `icon-dark-32x32.png` | 32x32 | Dark theme favicon |
+
+**Tool Logos** (`public/tools/`):
+
+| File | Product | Status |
+|------|---------|--------|
+| `subsense.png` | SubSense (subscription tracker) | beta |
+| `apppilot.png` | AppPilot (SaaS starter kit) | live |
+| `flightwindow.png` | FlightWindow (flight tracking) | beta |
+| `devdash.svg` | DevDash (developer dashboard) | coming-soon |
+
+**Brand Colors**:
+
+| Role | OKLCH | Hex | Usage |
+|------|-------|-----|-------|
+| Primary (Teal) | `oklch(0.70 0.15 175)` | #14b8a6 | Buttons, links, primary accents |
+| Secondary (Purple) | `oklch(0.55 0.20 280)` | #8b5cf6 | Gradients, hover states, badges |
+| Gradient | teal → purple | - | Logos, CTAs, text highlights |
 
 ### API Routes
-- `app/api/analytics/track/route.ts` - Tracking endpoint
+- `app/api/analytics/track/route.ts` - Event tracking endpoint
 - `app/api/newsletter/subscribe/route.ts` - Newsletter subscription
 - `app/feed.xml/route.ts` - RSS feed generation
 
 ### Build Configuration
-TypeScript build errors are ignored (`ignoreBuildErrors: true` in next.config.mjs). Images are unoptimized.
+- TypeScript build errors ignored (`ignoreBuildErrors: true`)
+- Images unoptimized (static export compatible)
+- `www.` subdomain redirects to apex domain

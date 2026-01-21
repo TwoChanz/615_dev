@@ -34,6 +34,11 @@ export function NewsletterForm({
   >("idle")
   const [message, setMessage] = React.useState("")
 
+  // Generate unique ID for this form instance
+  const formId = React.useId()
+  const emailInputId = `${formId}-email`
+  const messageId = `${formId}-message`
+
   // Track form view on mount
   React.useEffect(() => {
     trackNewsletter.formView(placement)
@@ -99,7 +104,7 @@ export function NewsletterForm({
         {leadMagnet && (
           <div className="mb-6 flex items-center gap-3">
             <div className="flex size-12 items-center justify-center rounded-xl bg-primary/20">
-              <Gift className="size-6 text-primary" />
+              <Gift className="size-6 text-primary" aria-hidden="true" />
             </div>
             <div>
               <p className="text-sm font-medium text-primary">Free Resource</p>
@@ -115,16 +120,28 @@ export function NewsletterForm({
           {description || "Get weekly build logs, tips, and early access to new tools. No spam, unsubscribe anytime."}
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3 sm:flex-row">
-          <Input
-            type="email"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            disabled={status === "loading" || status === "success"}
-            className="flex-1 h-12 text-base"
-          />
+        <form
+          onSubmit={handleSubmit}
+          className="mt-6 flex flex-col gap-3 sm:flex-row"
+          aria-busy={status === "loading"}
+        >
+          <div className="flex-1">
+            <label htmlFor={emailInputId} className="sr-only">
+              Email address
+            </label>
+            <Input
+              id={emailInputId}
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={status === "loading" || status === "success"}
+              aria-invalid={status === "error"}
+              aria-describedby={message ? messageId : undefined}
+              className="h-12 text-base"
+            />
+          </div>
           <Button
             type="submit"
             size="lg"
@@ -132,16 +149,16 @@ export function NewsletterForm({
             className="h-12 px-8 font-medium"
           >
             {status === "loading" ? (
-              <Loader2 className="size-5 animate-spin" />
+              <Loader2 className="size-5 animate-spin" aria-hidden="true" />
             ) : status === "success" ? (
               <>
-                <CheckCircle className="mr-2 size-5" />
+                <CheckCircle className="mr-2 size-5" aria-hidden="true" />
                 Subscribed
               </>
             ) : (
               <>
                 {leadMagnet ? "Get Free Access" : "Subscribe"}
-                <ArrowRight className="ml-2 size-4" />
+                <ArrowRight className="ml-2 size-4" aria-hidden="true" />
               </>
             )}
           </Button>
@@ -149,6 +166,9 @@ export function NewsletterForm({
 
         {message && (
           <p
+            id={messageId}
+            role={status === "error" ? "alert" : "status"}
+            aria-live="polite"
             className={cn(
               "mt-4 text-sm",
               status === "success" ? "text-primary" : "text-destructive"
@@ -168,25 +188,35 @@ export function NewsletterForm({
   // Inline variant - single line, minimal
   if (variant === "inline") {
     return (
-      <form onSubmit={handleSubmit} className={cn("flex gap-2", className)}>
-        <Input
-          type="email"
-          placeholder="Enter your email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          disabled={status === "loading" || status === "success"}
-          className="flex-1"
-        />
+      <form
+        onSubmit={handleSubmit}
+        className={cn("flex gap-2", className)}
+        aria-busy={status === "loading"}
+      >
+        <div className="flex-1">
+          <label htmlFor={emailInputId} className="sr-only">
+            Email address
+          </label>
+          <Input
+            id={emailInputId}
+            type="email"
+            placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={status === "loading" || status === "success"}
+            aria-invalid={status === "error"}
+          />
+        </div>
         <Button
           type="submit"
           disabled={status === "loading" || status === "success"}
           size="sm"
         >
           {status === "loading" ? (
-            <Loader2 className="size-4 animate-spin" />
+            <Loader2 className="size-4 animate-spin" aria-hidden="true" />
           ) : status === "success" ? (
-            <CheckCircle className="size-4" />
+            <CheckCircle className="size-4" aria-hidden="true" />
           ) : (
             "Subscribe"
           )}
@@ -199,25 +229,36 @@ export function NewsletterForm({
   if (variant === "minimal") {
     return (
       <div className={cn("space-y-3", className)}>
-        <form onSubmit={handleSubmit} className="flex gap-3">
-          <Input
-            type="email"
-            placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            disabled={status === "loading" || status === "success"}
-            className="flex-1"
-          />
+        <form
+          onSubmit={handleSubmit}
+          className="flex gap-3"
+          aria-busy={status === "loading"}
+        >
+          <div className="flex-1">
+            <label htmlFor={emailInputId} className="sr-only">
+              Email address
+            </label>
+            <Input
+              id={emailInputId}
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={status === "loading" || status === "success"}
+              aria-invalid={status === "error"}
+              aria-describedby={message ? messageId : undefined}
+            />
+          </div>
           <Button
             type="submit"
             disabled={status === "loading" || status === "success"}
             className="font-medium"
           >
             {status === "loading" ? (
-              <Loader2 className="size-4 animate-spin" />
+              <Loader2 className="size-4 animate-spin" aria-hidden="true" />
             ) : status === "success" ? (
-              <CheckCircle className="size-4" />
+              <CheckCircle className="size-4" aria-hidden="true" />
             ) : (
               "Subscribe"
             )}
@@ -225,6 +266,9 @@ export function NewsletterForm({
         </form>
         {message && (
           <p
+            id={messageId}
+            role={status === "error" ? "alert" : "status"}
+            aria-live="polite"
             className={cn(
               "text-sm",
               status === "success" ? "text-primary" : "text-destructive"
@@ -241,13 +285,13 @@ export function NewsletterForm({
   return (
     <div
       className={cn(
-        "rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:border-primary/30",
+        "rounded-xl border border-border bg-card p-6 card-interactive",
         className
       )}
     >
       <div className="flex items-start gap-4">
         <div className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-          <Mail className="size-5 text-primary" />
+          <Mail className="size-5 text-primary" aria-hidden="true" />
         </div>
         <div>
           <h3 className="font-semibold text-foreground">
@@ -259,25 +303,36 @@ export function NewsletterForm({
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-5 flex gap-3">
-        <Input
-          type="email"
-          placeholder="you@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          disabled={status === "loading" || status === "success"}
-          className="flex-1"
-        />
+      <form
+        onSubmit={handleSubmit}
+        className="mt-5 flex gap-3"
+        aria-busy={status === "loading"}
+      >
+        <div className="flex-1">
+          <label htmlFor={emailInputId} className="sr-only">
+            Email address
+          </label>
+          <Input
+            id={emailInputId}
+            type="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={status === "loading" || status === "success"}
+            aria-invalid={status === "error"}
+            aria-describedby={message ? messageId : undefined}
+          />
+        </div>
         <Button
           type="submit"
           disabled={status === "loading" || status === "success"}
           className="font-medium"
         >
           {status === "loading" ? (
-            <Loader2 className="size-4 animate-spin" />
+            <Loader2 className="size-4 animate-spin" aria-hidden="true" />
           ) : status === "success" ? (
-            <CheckCircle className="size-4" />
+            <CheckCircle className="size-4" aria-hidden="true" />
           ) : (
             "Subscribe"
           )}
@@ -286,6 +341,9 @@ export function NewsletterForm({
 
       {message && (
         <p
+          id={messageId}
+          role={status === "error" ? "alert" : "status"}
+          aria-live="polite"
           className={cn(
             "mt-3 text-sm",
             status === "success" ? "text-primary" : "text-destructive"

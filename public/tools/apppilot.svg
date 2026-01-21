@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#g)"/>
+  <!-- Rocket ship (launch/pilot) -->
+  <g stroke="#0a0a0f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Rocket body -->
+    <path d="M32 14c-6 6-8 14-8 22h16c0-8-2-16-8-22z"/>
+    <!-- Rocket window -->
+    <circle cx="32" cy="28" r="4"/>
+    <!-- Fins -->
+    <path d="M24 36l-6 8h6"/>
+    <path d="M40 36l6 8h-6"/>
+    <!-- Flame -->
+    <path d="M28 44c0 4 2 6 4 6s4-2 4-6"/>
+  </g>
+</svg>

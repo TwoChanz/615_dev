@@ -1,5 +1,6 @@
 import React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { ExternalLink, ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -14,7 +15,6 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { getToolIcon } from "@/components/icons/tool-icons"
 
 interface ToolCardProps {
   tool: Tool
@@ -43,22 +43,25 @@ const statusConfig: Record<ToolStatus, { label: string; className: string }> = {
 export function ToolCard({ tool, className }: ToolCardProps) {
   const status = statusConfig[tool.status]
   const isAccessible = tool.status !== "coming-soon" && !tool.comingSoon
-  const ToolIcon = getToolIcon(tool.slug)
 
   return (
     <Card
       className={cn(
-        "group relative flex flex-col overflow-hidden transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5",
+        "group relative flex flex-col overflow-hidden card-interactive",
         className
       )}
     >
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-4">
           <div className="flex items-start gap-3">
-            {ToolIcon && (
-              <div className="shrink-0 rounded-lg overflow-hidden shadow-md shadow-primary/10 transition-transform duration-300 group-hover:scale-105">
-                <ToolIcon size="sm" />
-              </div>
+            {tool.logo && (
+              <Image
+                src={tool.logo}
+                alt={`${tool.name} logo`}
+                width={48}
+                height={48}
+                className="size-12 rounded-lg"
+              />
             )}
             <div>
               <CardTitle className="text-lg text-foreground">{tool.name}</CardTitle>

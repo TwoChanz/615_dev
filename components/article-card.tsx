@@ -40,7 +40,7 @@ export function ArticleCard({ article, className }: ArticleCardProps) {
   return (
     <Card
       className={cn(
-        "group relative overflow-hidden transition-all duration-200 hover:border-primary/40 hover:shadow-md",
+        "group relative overflow-hidden card-interactive",
         article.featured && "border-primary/30 bg-primary/5",
         className
       )}

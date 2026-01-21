@@ -46,7 +46,7 @@ export function AffiliateBlock({
   return (
     <div
       className={cn(
-        "rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:border-primary/30",
+        "rounded-xl border border-border bg-card p-6 card-interactive",
         variant === "compact" && "p-4",
         variant === "featured" && "border-primary/20 bg-gradient-to-br from-primary/5 to-transparent",
         className
@@ -59,7 +59,7 @@ export function AffiliateBlock({
             variant === "compact" ? "size-8" : "size-9"
           )}>
             {variant === "featured" ? (
-              <Sparkles className={cn(variant === "compact" ? "size-3.5" : "size-4", "text-primary")} />
+              <Sparkles className={cn("size-4", "text-primary")} />
             ) : (
               <Star className={cn(variant === "compact" ? "size-3.5" : "size-4", "text-primary")} />
             )}
@@ -226,7 +226,7 @@ export function ResourceCard({
       rel="noopener noreferrer sponsored"
       onClick={handleClick}
       className={cn(
-        "group flex items-start gap-4 rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:border-primary/40 hover:shadow-md",
+        "group flex items-start gap-4 rounded-xl border border-border bg-card p-6 card-interactive",
         className
       )}
     >

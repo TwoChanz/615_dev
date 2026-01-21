@@ -31,10 +31,10 @@ const navigation = {
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-muted/30">
-      <div className="container-page py-12 lg:py-16">
+    <footer className="border-t border-border bg-gradient-to-b from-muted/40 to-muted/20">
+      <div className="container-page py-14 lg:py-20">
         {/* Main footer content */}
-        <div className="grid gap-8 lg:grid-cols-3">
+        <div className="grid gap-10 lg:grid-cols-3 lg:gap-20">
           {/* Brand column */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block transition-opacity hover:opacity-80">
@@ -62,10 +62,10 @@ export function SiteFooter() {
           </div>
           
           {/* Navigation columns */}
-          <div className="grid grid-cols-2 gap-8 lg:col-span-2 lg:justify-end lg:gap-16">
+          <div className="grid grid-cols-2 gap-10 lg:col-span-2 lg:justify-end lg:gap-20">
             <div>
-              <h3 className="text-sm font-semibold text-foreground">Explore</h3>
-              <ul className="mt-4 space-y-3">
+              <h3 className="text-sm font-semibold tracking-wide text-foreground">Explore</h3>
+              <ul className="mt-5 space-y-3.5">
                 {navigation.main.map((item) => (
                   <li key={item.name}>
                     <Link
@@ -78,10 +78,10 @@ export function SiteFooter() {
                 ))}
               </ul>
             </div>
-            
+
             <div>
-              <h3 className="text-sm font-semibold text-foreground">Company</h3>
-              <ul className="mt-4 space-y-3">
+              <h3 className="text-sm font-semibold tracking-wide text-foreground">Company</h3>
+              <ul className="mt-5 space-y-3.5">
                 {navigation.secondary.map((item) => (
                   <li key={item.name}>
                     <Link
@@ -96,9 +96,9 @@ export function SiteFooter() {
             </div>
           </div>
         </div>
-        
+
         {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-10 sm:flex-row">
           <p className="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} Six1Five Devs. All rights reserved.
           </p>

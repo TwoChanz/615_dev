@@ -25,7 +25,7 @@ interface PrimaryCTAProps {
   description: string
   buttonText: string
   buttonHref: string
-  variant?: "primary" | "gradient" | "outline"
+  variant?: "primary" | "gradient" | "outline" | "highlight"
   icon?: React.ReactNode
   badge?: string
   placement?: string
@@ -63,12 +63,22 @@ export function PrimaryCTA({
           "bg-gradient-to-br from-primary via-primary/90 to-primary/80 text-primary-foreground",
         variant === "outline" &&
           "border-2 border-primary/20 bg-primary/5",
+        variant === "highlight" &&
+          "border-2 border-primary/40 bg-gradient-to-br from-primary/15 via-purple-500/10 to-primary/5 shadow-lg shadow-primary/10",
         className
       )}
     >
       {/* Decorative elements */}
-      {variant !== "outline" && (
+      {variant !== "outline" && variant !== "highlight" && (
         <div className="absolute -right-10 -top-10 size-40 rounded-full bg-white/10 blur-3xl" />
+      )}
+      {/* Highlight variant decorative elements */}
+      {variant === "highlight" && (
+        <>
+          <div className="absolute -right-20 -top-20 size-60 rounded-full bg-primary/20 blur-3xl animate-pulse" />
+          <div className="absolute -left-10 -bottom-10 size-40 rounded-full bg-purple-500/15 blur-3xl animate-pulse [animation-delay:1s]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-purple-500/5" />
+        </>
       )}
 
       <div className="relative">
@@ -76,9 +86,12 @@ export function PrimaryCTA({
           <Badge
             className={cn(
               "mb-4",
-              variant === "outline"
-                ? "bg-primary/10 text-primary border-primary/20"
-                : "bg-white/20 text-white border-white/20"
+              variant === "outline" &&
+                "bg-primary/10 text-primary border-primary/20",
+              variant === "highlight" &&
+                "bg-gradient-to-r from-primary to-purple-500 text-white border-0 animate-pulse shadow-md shadow-primary/20",
+              variant !== "outline" && variant !== "highlight" &&
+                "bg-white/20 text-white border-white/20"
             )}
           >
             {badge}
@@ -90,9 +103,11 @@ export function PrimaryCTA({
             <div
               className={cn(
                 "flex size-12 shrink-0 items-center justify-center rounded-xl",
-                variant === "outline"
-                  ? "bg-primary/10 text-primary"
-                  : "bg-white/20 text-white"
+                variant === "outline" && "bg-primary/10 text-primary",
+                variant === "highlight" &&
+                  "bg-gradient-to-br from-primary to-purple-500 text-white shadow-lg shadow-primary/30",
+                variant !== "outline" && variant !== "highlight" &&
+                  "bg-white/20 text-white"
               )}
             >
               {icon}
@@ -102,7 +117,8 @@ export function PrimaryCTA({
             <h3
               className={cn(
                 "text-2xl font-bold sm:text-3xl",
-                variant === "outline" && "text-foreground"
+                variant === "outline" && "text-foreground",
+                variant === "highlight" && "text-foreground bg-gradient-to-r from-foreground via-primary to-purple-500 bg-clip-text"
               )}
             >
               {title}
@@ -110,9 +126,10 @@ export function PrimaryCTA({
             <p
               className={cn(
                 "mt-2 text-lg",
-                variant === "outline"
-                  ? "text-muted-foreground"
-                  : "text-white/80"
+                (variant === "outline" || variant === "highlight") &&
+                  "text-muted-foreground",
+                variant !== "outline" && variant !== "highlight" &&
+                  "text-white/80"
               )}
             >
               {description}
@@ -124,10 +141,13 @@ export function PrimaryCTA({
           <Button
             asChild
             size="lg"
-            variant={variant === "outline" ? "default" : "secondary"}
+            variant={variant === "outline" || variant === "highlight" ? "default" : "secondary"}
             className={cn(
               "font-medium",
-              variant !== "outline" && "bg-white text-primary hover:bg-white/90"
+              variant === "highlight" &&
+                "bg-gradient-to-r from-primary to-purple-500 hover:from-primary/90 hover:to-purple-500/90 text-white shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-[1.02]",
+              variant !== "outline" && variant !== "highlight" &&
+                "bg-white text-primary hover:bg-white/90"
             )}
             onClick={handleClick}
           >
@@ -261,7 +281,7 @@ export function ProductCTA({
   return (
     <div
       className={cn(
-        "rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:border-primary/40 hover:shadow-md",
+        "rounded-xl border border-border bg-card p-6 card-interactive",
         className
       )}
     >
@@ -481,7 +501,7 @@ export function ExternalLinkCTA({
       rel="noopener noreferrer"
       onClick={handleClick}
       className={cn(
-        "group flex items-center justify-between gap-4 rounded-xl border border-border bg-card p-6 transition-all duration-200 hover:border-primary/40 hover:shadow-md",
+        "group flex items-center justify-between gap-4 rounded-xl border border-border bg-card p-6 card-interactive",
         className
       )}
     >
