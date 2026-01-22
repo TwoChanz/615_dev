@@ -54,6 +54,7 @@ export const metadata: Metadata = {
     title: "Six1Five Devs | Build. Ship. Document.",
     description:
       "Developer brand building in public. Shipping real tools like SubSense and AppPilot.",
+    images: ["/og-image.png"],
     creator: "@six1five",
   },
   robots: {
@@ -69,20 +70,39 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: "/icons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/icons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
       {
         url: "/icon-light-32x32.png",
+        sizes: "32x32",
         media: "(prefers-color-scheme: light)",
       },
       {
         url: "/icon-dark-32x32.png",
+        sizes: "32x32",
         media: "(prefers-color-scheme: dark)",
       },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180" },
+      { url: "/icons/apple-touch-icon.png", sizes: "180x180" },
+    ],
+    other: [
       {
-        url: "/icon.svg",
-        type: "image/svg+xml",
+        rel: "android-chrome",
+        url: "/icons/android-chrome-192x192.png",
+        sizes: "192x192",
+      },
+      {
+        rel: "android-chrome",
+        url: "/icons/android-chrome-512x512.png",
+        sizes: "512x512",
       },
     ],
-    apple: "/apple-icon.png",
   },
   manifest: "/manifest.json",
 }
