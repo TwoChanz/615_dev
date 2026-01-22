@@ -75,8 +75,8 @@ export type TrackBatchInput = z.infer<typeof trackBatchSchema>
 
 // Allowed origins for CORS
 export const ALLOWED_ORIGINS = [
-  "https://six1five.dev",
-  "https://www.six1five.dev",
+  "https://six1fivestudio.dev",
+  "https://www.six1fivestudio.dev",
   // Development origins
   ...(process.env.NODE_ENV === "development"
     ? ["http://localhost:3000", "http://127.0.0.1:3000"]

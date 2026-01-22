@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: "https://six1five.dev/sitemap.xml",
+    sitemap: "https://six1fivestudio.dev/sitemap.xml",
   }
 }

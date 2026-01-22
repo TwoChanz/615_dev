@@ -13,7 +13,7 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://six1five.dev"),
+  metadataBase: new URL("https://six1fivestudio.dev"),
   title: {
     default: "Six1Five Devs | Build. Ship. Document.",
     template: "%s | Six1Five Devs",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://six1five.dev",
+    url: "https://six1fivestudio.dev",
     siteName: "Six1Five Devs",
     title: "Six1Five Devs | Build. Ship. Document.",
     description:

@@ -16,7 +16,7 @@ export default function TermsPage() {
           <section>
             <h2>Agreement to Terms</h2>
             <p>
-              By accessing six1five.dev, you agree to be bound by these Terms of Service.
+              By accessing six1fivestudio.dev, you agree to be bound by these Terms of Service.
               If you disagree with any part of these terms, you may not access the website.
             </p>
           </section>
@@ -45,7 +45,7 @@ export default function TermsPage() {
             <p>
               Our products (SubSense, AppPilot, etc.) have their own terms of service
               available on their respective websites. This document covers only the
-              six1five.dev informational website.
+              six1fivestudio.dev informational website.
             </p>
           </section>
 
@@ -78,8 +78,8 @@ export default function TermsPage() {
             <h2>Contact</h2>
             <p>
               Questions about these terms? Contact us at{" "}
-              <a href="mailto:hello@six1five.dev" className="text-primary hover:underline">
-                hello@six1five.dev
+              <a href="mailto:hello@six1fivestudio.dev" className="text-primary hover:underline">
+                hello@six1fivestudio.dev
               </a>
             </p>
           </section>

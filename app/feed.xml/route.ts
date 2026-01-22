@@ -1,7 +1,7 @@
 import { getAllContent } from "@/lib/content"
 
 export async function GET() {
-  const baseUrl = "https://six1five.dev"
+  const baseUrl = "https://six1fivestudio.dev"
   const content = getAllContent()
 
   const itemsXml = content

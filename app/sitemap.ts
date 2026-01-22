@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next"
 import { blogPosts, guides, labs, tools } from "@/lib/content"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://six1five.dev"
+  const baseUrl = "https://six1fivestudio.dev"
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [

@@ -181,11 +181,11 @@ describe("trackBatchSchema", () => {
 
 describe("isAllowedOrigin", () => {
   it("allows production origin", () => {
-    expect(isAllowedOrigin("https://six1five.dev")).toBe(true)
+    expect(isAllowedOrigin("https://six1fivestudio.dev")).toBe(true)
   })
 
   it("allows www subdomain", () => {
-    expect(isAllowedOrigin("https://www.six1five.dev")).toBe(true)
+    expect(isAllowedOrigin("https://www.six1fivestudio.dev")).toBe(true)
   })
 
   it("rejects null origin", () => {
@@ -197,7 +197,7 @@ describe("isAllowedOrigin", () => {
   })
 
   it("rejects http origin (non-https)", () => {
-    expect(isAllowedOrigin("http://six1five.dev")).toBe(false)
+    expect(isAllowedOrigin("http://six1fivestudio.dev")).toBe(false)
   })
 })
 

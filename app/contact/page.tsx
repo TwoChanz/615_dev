@@ -37,7 +37,7 @@ export default function ContactPage() {
             description="Best for detailed questions or collaboration proposals."
             action={
               <Button asChild>
-                <a href="mailto:hello@six1five.dev">hello@six1five.dev</a>
+                <a href="mailto:hello@six1fivestudio.dev">hello@six1fivestudio.dev</a>
               </Button>
             }
           />

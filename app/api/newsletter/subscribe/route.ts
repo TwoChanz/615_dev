@@ -91,7 +91,7 @@ export async function POST(request: Request) {
       // TODO: Send lead magnet email via Resend
       // const resend = new Resend(process.env.RESEND_API_KEY)
       // await resend.emails.send({
-      //   from: "Six1Five Devs <hello@six1five.dev>",
+      //   from: "Six1Five Devs <hello@six1fivestudio.dev>",
       //   to: email,
       //   subject: `Your ${leadMagnet} is ready!`,
       //   react: LeadMagnetEmail({ leadMagnet, downloadUrl }),

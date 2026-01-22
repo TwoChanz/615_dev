@@ -16,7 +16,7 @@ export default function PrivacyPage() {
           <section>
             <h2>Overview</h2>
             <p>
-              Six1Five Devs (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) operates six1five.dev.
+              Six1Five Devs (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) operates six1fivestudio.dev.
               This page informs you of our policies regarding the collection, use, and disclosure of
               personal information when you use our website.
             </p>
@@ -76,8 +76,8 @@ export default function PrivacyPage() {
             <h2>Contact</h2>
             <p>
               For privacy questions, contact us at{" "}
-              <a href="mailto:hello@six1five.dev" className="text-primary hover:underline">
-                hello@six1five.dev
+              <a href="mailto:hello@six1fivestudio.dev" className="text-primary hover:underline">
+                hello@six1fivestudio.dev
               </a>
             </p>
           </section>
