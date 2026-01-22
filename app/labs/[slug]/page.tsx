@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ArticleHeader } from "@/components/mdx-components"
 import { ArticleCard } from "@/components/article-card"
 import { NewsletterForm } from "@/components/newsletter-form"
+import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/json-ld"
 import { labs, getRelatedContent } from "@/lib/content"
 
 interface LabPageProps {
@@ -61,6 +62,22 @@ export default async function LabPage({ params }: LabPageProps) {
 
   return (
     <article className="mx-auto max-w-4xl px-4 py-16 lg:px-8">
+      {/* JSON-LD Structured Data */}
+      <ArticleJsonLd
+        title={lab.title}
+        description={lab.description}
+        datePublished={lab.date}
+        url={`/labs/${lab.slug}`}
+        tags={lab.tags}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: "Labs", url: "/labs" },
+          { name: lab.title, url: `/labs/${lab.slug}` },
+        ]}
+      />
+
       {/* Back Link */}
       <Button asChild variant="ghost" size="sm" className="mb-8">
         <Link href="/labs">

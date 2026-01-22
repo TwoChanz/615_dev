@@ -1,3 +1,5 @@
+import { withSentryConfig } from "@sentry/nextjs"
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
@@ -62,4 +64,32 @@ if (process.env.ANALYZE === "true") {
   }
 }
 
-export default config
+// Wrap with Sentry if DSN is configured
+const sentryConfig = {
+  // Suppress source map uploading logs during build
+  silent: true,
+
+  // Upload source maps to Sentry
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+
+  // Route browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers
+  tunnelRoute: "/monitoring",
+
+  // Hides source maps from generated client bundles
+  hideSourceMaps: true,
+
+  // Automatically tree-shake Sentry logger statements
+  disableLogger: true,
+
+  // Disable Sentry during development builds
+  disableServerWebpackPlugin: !process.env.SENTRY_AUTH_TOKEN,
+  disableClientWebpackPlugin: !process.env.SENTRY_AUTH_TOKEN,
+}
+
+// Only wrap with Sentry if configured
+const finalConfig = process.env.SENTRY_DSN
+  ? withSentryConfig(config, sentryConfig)
+  : config
+
+export default finalConfig

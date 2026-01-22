@@ -73,6 +73,30 @@ export const trackBatchSchema = z.object({
 
 export type TrackBatchInput = z.infer<typeof trackBatchSchema>
 
+// Contact form schema
+export const contactFormSchema = z.object({
+  name: z
+    .string()
+    .min(1, "Name is required")
+    .max(100, "Name too long")
+    .regex(/^[a-zA-Z\s'-]+$/, "Name contains invalid characters"),
+  email: z
+    .string()
+    .min(1, "Email is required")
+    .email("Invalid email address")
+    .max(254, "Email too long"),
+  subject: z
+    .string()
+    .max(200, "Subject too long")
+    .optional(),
+  message: z
+    .string()
+    .min(10, "Message must be at least 10 characters")
+    .max(5000, "Message too long"),
+})
+
+export type ContactFormInput = z.infer<typeof contactFormSchema>
+
 // Allowed origins for CORS
 export const ALLOWED_ORIGINS = [
   "https://six1five.dev",

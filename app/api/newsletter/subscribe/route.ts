@@ -1,16 +1,31 @@
 import { NextResponse } from "next/server"
+import { Resend } from "resend"
+
 import {
   subscribeSchema,
   getSafeErrorMessage,
   isAllowedOrigin,
-  ALLOWED_ORIGINS,
 } from "@/lib/validation"
+import { addSubscriber } from "@/lib/supabase"
+import WelcomeEmail from "@/emails/welcome"
+
+// Initialize Resend if API key is available
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null
 
 // Lead magnet download URLs
 const leadMagnetUrls: Record<string, string> = {
   "saas-checklist": "/downloads/saas-launch-checklist.pdf",
   "tech-stack-guide": "/downloads/tech-stack-guide-2026.pdf",
   "automation-starter": "/downloads/automation-workflows.zip",
+}
+
+// Lead magnet display names
+const leadMagnetNames: Record<string, string> = {
+  "saas-checklist": "SaaS Launch Checklist",
+  "tech-stack-guide": "Tech Stack Guide 2026",
+  "automation-starter": "Automation Workflows Starter Kit",
 }
 
 // CORS headers helper
@@ -64,16 +79,7 @@ export async function POST(request: Request) {
     // Extract validated data (safe - no prototype pollution)
     const { email, source, leadMagnet, placement } = result.data
 
-    // TODO: Replace with actual email service integration
-    // Example with Resend:
-    // const resend = new Resend(process.env.RESEND_API_KEY)
-    // await resend.contacts.create({
-    //   email,
-    //   audienceId: process.env.RESEND_AUDIENCE_ID,
-    //   unsubscribed: false,
-    // })
-
-    // Log for development (replace with actual analytics in production)
+    // Log for development
     console.log("[Newsletter] New subscriber:", {
       email,
       source,
@@ -82,20 +88,59 @@ export async function POST(request: Request) {
       timestamp: new Date().toISOString(),
     })
 
-    // If lead magnet, prepare download URL and trigger email delivery
+    // Store in Supabase
+    const dbResult = await addSubscriber({
+      email,
+      source,
+      leadMagnet,
+      placement,
+    })
+
+    if (!dbResult.success) {
+      console.error("[Newsletter] Database error:", dbResult.error)
+      // Continue even if DB fails - we can still send email
+    }
+
+    // Prepare lead magnet download URL if applicable
     let downloadUrl: string | undefined
     if (leadMagnet) {
       downloadUrl = leadMagnetUrls[leadMagnet]
       console.log("[Newsletter] Delivering lead magnet:", leadMagnet, downloadUrl)
+    }
 
-      // TODO: Send lead magnet email via Resend
-      // const resend = new Resend(process.env.RESEND_API_KEY)
-      // await resend.emails.send({
-      //   from: "Six1Five Devs <hello@six1five.dev>",
-      //   to: email,
-      //   subject: `Your ${leadMagnet} is ready!`,
-      //   react: LeadMagnetEmail({ leadMagnet, downloadUrl }),
-      // })
+    // Send welcome email via Resend
+    if (resend) {
+      try {
+        // Add contact to Resend audience (if configured)
+        if (process.env.RESEND_AUDIENCE_ID) {
+          await resend.contacts.create({
+            email,
+            audienceId: process.env.RESEND_AUDIENCE_ID,
+            unsubscribed: false,
+          })
+          console.log("[Newsletter] Contact added to Resend audience")
+        }
+
+        // Send welcome email
+        await resend.emails.send({
+          from: "Six1Five Devs <hello@six1five.dev>",
+          to: email,
+          subject: leadMagnet
+            ? `Your ${leadMagnetNames[leadMagnet] || leadMagnet} is ready!`
+            : "Welcome to Six1Five Devs!",
+          react: WelcomeEmail({
+            email,
+            leadMagnet: leadMagnet ? leadMagnetNames[leadMagnet] : undefined,
+            downloadUrl,
+          }),
+        })
+        console.log("[Newsletter] Welcome email sent")
+      } catch (emailError) {
+        console.error("[Newsletter] Email error:", emailError)
+        // Don't fail the request if email fails
+      }
+    } else {
+      console.log("[Newsletter] Resend not configured, skipping email")
     }
 
     return NextResponse.json(

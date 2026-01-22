@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ArticleHeader } from "@/components/mdx-components"
 import { ArticleCard } from "@/components/article-card"
 import { NewsletterForm } from "@/components/newsletter-form"
+import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/json-ld"
 import { guides, getRelatedContent } from "@/lib/content"
 
 interface GuidePageProps {
@@ -61,6 +62,22 @@ export default async function GuidePage({ params }: GuidePageProps) {
 
   return (
     <article className="mx-auto max-w-4xl px-4 py-16 lg:px-8">
+      {/* JSON-LD Structured Data */}
+      <ArticleJsonLd
+        title={guide.title}
+        description={guide.description}
+        datePublished={guide.date}
+        url={`/guides/${guide.slug}`}
+        tags={guide.tags}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: "Guides", url: "/guides" },
+          { name: guide.title, url: `/guides/${guide.slug}` },
+        ]}
+      />
+
       {/* Back Link */}
       <Button asChild variant="ghost" size="sm" className="mb-8">
         <Link href="/guides">

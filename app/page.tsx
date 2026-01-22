@@ -17,6 +17,7 @@ import { NewsletterForm } from "@/components/newsletter-form"
 import { AffiliateBlock } from "@/components/affiliate-block"
 import { PrimaryCTA } from "@/components/cta-blocks"
 import { LeadMagnetWidget } from "@/components/lead-magnet"
+import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/json-ld"
 import { tools, getRecentContent } from "@/lib/content"
 import { getFeaturedAffiliates } from "@/lib/monetization"
 
@@ -26,6 +27,10 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col">
+      {/* JSON-LD Structured Data */}
+      <OrganizationJsonLd />
+      <WebsiteJsonLd />
+
       {/* Hero Section */}
       <section className="relative overflow-hidden border-b border-border">
         {/* Gradient background with purple undertone */}

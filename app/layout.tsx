@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 
 import { ThemeProvider } from "@/components/theme-provider"
+import { PostHogProvider } from "@/components/posthog-provider"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 
@@ -131,19 +132,21 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative flex min-h-screen flex-col">
-            <a
-              href="#main-content"
-              className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:font-medium"
-            >
-              Skip to main content
-            </a>
-            <SiteHeader />
-            <main id="main-content" className="flex-1" tabIndex={-1}>
-              {children}
-            </main>
-            <SiteFooter />
-          </div>
+          <PostHogProvider>
+            <div className="relative flex min-h-screen flex-col">
+              <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:font-medium"
+              >
+                Skip to main content
+              </a>
+              <SiteHeader />
+              <main id="main-content" className="flex-1" tabIndex={-1}>
+                {children}
+              </main>
+              <SiteFooter />
+            </div>
+          </PostHogProvider>
         </ThemeProvider>
         <Analytics />
       </body>

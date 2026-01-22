@@ -1,157 +1,120 @@
 #!/usr/bin/env node
 /**
- * Icon Bundle Generator
- *
- * Usage:
- *   node scripts/generate-icons.mjs --input public/icon-source.png --out public/icons
- *
- * What it does:
- *  - Generates standard favicon/app icon PNG sizes
- *  - Generates a multi-size favicon.ico (16, 32, 48)
- *
- * Notes:
- *  - Assumes input is a square-ish image (PNG preferred)
- *  - Keeps your original background (no transparency added)
+ * Generate favicon and app icons from source images
+ * Run with: node scripts/generate-icons.mjs
  */
 
-import path from "node:path";
-import process from "node:process";
-import sharp from "sharp";
-import fs from "fs-extra";
-import pngToIco from "png-to-ico";
+import sharp from 'sharp'
+import fs from 'fs/promises'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-function getArg(name, fallback = null) {
-  const idx = process.argv.indexOf(name);
-  if (idx === -1) return fallback;
-  const val = process.argv[idx + 1];
-  if (!val || val.startsWith("--")) return fallback;
-  return val;
-}
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const publicDir = path.join(__dirname, '..', 'public')
 
-function printHelpAndExit() {
-  console.log(`
-Icon Bundle Generator
+async function generateIcons() {
+  console.log('Generating icons from source images...\n')
 
-Required:
-  --input <path>    Path to source image (recommend: square PNG)
-  --out <dir>       Output directory
+  const iconSource = path.join(publicDir, 'icon-source.png')
+  const logoMark = path.join(publicDir, 'logo-mark.png')
 
-Example:
-  node scripts/generate-icons.mjs --input public/icon-source.png --out public/icons
-`);
-  process.exit(1);
-}
-
-const inputPath = getArg("--input");
-const outDir = getArg("--out");
-
-if (!inputPath || !outDir) printHelpAndExit();
-
-const resolvedInput = path.resolve(process.cwd(), inputPath);
-const resolvedOut = path.resolve(process.cwd(), outDir);
-
-const PNG_TARGETS = [
-  { filename: "favicon-16x16.png", size: 16 },
-  { filename: "favicon-32x32.png", size: 32 },
-  { filename: "apple-touch-icon.png", size: 180 },
-  { filename: "android-chrome-192x192.png", size: 192 },
-  { filename: "android-chrome-512x512.png", size: 512 }
-];
-
-// For favicon.ico we generate a multi-size ico from these sizes.
-// (48 helps on some Windows / legacy contexts)
-const ICO_SIZES = [16, 32, 48];
-
-async function main() {
-  // Validate input exists
-  const exists = await fs.pathExists(resolvedInput);
-  if (!exists) {
-    console.error(`❌ Input file not found: ${resolvedInput}`);
-    process.exit(1);
-  }
-
-  await fs.ensureDir(resolvedOut);
-
-  // Read input once
-  const inputBuffer = await fs.readFile(resolvedInput);
-
-  // Basic sanity read (also catches unsupported formats early)
-  let meta;
+  // Check if source files exist
   try {
-    meta = await sharp(inputBuffer).metadata();
-  } catch (err) {
-    console.error("❌ Failed to read input image. Make sure it is a valid image file (PNG/JPG/WebP).");
-    console.error(err?.message || err);
-    process.exit(1);
+    await fs.access(iconSource)
+    console.log('Found: icon-source.png')
+  } catch {
+    console.error('ERROR: icon-source.png not found in public/')
+    process.exit(1)
   }
 
-  if (!meta.width || !meta.height) {
-    console.error("❌ Could not detect image dimensions.");
-    process.exit(1);
+  try {
+    await fs.access(logoMark)
+    console.log('Found: logo-mark.png')
+  } catch {
+    console.warn('WARNING: logo-mark.png not found, some icons will use icon-source.png')
   }
 
-  // We want sharp results at tiny sizes:
-  // - use Lanczos3
-  // - mild sharpening helps keep edges readable at 16/32
-  // (This is the "correct change" you wanted: improves perceived contrast/clarity at favicon sizes)
-  const basePipeline = sharp(inputBuffer).resize({
-    // resizing happens per-target below; this just ensures we don't carry weird metadata
-    fit: "cover"
-  });
+  // Generate PNG icons at various sizes
+  const pngSizes = [
+    { name: 'icon-192.png', size: 192 },
+    { name: 'icon-512.png', size: 512 },
+    { name: 'apple-icon.png', size: 180 },
+    { name: 'icon-light-32x32.png', size: 32 },
+  ]
 
-  console.log(`ℹ️ Input: ${resolvedInput} (${meta.width}x${meta.height})`);
-  console.log(`ℹ️ Output dir: ${resolvedOut}`);
-
-  // Generate PNG targets
-  for (const t of PNG_TARGETS) {
-    const outPath = path.join(resolvedOut, t.filename);
-
-    await sharp(inputBuffer)
-      .resize(t.size, t.size, {
-        fit: "cover",
-        kernel: sharp.kernel.lanczos3
-      })
-      // tiny boost to maintain crisp edges at small sizes
-      .sharpen({ sigma: 0.7 })
-      .png({
-        compressionLevel: 9,
-        adaptiveFiltering: true
-      })
-      .toFile(outPath);
-
-    console.log(`✅ Wrote ${t.filename} (${t.size}x${t.size})`);
+  for (const { name, size } of pngSizes) {
+    const outputPath = path.join(publicDir, name)
+    await sharp(iconSource)
+      .resize(size, size, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+      .png()
+      .toFile(outputPath)
+    console.log(`Generated: ${name} (${size}x${size})`)
   }
 
-  // Generate ICO source PNG buffers
-  const icoPngBuffers = [];
-  for (const s of ICO_SIZES) {
-    const buf = await sharp(inputBuffer)
-      .resize(s, s, {
-        fit: "cover",
-        kernel: sharp.kernel.lanczos3
-      })
-      .sharpen({ sigma: 0.8 })
-      .png({
-        compressionLevel: 9,
-        adaptiveFiltering: true
-      })
-      .toBuffer();
+  // Generate dark version (inverted colors for light mode)
+  const darkIconPath = path.join(publicDir, 'icon-dark-32x32.png')
+  await sharp(iconSource)
+    .resize(32, 32, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .negate({ alpha: false })
+    .png()
+    .toFile(darkIconPath)
+  console.log('Generated: icon-dark-32x32.png (32x32, inverted)')
 
-    icoPngBuffers.push(buf);
-  }
+  // Generate favicon.ico (32x32 PNG, browsers accept PNG in .ico container)
+  const faviconPath = path.join(publicDir, 'favicon.ico')
+  await sharp(iconSource)
+    .resize(32, 32, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .png()
+    .toFile(faviconPath)
+  console.log('Generated: favicon.ico (32x32)')
 
-  // Generate favicon.ico
-  const icoBuffer = await pngToIco(icoPngBuffers);
-  const icoOutPath = path.join(resolvedOut, "favicon.ico");
-  await fs.writeFile(icoOutPath, icoBuffer);
-  console.log(`✅ Wrote favicon.ico (sizes: ${ICO_SIZES.join(", ")})`);
+  // Generate simple SVG placeholder (actual vector should be created in design tool)
+  const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="brandGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#14b8a6"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="32" height="32" rx="6" fill="url(#brandGradient)"/>
+  <text x="16" y="22" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="white" text-anchor="middle">6</text>
+</svg>`
 
-  console.log("\n🎉 Done. Your icon bundle is ready.");
-  console.log(`➡️  Use these in your site from: ${outDir.replace(/\\/g, "/")}/`);
+  await fs.writeFile(path.join(publicDir, 'icon.svg'), svgIcon)
+  console.log('Generated: icon.svg (placeholder)')
+
+  // Generate logo-mark.svg placeholder
+  const logoMarkSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#14b8a6"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="12" fill="url(#logoGradient)"/>
+  <text x="32" y="44" font-family="system-ui, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">6</text>
+</svg>`
+
+  await fs.writeFile(path.join(publicDir, 'logo-mark.svg'), logoMarkSvg)
+  console.log('Generated: logo-mark.svg (placeholder)')
+
+  // Generate full logo SVG placeholder
+  const logoSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" width="200" height="48">
+  <defs>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#14b8a6"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <text x="0" y="36" font-family="system-ui, sans-serif" font-size="32" font-weight="bold" fill="url(#textGradient)">Six1Five</text>
+</svg>`
+
+  await fs.writeFile(path.join(publicDir, 'logo.svg'), logoSvg)
+  console.log('Generated: logo.svg (placeholder)')
+
+  console.log('\n✅ Icon generation complete!')
+  console.log('\nNote: The SVG files are placeholders. For production, create proper vector')
+  console.log('versions in a design tool like Figma or Illustrator.')
 }
 
-main().catch((err) => {
-  console.error("❌ Unexpected error:");
-  console.error(err);
-  process.exit(1);
-});
+generateIcons().catch(console.error)

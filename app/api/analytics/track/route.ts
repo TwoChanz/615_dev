@@ -1,10 +1,21 @@
 import { NextResponse } from "next/server"
+import { PostHog } from "posthog-node"
+
 import {
   trackEventSchema,
   trackBatchSchema,
   getSafeErrorMessage,
   isAllowedOrigin,
 } from "@/lib/validation"
+
+// Initialize PostHog server-side client
+const posthog = process.env.POSTHOG_API_KEY
+  ? new PostHog(process.env.POSTHOG_API_KEY, {
+      host: process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://app.posthog.com",
+      flushAt: 1, // Flush immediately for real-time tracking
+      flushInterval: 0,
+    })
+  : null
 
 // CORS headers helper
 function getCorsHeaders(request: Request): HeadersInit {
@@ -58,32 +69,34 @@ export async function POST(request: Request) {
     const { name, category, properties } = result.data
 
     // Build enriched event with explicitly picked fields
-    const enrichedEvent = {
-      name,
+    const enrichedProperties = {
+      ...(properties || {}),
       category,
-      properties: {
-        ...(properties || {}),
-        serverTimestamp: new Date().toISOString(),
-      },
+      serverTimestamp: new Date().toISOString(),
     }
 
     // Log for development
     if (process.env.NODE_ENV === "development") {
-      console.log("[Analytics Server]", name, enrichedEvent)
+      console.log("[Analytics Server]", name, enrichedProperties)
     }
 
-    // TODO: Forward to your analytics service
-    // Example with PostHog:
-    // await fetch(`${process.env.POSTHOG_HOST}/capture`, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     api_key: process.env.POSTHOG_API_KEY,
-    //     event: name,
-    //     properties: enrichedEvent.properties,
-    //     distinct_id: properties?.sessionId || "anonymous",
-    //   }),
-    // })
+    // Forward to PostHog
+    if (posthog) {
+      const distinctId = (properties?.sessionId as string) ||
+                         (properties?.userId as string) ||
+                         "anonymous"
+
+      posthog.capture({
+        distinctId,
+        event: name,
+        properties: enrichedProperties,
+      })
+
+      // Don't await shutdown - let it flush in background
+      // PostHog client handles batching
+    } else if (process.env.NODE_ENV === "development") {
+      console.log("[Analytics] PostHog not configured, event not forwarded")
+    }
 
     return NextResponse.json({ success: true }, { headers: corsHeaders })
   } catch (error) {
@@ -127,7 +140,24 @@ export async function PUT(request: Request) {
       console.log("[Analytics Server] Batch:", events.length, "events")
     }
 
-    // TODO: Forward batch to analytics service
+    // Forward batch to PostHog
+    if (posthog) {
+      for (const event of events) {
+        const distinctId = (event.properties?.sessionId as string) ||
+                           (event.properties?.userId as string) ||
+                           "anonymous"
+
+        posthog.capture({
+          distinctId,
+          event: event.name,
+          properties: {
+            ...(event.properties || {}),
+            category: event.category,
+            serverTimestamp: new Date().toISOString(),
+          },
+        })
+      }
+    }
 
     return NextResponse.json(
       {

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ArticleHeader } from "@/components/mdx-components"
 import { ArticleCard } from "@/components/article-card"
 import { NewsletterForm } from "@/components/newsletter-form"
+import { ArticleJsonLd, BreadcrumbJsonLd } from "@/components/json-ld"
 import { blogPosts, getRelatedContent } from "@/lib/content"
 
 interface BlogPostPageProps {
@@ -61,6 +62,22 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <article className="mx-auto max-w-4xl px-4 py-16 lg:px-8">
+      {/* JSON-LD Structured Data */}
+      <ArticleJsonLd
+        title={post.title}
+        description={post.description}
+        datePublished={post.date}
+        url={`/blog/${post.slug}`}
+        tags={post.tags}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: "Blog", url: "/blog" },
+          { name: post.title, url: `/blog/${post.slug}` },
+        ]}
+      />
+
       {/* Back Link */}
       <Button asChild variant="ghost" size="sm" className="mb-8">
         <Link href="/blog">

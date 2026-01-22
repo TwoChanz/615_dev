@@ -1,7 +1,7 @@
 {
   "name": "Six1Five Devs",
   "short_name": "Six1Five",
-  "description": "Developer brand building in public. Guides, tools, and resources.",
+  "description": "Build. Ship. Document.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0f",
@@ -25,14 +25,12 @@
     {
       "src": "/icons/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
       "src": "/icons/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
   ]
 }
