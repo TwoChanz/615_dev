@@ -397,3 +397,135 @@
     @apply inline-flex items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground;
   }
 }
+
+/* ===========================================
+   LOADING ANIMATIONS
+   =========================================== */
+
+/* Caret blink animation - 900ms cycle */
+.caret-blink {
+  animation: caretBlink 900ms ease-in-out infinite;
+}
+
+@keyframes caretBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Grid draw animation */
+.animate-grid-draw {
+  animation: gridDraw 300ms ease-out forwards;
+}
+
+@keyframes gridDraw {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Tile reveal animations - staggered sequence */
+.animate-tile-reveal-1 {
+  animation: tileReveal 150ms ease-out 0ms forwards;
+}
+
+.animate-tile-reveal-2 {
+  animation: tileReveal 150ms ease-out 100ms forwards;
+}
+
+.animate-tile-reveal-3 {
+  animation: tileReveal 150ms ease-out 200ms forwards;
+}
+
+.animate-tile-reveal-4 {
+  animation: tileReveal 150ms ease-out 300ms forwards;
+}
+
+@keyframes tileReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Glow pulse animation */
+.animate-glow-pulse {
+  animation: glowPulse 300ms ease-out forwards;
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0;
+    box-shadow:
+      0 0 0 rgba(34, 211, 238, 0),
+      0 0 0 rgba(139, 92, 246, 0);
+  }
+  50% {
+    opacity: 1;
+    box-shadow:
+      0 0 40px rgba(34, 211, 238, 0.5),
+      0 0 80px rgba(139, 92, 246, 0.4);
+  }
+  100% {
+    opacity: 0.6;
+    box-shadow:
+      0 0 30px rgba(34, 211, 238, 0.3),
+      0 0 60px rgba(139, 92, 246, 0.2);
+  }
+}
+
+/* Fade in utility */
+.animate-fade-in {
+  animation: fadeInSimple 200ms ease-out forwards;
+}
+
+@keyframes fadeInSimple {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Tennessee outline stroke draw animation */
+.tn-outline-draw .tn-path {
+  stroke-dasharray: 1200;
+  stroke-dashoffset: 1200;
+  animation: tnStrokeDraw 1.4s ease-out forwards;
+}
+
+.tn-outline-draw .tn-stars {
+  opacity: 0;
+  animation: tnStarsReveal 400ms ease-out 1s forwards;
+}
+
+@keyframes tnStrokeDraw {
+  0% {
+    stroke-dashoffset: 1200;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes tnStarsReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+}
