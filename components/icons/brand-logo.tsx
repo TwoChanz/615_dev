@@ -24,7 +24,7 @@ export function BrandLogo({ className, size = "md", showText = false }: BrandLog
     <div className={cn("flex items-center gap-2.5", className)}>
       <div className={cn("relative shrink-0 rounded-lg overflow-hidden", sizeClasses[size])}>
         <Image
-          src="/logo.png"
+          src="/og-image-square.png"
           alt="Six1Five Devs"
           width={imageSizes[size]}
           height={imageSizes[size]}
