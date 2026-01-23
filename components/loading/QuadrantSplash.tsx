@@ -145,7 +145,7 @@ export function QuadrantSplash({
             <img
               src={imageSrc}
               alt="615 Badge"
-              className="w-full h-full object-contain opacity-0"
+              className="w-full h-full object-contain"
             />
           </div>
         )}
