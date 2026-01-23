@@ -10,7 +10,7 @@ export const trackingConfig = {
   googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX",
 
   // Plausible Analytics (privacy-focused alternative)
-  plausibleDomain: process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN || "six1fivestudio.dev",
+  plausibleDomain: process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN || "six1five.dev",
 
   // PostHog (product analytics)
   posthogKey: process.env.NEXT_PUBLIC_POSTHOG_KEY || "phc_XXXXXXXXXXXX",

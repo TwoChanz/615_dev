@@ -1,9 +1,9 @@
 /**
  * Centralized Tools Data Model
- * Single source of truth for all tools/products displayed on six1fivestudio.dev
+ * Single source of truth for all tools/products displayed on six1five.dev
  * 
  * Architecture:
- * - six1fivestudio.dev serves as the discovery + SEO layer
+ * - six1five.dev serves as the discovery + SEO layer
  * - External product domains (websiteUrl) are the conversion/app layer
  */
 

@@ -46,7 +46,7 @@ export async function generateMetadata({
 
   const title = tool.metaTitle || `${tool.name} - ${tool.tagline}`
   const description = tool.metaDescription || tool.description
-  const canonicalUrl = `https://six1fivestudio.dev/tools/${tool.slug}`
+  const canonicalUrl = `https://six1five.dev/tools/${tool.slug}`
 
   return {
     title: tool.name,
@@ -102,7 +102,7 @@ function generateJsonLd(tool: NonNullable<ReturnType<typeof getToolBySlug>>) {
     "@type": "SoftwareApplication",
     name: tool.name,
     description: tool.description,
-    url: `https://six1fivestudio.dev/tools/${tool.slug}`,
+    url: `https://six1five.dev/tools/${tool.slug}`,
     applicationCategory: "WebApplication",
     operatingSystem: "Web",
     offers: {
@@ -115,7 +115,7 @@ function generateJsonLd(tool: NonNullable<ReturnType<typeof getToolBySlug>>) {
     author: {
       "@type": "Organization",
       name: "Six1Five Devs",
-      url: "https://six1fivestudio.dev",
+      url: "https://six1five.dev",
     },
     ...(tool.websiteUrl && { installUrl: tool.websiteUrl }),
   }
