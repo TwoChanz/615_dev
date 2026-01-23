@@ -9,10 +9,15 @@ Six1Five Devs developer website - a Next.js 16 content site serving as the disco
 ## Commands
 
 ```bash
-npm run dev      # Start development server
-npm run build    # Production build
-npm run lint     # Run ESLint
-npm run start    # Start production server
+npm run dev           # Start development server
+npm run build         # Production build
+npm run lint          # Run ESLint
+npm run start         # Start production server
+npm run test          # Run Vitest in watch mode
+npm run test:run      # Run tests once
+npm run test:coverage # Run tests with coverage report
+npm run analyze       # Production build with bundle analyzer (ANALYZE=true)
+npm run icons         # Generate PWA icons from public/icon-source.png
 ```
 
 ## Architecture
@@ -21,7 +26,9 @@ npm run start    # Start production server
 - **Framework:** Next.js 16 with App Router (React 19, TypeScript, RSC enabled)
 - **Styling:** Tailwind CSS 4 with shadcn/ui (new-york style, CSS variables)
 - **Fonts:** Geist Sans + Geist Mono
-- **Analytics:** Vercel Analytics
+- **Testing:** Vitest with React Testing Library
+- **Analytics:** Vercel Analytics, PostHog (optional)
+- **Monitoring:** Sentry (optional)
 - **Theme:** next-themes with system/light/dark support
 
 ### Path Aliases
@@ -53,84 +60,30 @@ Teal/Purple gradient brand (dark mode optimized). Custom utilities in `app/globa
 Primary color: `oklch(0.70 0.15 175)` (teal), Secondary: `oklch(0.55 0.20 280)` (purple/indigo)
 
 ### Brand Assets
-
-**Logos** (`public/`):
-
-| File | Size | Use Case |
-|------|------|----------|
-| `logo.svg` | 48x48 | Full site logo (header, footer, OG images) |
-| `logo-mark.svg` | 32x32 | "615" monogram icon (compact spaces, favicons) |
-| `logo-mark.png` | 32x32 | "615" monogram PNG version |
-| `logo-full.png` | - | Full logo PNG for high-res displays |
-| `icon.svg` | 32x32 | Favicon SVG source |
-| `icon-source.png` | - | Source PNG for icon generation |
-
-**PWA/Platform Icons** (`public/`):
-
-| File | Size | Platform |
-|------|------|----------|
-| `favicon.ico` | 32x32 | Browser tab |
-| `icon-192.png` | 192x192 | PWA manifest |
-| `icon-512.png` | 512x512 | PWA manifest (splash) |
-| `apple-icon.png` | 180x180 | iOS home screen |
-| `icon-light-32x32.png` | 32x32 | Light theme favicon |
-| `icon-dark-32x32.png` | 32x32 | Dark theme favicon |
-
-**Additional PWA Icons** (`public/icons/`):
-
-| File | Size | Platform |
-|------|------|----------|
-| `android-chrome-192x192.png` | 192x192 | Android Chrome |
-| `android-chrome-512x512.png` | 512x512 | Android Chrome (splash) |
-| `apple-touch-icon.png` | 180x180 | iOS Safari |
-| `favicon-16x16.png` | 16x16 | Small favicon |
-| `favicon-32x32.png` | 32x32 | Standard favicon |
-| `favicon.ico` | 32x32 | Legacy favicon |
-
-**Open Graph & Social** (`public/`):
-
-| File | Size | Use Case |
-|------|------|----------|
-| `og-image.png` | 1200x630 | Open Graph social sharing |
-| `og-image-square.png` | 1200x1200 | Square social sharing |
-| `watermark.png` | - | Watermark overlay |
-
-**Placeholders** (`public/`):
-
-| File | Use Case |
-|------|----------|
-| `placeholder.jpg` | Generic placeholder image |
-| `placeholder.svg` | SVG placeholder |
-| `placeholder-logo.png` | Logo placeholder |
-| `placeholder-logo.svg` | SVG logo placeholder |
-| `placeholder-user.jpg` | User avatar placeholder |
-
-**Tool Logos** (`public/tools/`):
-
-| File | Product | Status |
-|------|---------|--------|
-| `subsense.png` | SubSense (subscription tracker) | beta |
-| `subsense.svg` | SubSense SVG version | beta |
-| `apppilot.png` | AppPilot (SaaS starter kit) | live |
-| `apppilot.svg` | AppPilot SVG version | live |
-| `flightwindow.png` | FlightWindow (flight tracking) | beta |
-| `flightwindow.svg` | FlightWindow SVG version | beta |
-| `devdash.svg` | DevDash (developer dashboard) | coming-soon |
-
-**Brand Colors**:
-
-| Role | OKLCH | Hex | Usage |
-|------|-------|-----|-------|
-| Primary (Teal) | `oklch(0.70 0.15 175)` | #14b8a6 | Buttons, links, primary accents |
-| Secondary (Purple) | `oklch(0.55 0.20 280)` | #8b5cf6 | Gradients, hover states, badges |
-| Gradient | teal → purple | - | Logos, CTAs, text highlights |
+Logos in `public/`: `logo.svg` (48x48 full logo), `logo-mark.svg` (32x32 "615" monogram), `icon.svg` (favicon source).
+PWA icons in `public/icons/`. Tool logos in `public/tools/[toolslug].png`.
+OG image: `public/og-image.png` (1200x630).
 
 ### API Routes
 - `app/api/analytics/track/route.ts` - Event tracking endpoint
-- `app/api/newsletter/subscribe/route.ts` - Newsletter subscription
+- `app/api/newsletter/subscribe/route.ts` - Newsletter subscription (Resend)
+- `app/api/contact/route.ts` - Contact form submission (Resend + Supabase)
 - `app/feed.xml/route.ts` - RSS feed generation
 
+### Environment Variables
+All integrations are optional - site works without any env vars. Copy `.env.example` to `.env.local`.
+
+| Variable | Purpose |
+|----------|---------|
+| `SUPABASE_URL`, `SUPABASE_ANON_KEY` | Database for form storage |
+| `RESEND_API_KEY`, `RESEND_AUDIENCE_ID` | Email sending and newsletter |
+| `ADMIN_EMAIL` | Contact form notifications |
+| `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST` | Product analytics |
+| `SENTRY_DSN`, `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` | Error monitoring |
+| `NEXT_PUBLIC_GA_ID` | Google Analytics |
+
 ### Build Configuration
-- TypeScript build errors ignored (`ignoreBuildErrors: true`)
+- TypeScript build errors enabled (`ignoreBuildErrors: false`)
 - Images unoptimized (static export compatible)
+- Sentry integration conditional on `SENTRY_DSN` being set
 - `www.` subdomain redirects to apex domain
