@@ -4,6 +4,15 @@ import { Wrench } from "lucide-react"
 import { ToolCard } from "@/components/tool-card"
 import { getAllTools, getToolsByStatus } from "@/lib/tools"
 
+// DEV ONLY: Artificial delay to test loading animations (remove for production)
+const DEV_LOADING_DELAY = process.env.NODE_ENV === "development" ? 3000 : 0
+
+async function devDelay() {
+  if (DEV_LOADING_DELAY > 0) {
+    await new Promise((resolve) => setTimeout(resolve, DEV_LOADING_DELAY))
+  }
+}
+
 export const metadata: Metadata = {
   title: "Tools",
   description:
@@ -14,7 +23,8 @@ export const metadata: Metadata = {
   },
 }
 
-export default function ToolsPage() {
+export default async function ToolsPage() {
+  await devDelay()
   const allTools = getAllTools()
   const liveTools = getToolsByStatus("live")
   const betaTools = getToolsByStatus("beta")

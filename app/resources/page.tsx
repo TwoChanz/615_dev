@@ -2,7 +2,17 @@ import React from "react"
 import type { Metadata } from "next"
 import { Zap, Code, Database, CreditCard, Mail, Palette, Cpu, BarChart } from "lucide-react"
 
-import { ResourceCard, AffiliateBlock } from "@/components/affiliate-block"
+import { ResourceCard } from "@/components/affiliate-block"
+import { EssentialStackCategories } from "@/components/essential-stack-categories"
+
+// DEV ONLY: Artificial delay to test loading animations (remove for production)
+const DEV_LOADING_DELAY = process.env.NODE_ENV === "development" ? 3000 : 0
+
+async function devDelay() {
+  if (DEV_LOADING_DELAY > 0) {
+    await new Promise((resolve) => setTimeout(resolve, DEV_LOADING_DELAY))
+  }
+}
 import { NewsletterForm } from "@/components/newsletter-form"
 import { PrimaryCTA } from "@/components/cta-blocks"
 import {
@@ -78,7 +88,8 @@ const categoryConfig: Record<AffiliateCategory, { name: string; icon: React.Reac
 // Get unique categories that have affiliates
 const activeCategories = [...new Set(affiliatePrograms.map((a) => a.category))] as AffiliateCategory[]
 
-export default function ResourcesPage() {
+export default async function ResourcesPage() {
+  await devDelay()
   const essentialAffiliates = getAffiliatesByTier("essential")
 
   return (
@@ -104,12 +115,9 @@ export default function ResourcesPage() {
       {/* Essential Stack */}
       <section className="section border-b border-border">
         <div className="container-page">
-          <AffiliateBlock
-            title="My Essential Stack"
-            description="The core tools I use on every project. These are my top picks."
+          <EssentialStackCategories
             affiliates={essentialAffiliates}
             placement="resources-essential"
-            variant="featured"
             className="mx-auto max-w-3xl"
           />
         </div>

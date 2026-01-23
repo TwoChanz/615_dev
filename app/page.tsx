@@ -21,7 +21,17 @@ import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/json-ld"
 import { tools, getRecentContent } from "@/lib/content"
 import { getFeaturedAffiliates } from "@/lib/monetization"
 
-export default function HomePage() {
+// DEV ONLY: Artificial delay to test loading animations (remove for production)
+const DEV_LOADING_DELAY = process.env.NODE_ENV === "development" ? 3000 : 0
+
+async function devDelay() {
+  if (DEV_LOADING_DELAY > 0) {
+    await new Promise((resolve) => setTimeout(resolve, DEV_LOADING_DELAY))
+  }
+}
+
+export default async function HomePage() {
+  await devDelay()
   const recentContent = getRecentContent(4)
   const featuredAffiliates = getFeaturedAffiliates()
 

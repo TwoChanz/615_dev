@@ -5,13 +5,23 @@ import { ArticleCard } from "@/components/article-card"
 import { NewsletterForm } from "@/components/newsletter-form"
 import { blogPosts } from "@/lib/content"
 
+// DEV ONLY: Artificial delay to test loading animations (remove for production)
+const DEV_LOADING_DELAY = process.env.NODE_ENV === "development" ? 3000 : 0
+
+async function devDelay() {
+  if (DEV_LOADING_DELAY > 0) {
+    await new Promise((resolve) => setTimeout(resolve, DEV_LOADING_DELAY))
+  }
+}
+
 export const metadata: Metadata = {
   title: "Blog",
   description:
     "Thoughts on building products, coding, and the indie hacker journey. Build logs, lessons learned, and technical deep dives.",
 }
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  await devDelay()
   const featuredPosts = blogPosts.filter((p) => p.featured)
   const otherPosts = blogPosts.filter((p) => !p.featured)
 
