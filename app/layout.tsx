@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/sonner"
 import { PostHogProvider } from "@/components/posthog-provider"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
@@ -147,6 +148,7 @@ export default function RootLayout({
               <SiteFooter />
             </div>
           </PostHogProvider>
+          <Toaster />
         </ThemeProvider>
         <Analytics />
       </body>

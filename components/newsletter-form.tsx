@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { trackNewsletter } from "@/lib/analytics"
+import { toast } from "sonner"
 
 interface NewsletterFormProps {
   className?: string
@@ -68,6 +69,10 @@ export function NewsletterForm({
       trackNewsletter.subscribe(placement, leadMagnet?.title)
 
       setStatus("success")
+      toast.success(
+        leadMagnet ? "Check your inbox!" : "Successfully subscribed!",
+        { description: leadMagnet ? `${leadMagnet.title} is on its way.` : "Check your inbox to confirm." }
+      )
       setMessage(
         leadMagnet
           ? `Check your inbox for ${leadMagnet.title}!`
@@ -84,6 +89,7 @@ export function NewsletterForm({
       trackNewsletter.error(placement, "subscription_failed")
       setStatus("error")
       setMessage("Something went wrong. Please try again.")
+      toast.error("Subscription failed", { description: "Please try again later." })
 
       setTimeout(() => {
         setStatus("idle")

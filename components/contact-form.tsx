@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { contactFormSchema, type ContactFormInput } from "@/lib/validation"
+import { toast } from "sonner"
 
 type FormStatus = "idle" | "loading" | "success" | "error"
 
@@ -44,12 +45,13 @@ export function ContactForm() {
       }
 
       setStatus("success")
+      toast.success("Message sent!", { description: "I'll get back to you soon." })
       reset()
     } catch (error) {
       setStatus("error")
-      setErrorMessage(
-        error instanceof Error ? error.message : "Something went wrong"
-      )
+      const message = error instanceof Error ? error.message : "Something went wrong"
+      setErrorMessage(message)
+      toast.error("Failed to send message", { description: message })
     }
   }
 
