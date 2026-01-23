@@ -12,7 +12,7 @@ interface QuadrantSplashProps {
 export function QuadrantSplash({
   className,
   onComplete,
-  imageSrc = "/logo-mark.png",
+  imageSrc = "/og-image-square.png",
 }: QuadrantSplashProps) {
   const [phase, setPhase] = useState<"grid" | "tiles" | "glow" | "complete">("grid")
 

@@ -46,7 +46,7 @@ export function SiteHeader() {
           >
             <div className="relative">
               <Image
-                src="/logo-mark.svg"
+                src="/og-image-square.png"
                 alt="Six1Five Devs"
                 width={32}
                 height={32}
@@ -132,7 +132,7 @@ export function SiteHeader() {
               onClick={() => setMobileMenuOpen(false)}
             >
               <Image
-                src="/logo-mark.svg"
+                src="/og-image-square.png"
                 alt="Six1Five Devs"
                 width={32}
                 height={32}
