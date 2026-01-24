@@ -7,6 +7,10 @@ import {
   BookOpen,
   Wrench,
   Zap,
+  Users,
+  Code2,
+  Star,
+  TrendingUp,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -18,8 +22,10 @@ import { AffiliateBlock } from "@/components/affiliate-block"
 import { PrimaryCTA } from "@/components/cta-blocks"
 import { LeadMagnetWidget } from "@/components/lead-magnet"
 import { OrganizationJsonLd, WebsiteJsonLd } from "@/components/json-ld"
+import { FeaturedToolSpotlight } from "@/components/featured-tool-spotlight"
 import { tools, getRecentContent } from "@/lib/content"
 import { getFeaturedAffiliates } from "@/lib/monetization"
+import { getLiveTools } from "@/lib/tools"
 
 // DEV ONLY: Artificial delay to test loading animations (remove for production)
 const DEV_LOADING_DELAY = process.env.NODE_ENV === "development" ? 3000 : 0
@@ -34,6 +40,8 @@ export default async function HomePage() {
   await devDelay()
   const recentContent = getRecentContent(4)
   const featuredAffiliates = getFeaturedAffiliates()
+  const liveTools = getLiveTools()
+  const featuredTool = liveTools[0] // First live tool as featured
 
   return (
     <div className="flex flex-col">
@@ -50,7 +58,7 @@ export default async function HomePage() {
         <div className="absolute left-1/4 top-0 -z-10 -translate-x-1/2 -translate-y-1/2 size-[600px] rounded-full bg-primary/8 blur-[120px]" />
         <div className="absolute right-1/4 top-1/4 -z-10 translate-x-1/2 size-[500px] rounded-full bg-secondary/10 blur-[100px]" />
 
-        <div className="container-page relative py-24 sm:py-32 lg:py-40">
+        <div className="container-page relative py-16 sm:py-24 lg:py-32">
           <div className="mx-auto max-w-3xl text-center">
             <Badge
               variant="secondary"
@@ -87,6 +95,49 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Social Proof Stats Section */}
+      <section className="border-b border-border bg-muted/30">
+        <div className="container-page py-8">
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+            <SocialProofStat
+              icon={<Wrench className="size-5" />}
+              value="4+"
+              label="Tools Built"
+            />
+            <SocialProofStat
+              icon={<Users className="size-5" />}
+              value="10K+"
+              label="Users Served"
+            />
+            <SocialProofStat
+              icon={<Code2 className="size-5" />}
+              value="50+"
+              label="Build Logs"
+            />
+            <SocialProofStat
+              icon={<TrendingUp className="size-5" />}
+              value="100%"
+              label="Open Source"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Tool Spotlight */}
+      {featuredTool && (
+        <section className="section border-b border-border">
+          <div className="container-page">
+            <div className="mb-8 flex items-center gap-2">
+              <Star className="size-5 text-yellow-500" />
+              <span className="text-sm font-medium text-muted-foreground">
+                Featured This Week
+              </span>
+            </div>
+            <FeaturedToolSpotlight tool={featuredTool} />
+          </div>
+        </section>
+      )}
 
       {/* What I Do Section */}
       <section className="section border-b border-border">
@@ -127,12 +178,12 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Featured Tools Section */}
+      {/* All Tools Section */}
       <section className="section border-b border-border">
         <div className="container-page">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <div>
-              <h2>Tools I&apos;ve Built</h2>
+              <h2>All Tools</h2>
               <p className="mt-2 text-muted-foreground">
                 Real products solving real problems.
               </p>
@@ -239,6 +290,28 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+    </div>
+  )
+}
+
+function SocialProofStat({
+  icon,
+  value,
+  label,
+}: {
+  icon: React.ReactNode
+  value: string
+  label: string
+}) {
+  return (
+    <div className="flex items-center gap-3 justify-center sm:justify-start">
+      <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
+        {icon}
+      </div>
+      <div>
+        <div className="text-xl font-bold text-foreground">{value}</div>
+        <div className="text-sm text-muted-foreground">{label}</div>
+      </div>
     </div>
   )
 }
