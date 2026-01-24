@@ -16,8 +16,11 @@ npm run start         # Start production server
 npm run test          # Run Vitest in watch mode
 npm run test:run      # Run tests once
 npm run test:coverage # Run tests with coverage report
+npx vitest lib/validation.test.ts  # Run a single test file
 npm run analyze       # Production build with bundle analyzer (ANALYZE=true)
 npm run icons         # Generate PWA icons from public/icon-source.png
+npm run screenshots   # Capture tool website screenshots (requires Playwright)
+npm run screenshots:install  # One-time Playwright chromium setup
 ```
 
 ## Architecture
@@ -26,7 +29,7 @@ npm run icons         # Generate PWA icons from public/icon-source.png
 - **Framework:** Next.js 16 with App Router (React 19, TypeScript, RSC enabled)
 - **Styling:** Tailwind CSS 4 with shadcn/ui (new-york style, CSS variables)
 - **Fonts:** Geist Sans + Geist Mono
-- **Testing:** Vitest with React Testing Library
+- **Testing:** Vitest with React Testing Library (jsdom environment)
 - **Analytics:** Vercel Analytics, PostHog (optional)
 - **Monitoring:** Sentry (optional)
 - **Theme:** next-themes with system/light/dark support
@@ -61,7 +64,7 @@ Primary color: `oklch(0.70 0.15 175)` (teal), Secondary: `oklch(0.55 0.20 280)` 
 
 ### Brand Assets
 Logos in `public/`: `logo.svg` (48x48 full logo), `logo-mark.svg` (32x32 "615" monogram), `icon.svg` (favicon source).
-PWA icons in `public/icons/`. Tool logos in `public/tools/[toolslug].png`.
+PWA icons in `public/icons/`. Tool logos in `public/tools/[toolslug].png`. Tool screenshots in `public/tools/screenshots/`.
 OG image: `public/og-image.png` (1200x630).
 
 ### API Routes

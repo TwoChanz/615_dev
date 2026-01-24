@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "screenshots": "npx tsx scripts/capture-screenshots.ts",
+    "screenshots:install": "npx playwright install chromium",
     "build": "next build",
     "dev": "next dev",
     "icons": "node scripts/generate-icons.mjs --input public/icon-source.png --out public/icons",
@@ -91,8 +93,9 @@
     "postcss": "^8.5",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.1.9",
+    "tsx": "^4.21.0",
     "tw-animate-css": "1.3.3",
     "typescript": "^5",
-    "vitest": "^2.0.0"
+    "vitest": "^4.0.18"
   }
 }
