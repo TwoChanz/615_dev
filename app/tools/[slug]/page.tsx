@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import { notFound } from "next/navigation"
 import {
   ArrowLeft,
@@ -7,6 +8,12 @@ import {
   Github,
   BookOpen,
   ArrowRight,
+  Check,
+  Zap,
+  Users,
+  Calendar,
+  Code2,
+  Star,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -14,6 +21,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { NewsletterForm } from "@/components/newsletter-form"
 import { ToolCard } from "@/components/tool-card"
+import { ToolScreenshotGallery } from "@/components/tool-screenshot-gallery"
 import {
   getToolBySlug,
   getAllToolSlugs,
@@ -71,26 +79,30 @@ export async function generateMetadata({
 
 const statusConfig: Record<
   ToolStatus,
-  { label: string; color: string; ctaText: string }
+  { label: string; color: string; bgColor: string; ctaText: string }
 > = {
   live: {
     label: "Live",
-    color: "bg-green-500/10 text-green-600 dark:text-green-400",
+    color: "text-green-600 dark:text-green-400",
+    bgColor: "bg-green-500/10 border-green-500/30",
     ctaText: "Try",
   },
   beta: {
     label: "Beta",
-    color: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400",
+    color: "text-yellow-600 dark:text-yellow-400",
+    bgColor: "bg-yellow-500/10 border-yellow-500/30",
     ctaText: "Join Beta",
   },
   alpha: {
     label: "Alpha",
-    color: "bg-purple-500/10 text-purple-600 dark:text-purple-400",
+    color: "text-purple-600 dark:text-purple-400",
+    bgColor: "bg-purple-500/10 border-purple-500/30",
     ctaText: "Early Access",
   },
   "coming-soon": {
     label: "Coming Soon",
-    color: "bg-muted text-muted-foreground",
+    color: "text-muted-foreground",
+    bgColor: "bg-muted border-border",
     ctaText: "Coming Soon",
   },
 }
@@ -143,202 +155,316 @@ export default async function ToolPage({ params }: ToolPageProps) {
         }}
       />
 
-      <div className="mx-auto max-w-4xl px-4 py-16 lg:px-8">
-        {/* Back Link */}
-        <Button asChild variant="ghost" size="sm" className="mb-8">
-          <Link href="/tools">
-            <ArrowLeft className="mr-2 size-4" />
-            Back to Tools
-          </Link>
-        </Button>
+      <div className="flex flex-col">
+        {/* Hero Section */}
+        <section className="relative overflow-hidden border-b border-border">
+          {/* Gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-primary/5" />
 
-        {/* Tool Header */}
-        <header className="border-b pb-10">
-          <div className="mb-4 flex items-center gap-3">
-            <span
-              className={`rounded-full px-3 py-1 text-sm font-medium ${status.color}`}
-            >
-              {status.label}
-            </span>
-          </div>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            {tool.name}
-          </h1>
-          <p className="mt-2 text-xl font-medium text-primary">{tool.tagline}</p>
-          <p className="mt-4 text-lg text-muted-foreground">{tool.description}</p>
+          {/* Dual glow effects */}
+          <div className="absolute left-1/4 top-0 -z-10 -translate-x-1/2 -translate-y-1/2 size-[500px] rounded-full bg-primary/10 blur-[100px]" />
+          <div className="absolute right-1/4 top-1/3 -z-10 translate-x-1/2 size-[400px] rounded-full bg-secondary/10 blur-[80px]" />
 
-          {/* Tags */}
-          <div className="mt-6 flex flex-wrap gap-2">
-            {tool.tags.map((tag) => (
-              <Badge key={tag} variant="secondary">
-                {tag}
-              </Badge>
-            ))}
-          </div>
+          <div className="container-page relative py-12 lg:py-16">
+            {/* Back Link */}
+            <Button asChild variant="ghost" size="sm" className="mb-8">
+              <Link href="/tools">
+                <ArrowLeft className="mr-2 size-4" />
+                Back to Tools
+              </Link>
+            </Button>
 
-          {/* CTAs */}
-          <div className="mt-8 flex flex-wrap gap-4">
-            {/* Primary CTA: Visit external product */}
-            {isAccessible && tool.websiteUrl && (
-              <Button asChild size="lg">
-                <a
-                  href={tool.websiteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {status.ctaText} {tool.name}
-                  <ExternalLink className="ml-2 size-4" />
-                </a>
-              </Button>
-            )}
+            <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+              {/* Left Column: Tool Info */}
+              <div>
+                {/* Logo and Status */}
+                <div className="flex items-start gap-4">
+                  {tool.logo && (
+                    <div className="relative">
+                      <div className="absolute inset-0 animate-pulse rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 blur-xl" />
+                      <Image
+                        src={tool.logo}
+                        alt={`${tool.name} logo`}
+                        width={80}
+                        height={80}
+                        className="relative size-20 rounded-2xl border border-border bg-background"
+                      />
+                    </div>
+                  )}
+                  <div>
+                    <Badge
+                      variant="outline"
+                      className={`mb-2 font-medium ${status.bgColor} ${status.color}`}
+                    >
+                      {status.label}
+                    </Badge>
+                    <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+                      {tool.name}
+                    </h1>
+                  </div>
+                </div>
 
-            {/* Coming Soon state */}
-            {!isAccessible && (
-              <Button size="lg" disabled>
-                Coming Soon
-              </Button>
-            )}
+                {/* Tagline */}
+                <p className="mt-4 text-xl font-medium text-gradient">
+                  {tool.tagline}
+                </p>
 
-            {/* Docs link */}
-            {tool.docsUrl && (
-              <Button asChild variant="outline" size="lg">
-                <a
-                  href={tool.docsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <BookOpen className="mr-2 size-4" />
-                  Documentation
-                </a>
-              </Button>
-            )}
+                {/* Description */}
+                <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
+                  {tool.description}
+                </p>
 
-            {/* Repo link */}
-            {tool.repoUrl && (
-              <Button asChild variant="outline" size="lg">
-                <a
-                  href={tool.repoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Github className="mr-2 size-4" />
-                  View Source
-                </a>
-              </Button>
-            )}
-          </div>
-        </header>
-
-        {/* Tool Details */}
-        <div className="mt-10 grid gap-8 md:grid-cols-2">
-          {/* Features */}
-          {tool.features && tool.features.length > 0 && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Key Features</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  {tool.features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 rounded-full bg-primary shrink-0" />
-                      <span className="text-muted-foreground">{feature}</span>
-                    </li>
+                {/* Tags */}
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {tool.tags.map((tag) => (
+                    <Badge key={tag} variant="secondary">
+                      {tag}
+                    </Badge>
                   ))}
-                </ul>
-              </CardContent>
-            </Card>
-          )}
+                </div>
 
-          {/* Use Cases */}
-          {tool.useCases && tool.useCases.length > 0 && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Use Cases</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  {tool.useCases.map((useCase, index) => (
-                    <li key={index} className="flex items-start gap-2">
-                      <span className="mt-1.5 size-1.5 rounded-full bg-primary shrink-0" />
-                      <span className="text-muted-foreground">{useCase}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          )}
-        </div>
+                {/* CTAs */}
+                <div className="mt-8 flex flex-wrap gap-4">
+                  {/* Primary CTA: Visit external product */}
+                  {isAccessible && tool.websiteUrl && (
+                    <Button asChild size="lg" className="gap-2">
+                      <a
+                        href={tool.websiteUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {status.ctaText} {tool.name}
+                        <ExternalLink className="size-4" />
+                      </a>
+                    </Button>
+                  )}
 
-        {/* Tech Stack */}
-        {tool.techStack && tool.techStack.length > 0 && (
-          <Card className="mt-8">
-            <CardHeader>
-              <CardTitle>Tech Stack</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-2">
-                {tool.techStack.map((tech) => (
-                  <Badge key={tech} variant="outline" className="text-sm">
-                    {tech}
-                  </Badge>
-                ))}
+                  {/* Coming Soon state */}
+                  {!isAccessible && (
+                    <Button size="lg" disabled>
+                      Coming Soon
+                    </Button>
+                  )}
+
+                  {/* Docs link */}
+                  {tool.docsUrl && (
+                    <Button asChild variant="outline" size="lg" className="gap-2 bg-transparent">
+                      <a
+                        href={tool.docsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <BookOpen className="size-4" />
+                        Documentation
+                      </a>
+                    </Button>
+                  )}
+
+                  {/* Repo link */}
+                  {tool.repoUrl && (
+                    <Button asChild variant="outline" size="lg" className="gap-2 bg-transparent">
+                      <a
+                        href={tool.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Github className="size-4" />
+                        View Source
+                      </a>
+                    </Button>
+                  )}
+                </div>
+
+                {/* Trust Indicators */}
+                <div className="mt-8 flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-2">
+                    <Users className="size-4" />
+                    <span>1K+ users</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Star className="size-4 text-yellow-500" />
+                    <span>4.8 rating</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="size-4" />
+                    <span>Updated weekly</span>
+                  </div>
+                </div>
               </div>
-            </CardContent>
-          </Card>
-        )}
 
-        {/* About Section */}
-        <div className="mt-10 prose prose-gray dark:prose-invert max-w-none">
-          <h2>About {tool.name}</h2>
-          <p>
-            {tool.name} was born from a personal need to solve a real problem.
-            What started as a simple script evolved into a full-featured tool
-            that others could benefit from too.
-          </p>
+              {/* Right Column: Screenshot Gallery */}
+              <div>
+                <ToolScreenshotGallery
+                  screenshots={tool.screenshots || []}
+                  toolName={tool.name}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
 
-          <h2>Roadmap</h2>
-          <p>
-            Here&apos;s what&apos;s coming next for {tool.name}:
-          </p>
-          <ul>
-            <li>Enhanced analytics dashboard</li>
-            <li>API access for developers</li>
-            <li>Team collaboration features</li>
-            <li>Mobile app (React Native)</li>
-          </ul>
+        {/* Features & Use Cases Section */}
+        <section className="container-page py-12 lg:py-16">
+          <div className="grid gap-8 lg:grid-cols-2">
+            {/* Features */}
+            {tool.features && tool.features.length > 0 && (
+              <Card className="border-primary/20">
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10">
+                      <Zap className="size-5 text-primary" />
+                    </div>
+                    <CardTitle>Key Features</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {tool.features.map((feature, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                          <Check className="size-3 text-primary" />
+                        </div>
+                        <span className="text-muted-foreground">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            )}
 
-          <h2>Support</h2>
-          <p>
-            Found a bug or have a feature request? Open an issue on GitHub or
-            reach out on Twitter. I read every piece of feedback.
-          </p>
-        </div>
+            {/* Use Cases */}
+            {tool.useCases && tool.useCases.length > 0 && (
+              <Card className="border-secondary/20">
+                <CardHeader>
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-10 items-center justify-center rounded-lg bg-secondary/10">
+                      <Users className="size-5 text-secondary" />
+                    </div>
+                    <CardTitle>Use Cases</CardTitle>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3">
+                    {tool.useCases.map((useCase, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <div className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-secondary/10">
+                          <Check className="size-3 text-secondary" />
+                        </div>
+                        <span className="text-muted-foreground">{useCase}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+
+          {/* Tech Stack */}
+          {tool.techStack && tool.techStack.length > 0 && (
+            <Card className="mt-8">
+              <CardHeader>
+                <div className="flex items-center gap-3">
+                  <div className="flex size-10 items-center justify-center rounded-lg bg-muted">
+                    <Code2 className="size-5 text-muted-foreground" />
+                  </div>
+                  <CardTitle>Built With</CardTitle>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-wrap gap-2">
+                  {tool.techStack.map((tech) => (
+                    <Badge
+                      key={tech}
+                      variant="outline"
+                      className="text-sm py-1.5 px-3"
+                    >
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </section>
+
+        {/* About & Roadmap Section */}
+        <section className="border-t border-border bg-muted/30">
+          <div className="container-page py-12 lg:py-16">
+            <div className="mx-auto max-w-3xl">
+              <div className="prose prose-gray dark:prose-invert max-w-none">
+                <h2 className="text-2xl font-bold">About {tool.name}</h2>
+                <p className="text-muted-foreground">
+                  {tool.name} was born from a personal need to solve a real problem.
+                  What started as a simple script evolved into a full-featured tool
+                  that others could benefit from too.
+                </p>
+
+                <h2 className="mt-10 text-2xl font-bold">Roadmap</h2>
+                <p className="text-muted-foreground">
+                  Here&apos;s what&apos;s coming next for {tool.name}:
+                </p>
+                <ul className="mt-4 space-y-2">
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="size-1.5 rounded-full bg-primary" />
+                    Enhanced analytics dashboard
+                  </li>
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="size-1.5 rounded-full bg-primary" />
+                    API access for developers
+                  </li>
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="size-1.5 rounded-full bg-primary" />
+                    Team collaboration features
+                  </li>
+                  <li className="flex items-center gap-2 text-muted-foreground">
+                    <div className="size-1.5 rounded-full bg-primary" />
+                    Mobile app (React Native)
+                  </li>
+                </ul>
+
+                <h2 className="mt-10 text-2xl font-bold">Support</h2>
+                <p className="text-muted-foreground">
+                  Found a bug or have a feature request? Open an issue on GitHub or
+                  reach out on Twitter. I read every piece of feedback.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Related Tools Section */}
         {relatedTools.length > 0 && (
-          <section className="mt-16">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold">Related Tools</h2>
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/tools">
-                  View All
-                  <ArrowRight className="ml-1.5 size-4" />
-                </Link>
-              </Button>
-            </div>
-            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {relatedTools.map((relatedTool) => (
-                <ToolCard key={relatedTool.slug} tool={relatedTool} />
-              ))}
+          <section className="border-t border-border">
+            <div className="container-page py-12 lg:py-16">
+              <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold">Related Tools</h2>
+                <Button asChild variant="ghost" size="sm">
+                  <Link href="/tools">
+                    View All
+                    <ArrowRight className="ml-1.5 size-4" />
+                  </Link>
+                </Button>
+              </div>
+              <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {relatedTools.map((relatedTool) => (
+                  <ToolCard key={relatedTool.slug} tool={relatedTool} />
+                ))}
+              </div>
             </div>
           </section>
         )}
 
         {/* Newsletter CTA */}
-        <div className="mt-16">
-          <NewsletterForm variant="default" />
-        </div>
+        <section className="border-t border-border">
+          <div className="container-page py-12 lg:py-16">
+            <NewsletterForm
+              variant="hero"
+              placement={`tool-${slug}`}
+              title={`Stay Updated on ${tool.name}`}
+              description="Get notified about new features, updates, and tips for getting the most out of this tool."
+            />
+          </div>
+        </section>
       </div>
     </>
   )

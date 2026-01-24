@@ -13,6 +13,7 @@ interface RateLimitConfig {
 const RATE_LIMITS: Record<string, RateLimitConfig> = {
   "/api/newsletter/subscribe": { windowMs: 60_000, maxRequests: 5 }, // 5/minute
   "/api/analytics/track": { windowMs: 60_000, maxRequests: 30 }, // 30/minute
+  "/api/contact": { windowMs: 60_000, maxRequests: 3 }, // 3/minute (stricter for contact form)
 }
 
 function getClientIp(request: NextRequest): string {
