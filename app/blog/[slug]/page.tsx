@@ -32,20 +32,37 @@ export async function generateMetadata({
     }
   }
 
+  const canonicalUrl = `https://six1five.dev/blog/${post.slug}`
+
   return {
     title: post.title,
     description: post.description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: post.title,
       description: post.description,
+      url: canonicalUrl,
+      siteName: "Six1Five Devs",
       type: "article",
       publishedTime: post.date,
       authors: ["Six1Five"],
+      section: "Blog",
+      images: [
+        {
+          url: "https://six1five.dev/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.description,
+      images: ["https://six1five.dev/og-image.png"],
     },
   }
 }

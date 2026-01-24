@@ -22,6 +22,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { NewsletterForm } from "@/components/newsletter-form"
 import { ToolCard } from "@/components/tool-card"
 import { ToolScreenshotGallery } from "@/components/tool-screenshot-gallery"
+import { BreadcrumbJsonLd } from "@/components/json-ld"
 import {
   getToolBySlug,
   getAllToolSlugs,
@@ -153,6 +154,13 @@ export default async function ToolPage({ params }: ToolPageProps) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(generateJsonLd(tool)),
         }}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", url: "/" },
+          { name: "Tools", url: "/tools" },
+          { name: tool.name, url: `/tools/${tool.slug}` },
+        ]}
       />
 
       <div className="flex flex-col">

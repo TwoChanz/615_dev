@@ -58,7 +58,7 @@ export default async function HomePage() {
         <div className="absolute left-1/4 top-0 -z-10 -translate-x-1/2 -translate-y-1/2 size-[600px] rounded-full bg-primary/8 blur-[120px]" />
         <div className="absolute right-1/4 top-1/4 -z-10 translate-x-1/2 size-[500px] rounded-full bg-secondary/10 blur-[100px]" />
 
-        <div className="container-page relative py-24 sm:py-32 lg:py-40">
+        <div className="container-page relative py-16 sm:py-24 lg:py-32">
           <div className="mx-auto max-w-3xl text-center">
             <Badge
               variant="secondary"
