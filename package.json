@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "screenshots": "npx tsx scripts/capture-screenshots.ts",
+    "screenshots:subsense": "npx tsx scripts/capture-subsense.ts",
     "screenshots:install": "npx playwright install chromium",
     "build": "next build",
     "dev": "next dev",
@@ -13,9 +14,7 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "analyze": "ANALYZE=true next build",
-    "screenshots": "npx tsx scripts/capture-screenshots.ts",
-    "screenshots:install": "npx playwright install chromium"
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -91,6 +90,7 @@
     "playwright": "^1.58.0",
     "png-to-ico": "^2.1.0",
     "postcss": "^8.5",
+    "puppeteer-core": "^24.36.1",
     "sharp": "^0.34.5",
     "tailwindcss": "^4.1.9",
     "tsx": "^4.21.0",

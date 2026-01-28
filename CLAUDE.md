@@ -20,6 +20,7 @@ npx vitest lib/validation.test.ts  # Run a single test file
 npm run analyze       # Production build with bundle analyzer (ANALYZE=true)
 npm run icons         # Generate PWA icons from public/icon-source.png
 npm run screenshots   # Capture tool website screenshots (requires Playwright)
+npm run screenshots:subsense  # Capture SubSense app screenshots (6 images)
 npm run screenshots:install  # One-time Playwright chromium setup
 ```
 
