@@ -13,18 +13,22 @@ import {
 
 interface WelcomeEmailProps {
   email?: string
+  firstName?: string
   leadMagnet?: string
   downloadUrl?: string
 }
 
 export function WelcomeEmail({
   email = "developer@example.com",
+  firstName,
   leadMagnet,
   downloadUrl,
 }: WelcomeEmailProps) {
   const previewText = leadMagnet
     ? `Your ${leadMagnet} is ready for download!`
     : "Welcome to Six1Five Devs!"
+
+  const greeting = firstName ? `Hey ${firstName}!` : "Hey there!"
 
   return (
     <Html>
@@ -39,18 +43,18 @@ export function WelcomeEmail({
           {leadMagnet && downloadUrl ? (
             <>
               <Text style={text}>
-                Thanks for subscribing! Here&apos;s your <strong>{leadMagnet}</strong>:
+                {greeting} Thanks for subscribing! Here&apos;s your <strong>{leadMagnet}</strong>:
               </Text>
               <Section style={buttonContainer}>
-                <Link href={`https://six1five.dev${downloadUrl}`} style={button}>
+                <Link href={downloadUrl} style={button}>
                   Download Now
                 </Link>
               </Section>
               <Text style={textMuted}>
-                If the button doesn&apos;t work, copy and paste this URL into your browser:
+                This link expires in 7 days. If the button doesn&apos;t work, copy and paste this URL:
                 <br />
-                <Link href={`https://six1five.dev${downloadUrl}`} style={link}>
-                  https://six1five.dev{downloadUrl}
+                <Link href={downloadUrl} style={link}>
+                  {downloadUrl.length > 60 ? `${downloadUrl.substring(0, 60)}...` : downloadUrl}
                 </Link>
               </Text>
               <Hr style={hr} />
@@ -58,7 +62,7 @@ export function WelcomeEmail({
           ) : null}
 
           <Text style={text}>
-            You&apos;re now subscribed to Six1Five Devs. Here&apos;s what you can expect:
+            {!leadMagnet && greeting} You&apos;re now subscribed to Six1Five Devs. Here&apos;s what you can expect:
           </Text>
 
           <Text style={list}>

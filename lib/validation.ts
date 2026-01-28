@@ -9,6 +9,28 @@ export const VALID_LEAD_MAGNETS = [
 
 export type LeadMagnetId = (typeof VALID_LEAD_MAGNETS)[number]
 
+// Persona options for lead capture
+export const VALID_PERSONAS = [
+  "solo-founder",
+  "small-team",
+  "agency-freelancer",
+  "learning-student",
+  "enterprise",
+] as const
+
+export type PersonaId = (typeof VALID_PERSONAS)[number]
+
+// Challenge options for post-subscribe survey
+export const VALID_CHALLENGES = [
+  "cutting-tool-costs",
+  "shipping-faster",
+  "organizing-projects",
+  "learning-ai-workflows",
+  "automation",
+] as const
+
+export type ChallengeId = (typeof VALID_CHALLENGES)[number]
+
 // Newsletter subscription schema
 export const subscribeSchema = z.object({
   email: z
@@ -29,9 +51,52 @@ export const subscribeSchema = z.object({
     .string()
     .max(100, "Placement too long")
     .optional(),
+  firstName: z
+    .string()
+    .max(50, "Name too long")
+    .regex(/^[a-zA-Z\s'-]*$/, "Name contains invalid characters")
+    .optional(),
+  persona: z
+    .enum(VALID_PERSONAS, {
+      errorMap: () => ({ message: "Invalid persona selection" }),
+    })
+    .optional(),
 })
 
 export type SubscribeInput = z.infer<typeof subscribeSchema>
+
+// Survey submission schema (challenge picker)
+export const surveySchema = z.object({
+  email: z
+    .string()
+    .min(1, "Email is required")
+    .email("Invalid email address")
+    .max(254, "Email too long"),
+  challenge: z
+    .enum(VALID_CHALLENGES, {
+      errorMap: () => ({ message: "Invalid challenge selection" }),
+    }),
+})
+
+export type SurveyInput = z.infer<typeof surveySchema>
+
+// Profile update schema (progressive profiling)
+export const profileUpdateSchema = z.object({
+  token: z
+    .string()
+    .min(1, "Token is required")
+    .max(500, "Token too long"),
+  question: z
+    .enum(["stack", "spend", "team"], {
+      errorMap: () => ({ message: "Invalid question type" }),
+    }),
+  answer: z
+    .string()
+    .min(1, "Answer is required")
+    .max(100, "Answer too long"),
+})
+
+export type ProfileUpdateInput = z.infer<typeof profileUpdateSchema>
 
 // Analytics event schema
 export const trackEventSchema = z.object({

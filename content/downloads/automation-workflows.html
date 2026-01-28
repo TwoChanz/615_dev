@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automation Workflows Starter Kit - Six1Five Devs</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #1a1a2e; max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #14b8a6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #666; font-size: 1.1rem; margin-bottom: 2rem; }
+    h2 { font-size: 1.5rem; color: #14b8a6; margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e5e5e5; }
+    h3 { font-size: 1.1rem; color: #333; margin: 1.5rem 0 0.75rem; }
+    p { margin-bottom: 1rem; }
+    pre { background: #1a1a2e; color: #e5e5e5; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.85rem; margin: 1rem 0; }
+    code { font-family: 'SF Mono', Consolas, monospace; }
+    .inline-code { background: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.9rem; color: #1a1a2e; }
+    .workflow-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; margin: 1rem 0; }
+    .workflow-card h4 { color: #14b8a6; margin-bottom: 0.5rem; font-size: 1.2rem; }
+    .workflow-card .desc { color: #666; margin-bottom: 1rem; }
+    .tip { background: #f0fdfa; border-left: 4px solid #14b8a6; padding: 1rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    .tip strong { color: #14b8a6; }
+    .warning { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 1rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    .warning strong { color: #92400e; }
+    ul { margin: 0.5rem 0 1rem 1.5rem; }
+    li { margin: 0.25rem 0; }
+    .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #e5e5e5; text-align: center; color: #666; }
+    .footer a { color: #14b8a6; text-decoration: none; }
+    @media print { body { padding: 20px; } pre { white-space: pre-wrap; } }
+  </style>
+</head>
+<body>
+  <h1>Automation Workflows Starter Kit</h1>
+  <p class="subtitle">Copy-paste automation patterns for Claude Code, GitHub Actions, Vercel, and notifications</p>
+
+  <h2>1. Claude Code Automation Patterns</h2>
+  <p>Leverage Claude Code's CLI for powerful development automation.</p>
+
+  <div class="workflow-card">
+    <h4>Auto-Commit with Context</h4>
+    <p class="desc">Generate meaningful commit messages based on staged changes.</p>
+    <pre><code># Add to your shell profile (.zshrc or .bashrc)
+function ai-commit() {
+  if ! git diff --cached --quiet; then
+    claude -p "Generate a conventional commit message for these staged changes.
+    Be concise but descriptive. Format: type(scope): description" \
+    --allowedTools "Bash(git diff --cached)"
+  else
+    echo "No staged changes to commit"
+  fi
+}
+
+# Usage: stage files, then run
+git add .
+ai-commit</code></pre>
+  </div>
+
+  <div class="workflow-card">
+    <h4>Code Review Assistant</h4>
+    <p class="desc">Get AI-powered code review on your changes before pushing.</p>
+    <pre><code># Review current branch changes against main
+function ai-review() {
+  local base_branch="${1:-main}"
+  claude -p "Review the code changes in this branch compared to $base_branch.
+  Focus on:
+  1. Potential bugs or edge cases
+  2. Performance concerns
+  3. Security issues
+  4. Code style consistency
+  Be specific and actionable." \
+  --allowedTools "Bash(git diff $base_branch...HEAD)" "Read"
+}
+
+# Usage
+ai-review main</code></pre>
+  </div>
+
+  <div class="workflow-card">
+    <h4>Quick Bug Fix</h4>
+    <p class="desc">Describe a bug and let Claude investigate and fix it.</p>
+    <pre><code># Interactive bug fix session
+function ai-fix() {
+  local description="$1"
+  claude "There's a bug: $description
+
+  Please:
+  1. Find the relevant code
+  2. Identify the root cause
+  3. Propose a fix
+  4. Apply the fix if I approve"
+}
+
+# Usage
+ai-fix "Login button doesn't work on mobile Safari"</code></pre>
+  </div>
+
+  <div class="workflow-card">
+    <h4>Test Generator</h4>
+    <p class="desc">Auto-generate tests for a specific file or function.</p>
+    <pre><code># Generate tests for a file
+function ai-test() {
+  local file="$1"
+  claude -p "Generate comprehensive unit tests for this file.
+  Use the project's existing test framework and patterns.
+  Include edge cases and error scenarios." \
+  --allowedTools "Read" "Write" "Glob" "Grep" \
+  "$file"
+}
+
+# Usage
+ai-test src/lib/auth.ts</code></pre>
+  </div>
+
+  <div class="tip">
+    <strong>Pro Tip:</strong> Create a <code class="inline-code">CLAUDE.md</code> file in your project root with coding standards, architecture notes, and common patterns. Claude Code reads this automatically for context.
+  </div>
+
+  <h2>2. GitHub Actions Templates</h2>
+  <p>Production-ready CI/CD workflows you can drop into any project.</p>
+
+  <div class="workflow-card">
+    <h4>Next.js CI Pipeline</h4>
+    <p class="desc">Complete CI with caching, linting, testing, and build verification.</p>
+    <pre><code># .github/workflows/ci.yml
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Test
+        run: npm run test:run
+
+      - name: Build
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: 1</code></pre>
+  </div>
+
+  <div class="workflow-card">
+    <h4>Dependency Updates (Dependabot)</h4>
+    <p class="desc">Auto-update dependencies weekly with grouped PRs.</p>
+    <pre><code># .github/dependabot.yml
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    groups:
+      dev-dependencies:
+        dependency-type: "development"
+      production-dependencies:
+        dependency-type: "production"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]</code></pre>
+  </div>
+
+  <div class="workflow-card">
+    <h4>Release Automation</h4>
+    <p class="desc">Auto-generate releases with changelogs on version tags.</p>
+    <pre><code># .github/workflows/release.yml
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate changelog
+        id: changelog
+        uses: orhun/git-cliff-action@v3
+        with:
+          config: cliff.toml
+          args: --latest --strip header
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: ${{ steps.changelog.outputs.content }}
+          draft: false
+          prerelease: ${{ contains(github.ref, 'beta') }}</code></pre>
+  </div>
+
+  <div class="workflow-card">
+    <h4>Preview Deployments Comment</h4>
+    <p class="desc">Post deployment URL as PR comment automatically.</p>
+    <pre><code># .github/workflows/preview-comment.yml
+name: Preview Comment
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Vercel
+        uses: patrickedqvist/wait-for-vercel-preview@v1.3.1
+        id: vercel
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 300
+
+      - name: Comment PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## Preview Deployment
+
+              Your changes are live at: ${{ steps.vercel.outputs.url }}
+
+              | Check | Status |
+              |-------|--------|
+              | Build | Passed |
+              | Preview | [View](${{ steps.vercel.outputs.url }}) |`
+            })</code></pre>
+  </div>
+
+  <h2>3. Vercel Deployment Workflows</h2>
+  <p>Optimize your Vercel deployments with these patterns.</p>
+
+  <div class="workflow-card">
+    <h4>vercel.json Configuration</h4>
+    <p class="desc">Production-ready Vercel config with security headers and redirects.</p>
+    <pre><code>{
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ],
+  "redirects": [
+    { "source": "/blog", "destination": "/articles", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/api/health", "destination": "/api/healthcheck" }
+  ]
+}</code></pre>
+  </div>
+
+  <div class="workflow-card">
+    <h4>Environment-Specific Builds</h4>
+    <p class="desc">Different behavior for preview vs production deployments.</p>
+    <pre><code>// next.config.ts
+const isProduction = process.env.VERCEL_ENV === 'production'
+const isPreview = process.env.VERCEL_ENV === 'preview'
+
+const config = {
+  // Disable indexing on previews
+  ...(isPreview && {
+    headers: async () => [
+      {
+        source: '/:path*',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex' }]
+      }
+    ]
+  }),
+
+  // Only enable analytics in production
+  env: {
+    NEXT_PUBLIC_ANALYTICS_ENABLED: isProduction ? 'true' : 'false',
+  }
+}
+
+export default config</code></pre>
+  </div>
+
+  <div class="workflow-card">
+    <h4>Deploy Hooks for External Triggers</h4>
+    <p class="desc">Trigger rebuilds from external services (CMS, webhooks, etc).</p>
+    <pre><code># Create deploy hook in Vercel Dashboard:
+# Project Settings > Git > Deploy Hooks
+
+# Trigger from anywhere:
+curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_xxx/yyy
+
+# From GitHub Actions:
+- name: Trigger Vercel Rebuild
+  run: curl -X POST ${{ secrets.VERCEL_DEPLOY_HOOK }}
+
+# From a scheduled cron (rebuild daily for fresh data):
+# .github/workflows/daily-rebuild.yml
+on:
+  schedule:
+    - cron: '0 6 * * *'  # 6 AM UTC daily</code></pre>
+  </div>
+
+  <h2>4. Notification Automations</h2>
+  <p>Keep your team informed with automated notifications.</p>
+
+  <div class="workflow-card">
+    <h4>Slack Deployment Notifications</h4>
+    <p class="desc">Post to Slack when deployments complete.</p>
+    <pre><code># .github/workflows/notify-slack.yml
+name: Notify Slack
+
+on:
+  deployment_status:
+
+jobs:
+  notify:
+    if: github.event.deployment_status.state == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Slack
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Deployment Successful* :rocket:\n*Repo:* ${{ github.repository }}\n*Branch:* ${{ github.ref_name }}\n*URL:* ${{ github.event.deployment_status.target_url }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK</code></pre>
+  </div>
+
+  <div class="workflow-card">
+    <h4>Discord Webhook Integration</h4>
+    <p class="desc">Send rich embeds to Discord on important events.</p>
+    <pre><code># .github/workflows/notify-discord.yml
+name: Notify Discord
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Discord
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          title: "New Release: ${{ github.event.release.tag_name }}"
+          description: |
+            ${{ github.event.release.body }}
+
+            [View Release](${{ github.event.release.html_url }})
+          color: 0x14b8a6
+          username: "Release Bot"</code></pre>
+  </div>
+
+  <div class="workflow-card">
+    <h4>Email Alerts for Failures</h4>
+    <p class="desc">Get emailed when CI fails on main branch.</p>
+    <pre><code># .github/workflows/alert-failure.yml
+name: Alert on Failure
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  alert:
+    if: github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send failure alert
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.resend.com
+          server_port: 465
+          username: resend
+          password: ${{ secrets.RESEND_API_KEY }}
+          subject: "CI Failed: ${{ github.repository }}"
+          to: alerts@yourcompany.com
+          from: GitHub Actions &lt;ci@yourcompany.com&gt;
+          body: |
+            CI pipeline failed on main branch.
+
+            Commit: ${{ github.event.workflow_run.head_sha }}
+            Author: ${{ github.event.workflow_run.head_commit.author.name }}
+
+            View run: ${{ github.event.workflow_run.html_url }}</code></pre>
+  </div>
+
+  <div class="workflow-card">
+    <h4>Daily Digest Notification</h4>
+    <p class="desc">Summarize repository activity and send daily report.</p>
+    <pre><code># .github/workflows/daily-digest.yml
+name: Daily Digest
+
+on:
+  schedule:
+    - cron: '0 17 * * 1-5'  # 5 PM UTC, weekdays
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate digest
+        id: digest
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const yesterday = new Date(Date.now() - 86400000).toISOString()
+
+            const commits = await github.rest.repos.listCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              since: yesterday
+            })
+
+            const prs = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'all',
+              sort: 'updated',
+              direction: 'desc'
+            })
+
+            return {
+              commits: commits.data.length,
+              prs_opened: prs.data.filter(p =>
+                new Date(p.created_at) > new Date(yesterday)
+              ).length,
+              prs_merged: prs.data.filter(p =>
+                p.merged_at && new Date(p.merged_at) > new Date(yesterday)
+              ).length
+            }
+
+      - name: Send to Slack
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: |
+            {
+              "text": "Daily Digest for ${{ github.repository }}: ${{ steps.digest.outputs.result }}"
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}</code></pre>
+  </div>
+
+  <h2>5. Quick Reference</h2>
+
+  <h3>Essential Environment Variables</h3>
+  <pre><code># GitHub Actions secrets you'll need:
+VERCEL_TOKEN          # For Vercel API calls
+VERCEL_ORG_ID         # Your Vercel org ID
+VERCEL_PROJECT_ID     # Your project ID
+SLACK_WEBHOOK_URL     # Incoming webhook URL
+DISCORD_WEBHOOK       # Discord webhook URL
+RESEND_API_KEY        # For email notifications</code></pre>
+
+  <h3>Useful Claude Code Flags</h3>
+  <pre><code>claude -p "prompt"              # Non-interactive (pipe mode)
+claude --allowedTools "Read"    # Restrict tools
+claude --model sonnet           # Use specific model
+claude --output-format json     # JSON output
+claude --max-turns 5            # Limit conversation turns</code></pre>
+
+  <div class="warning">
+    <strong>Security Note:</strong> Never commit secrets to your repository. Use GitHub Secrets, Vercel Environment Variables, or a secrets manager. Rotate credentials if accidentally exposed.
+  </div>
+
+  <div class="tip">
+    <strong>Next Steps:</strong> Start with one automation that solves your biggest pain point. Iterate from there. The best automation is the one you'll actually use.
+  </div>
+
+  <div class="footer">
+    <p>Created by <a href="https://six1five.dev">Six1Five Devs</a></p>
+    <p>Build. Ship. Document.</p>
+  </div>
+</body>
+</html>

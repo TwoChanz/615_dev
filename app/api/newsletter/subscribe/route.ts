@@ -7,6 +7,7 @@ import {
   isAllowedOrigin,
 } from "@/lib/validation"
 import { addSubscriber } from "@/lib/supabase"
+import { generateDownloadToken } from "@/lib/download-token"
 import WelcomeEmail from "@/emails/welcome"
 
 // Initialize Resend if API key is available
@@ -14,12 +15,8 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null
 
-// Lead magnet download URLs
-const leadMagnetUrls: Record<string, string> = {
-  "saas-checklist": "/downloads/saas-launch-checklist.pdf",
-  "tech-stack-guide": "/downloads/tech-stack-guide-2026.pdf",
-  "automation-starter": "/downloads/automation-workflows.zip",
-}
+// Base URL for download links
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://six1five.dev"
 
 // Lead magnet display names
 const leadMagnetNames: Record<string, string> = {
@@ -77,11 +74,13 @@ export async function POST(request: Request) {
     }
 
     // Extract validated data (safe - no prototype pollution)
-    const { email, source, leadMagnet, placement } = result.data
+    const { email, source, leadMagnet, placement, firstName, persona } = result.data
 
     // Log for development
     console.log("[Newsletter] New subscriber:", {
       email,
+      firstName,
+      persona,
       source,
       leadMagnet,
       placement,
@@ -94,6 +93,8 @@ export async function POST(request: Request) {
       source,
       leadMagnet,
       placement,
+      firstName,
+      persona,
     })
 
     if (!dbResult.success) {
@@ -101,11 +102,12 @@ export async function POST(request: Request) {
       // Continue even if DB fails - we can still send email
     }
 
-    // Prepare lead magnet download URL if applicable
+    // Generate secure download URL with token if lead magnet requested
     let downloadUrl: string | undefined
     if (leadMagnet) {
-      downloadUrl = leadMagnetUrls[leadMagnet]
-      console.log("[Newsletter] Delivering lead magnet:", leadMagnet, downloadUrl)
+      const token = generateDownloadToken(email, leadMagnet)
+      downloadUrl = `${BASE_URL}/api/downloads/${leadMagnet}?token=${token}`
+      console.log("[Newsletter] Delivering lead magnet:", leadMagnet)
     }
 
     // Send welcome email via Resend
@@ -115,6 +117,7 @@ export async function POST(request: Request) {
         if (process.env.RESEND_AUDIENCE_ID) {
           await resend.contacts.create({
             email,
+            firstName: firstName || undefined,
             audienceId: process.env.RESEND_AUDIENCE_ID,
             unsubscribed: false,
           })
@@ -130,6 +133,7 @@ export async function POST(request: Request) {
             : "Welcome to Six1Five Devs!",
           react: WelcomeEmail({
             email,
+            firstName: firstName || undefined,
             leadMagnet: leadMagnet ? leadMagnetNames[leadMagnet] : undefined,
             downloadUrl,
           }),

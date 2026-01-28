@@ -15,6 +15,7 @@ async function devDelay() {
 }
 import { NewsletterForm } from "@/components/newsletter-form"
 import { PrimaryCTA } from "@/components/cta-blocks"
+import { LeadMagnetCTA } from "@/components/lead-magnet"
 import {
   affiliatePrograms,
   getAffiliatesByCategory,
@@ -173,13 +174,9 @@ export default async function ResourcesPage() {
       {/* Product CTA */}
       <section className="section border-b border-border">
         <div className="container-page">
-          <PrimaryCTA
-            title="Want the Complete Setup Guide?"
-            description="Learn how to wire all these tools together with my Indie SaaS Playbook. From zero to shipped in record time."
-            buttonText="Get the Playbook"
-            buttonHref="/products/indie-saas-playbook"
-            variant="gradient"
-            badge="Digital Product"
+          <LeadMagnetCTA
+            magnetId="saas-checklist"
+            variant="featured"
             placement="resources-product"
           />
         </div>

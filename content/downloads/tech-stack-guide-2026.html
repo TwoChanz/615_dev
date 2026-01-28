@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Stack Guide 2026 - Six1Five Devs</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #1a1a2e; max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #14b8a6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #666; font-size: 1.1rem; margin-bottom: 2rem; }
+    h2 { font-size: 1.5rem; color: #14b8a6; margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e5e5e5; }
+    h3 { font-size: 1.1rem; color: #333; margin: 1.5rem 0 0.75rem; }
+    p { margin-bottom: 1rem; }
+    .stack-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; margin: 1rem 0; }
+    .stack-card h4 { color: #14b8a6; margin-bottom: 0.5rem; font-size: 1.2rem; }
+    .stack-card .pick { font-weight: 600; color: #1a1a2e; font-size: 1.1rem; }
+    .stack-card .why { color: #666; margin-top: 0.5rem; }
+    .stack-card .alternatives { font-size: 0.9rem; color: #888; margin-top: 0.75rem; }
+    .stack-card .alternatives strong { color: #666; }
+    .tier { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; margin-left: 0.5rem; }
+    .tier.essential { background: #dcfce7; color: #166534; }
+    .tier.recommended { background: #fef3c7; color: #92400e; }
+    .tier.optional { background: #e0e7ff; color: #3730a3; }
+    .cost-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    .cost-table th, .cost-table td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e5e5; }
+    .cost-table th { background: #f8fafc; font-weight: 600; }
+    .tip { background: #f0fdfa; border-left: 4px solid #14b8a6; padding: 1rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    .tip strong { color: #14b8a6; }
+    .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #e5e5e5; text-align: center; color: #666; }
+    .footer a { color: #14b8a6; text-decoration: none; }
+    @media print { body { padding: 20px; } .stack-card { break-inside: avoid; } }
+  </style>
+</head>
+<body>
+  <h1>Tech Stack Guide 2026</h1>
+  <p class="subtitle">The modern indie hacker stack for shipping fast and scaling smart</p>
+
+  <h2>Philosophy</h2>
+  <p>This stack prioritizes: <strong>developer experience</strong>, <strong>generous free tiers</strong>, <strong>proven reliability</strong>, and <strong>easy scaling</strong>. Every tool earns its place by reducing friction, not adding complexity.</p>
+
+  <h2>The Core Stack</h2>
+
+  <div class="stack-card">
+    <h4>Framework <span class="tier essential">Essential</span></h4>
+    <p class="pick">Next.js 15+ (App Router)</p>
+    <p class="why">Server Components, streaming, built-in API routes, excellent Vercel integration. The React ecosystem's clear winner for full-stack apps.</p>
+    <p class="alternatives"><strong>Alternatives:</strong> Remix (if you prefer loaders), Nuxt (Vue), SvelteKit (Svelte)</p>
+  </div>
+
+  <div class="stack-card">
+    <h4>Language <span class="tier essential">Essential</span></h4>
+    <p class="pick">TypeScript</p>
+    <p class="why">Catch bugs before runtime, better IDE support, self-documenting code. Non-negotiable for any serious project.</p>
+  </div>
+
+  <div class="stack-card">
+    <h4>Styling <span class="tier essential">Essential</span></h4>
+    <p class="pick">Tailwind CSS + shadcn/ui</p>
+    <p class="why">Utility-first CSS with copy-paste components. Ship fast without fighting CSS. shadcn/ui gives you accessible, customizable primitives.</p>
+    <p class="alternatives"><strong>Alternatives:</strong> CSS Modules, Styled Components (if you prefer CSS-in-JS)</p>
+  </div>
+
+  <div class="stack-card">
+    <h4>Database <span class="tier essential">Essential</span></h4>
+    <p class="pick">Supabase (PostgreSQL)</p>
+    <p class="why">Generous free tier (500MB, unlimited API requests), built-in auth, realtime subscriptions, auto-generated APIs. The Firebase alternative that doesn't lock you in.</p>
+    <p class="alternatives"><strong>Alternatives:</strong> PlanetScale (MySQL), Neon (serverless Postgres), Turso (SQLite edge)</p>
+  </div>
+
+  <div class="stack-card">
+    <h4>Authentication <span class="tier essential">Essential</span></h4>
+    <p class="pick">Supabase Auth or Clerk</p>
+    <p class="why">Supabase Auth: Free, integrated with your database. Clerk: Better UX, more providers, but paid after 10k MAU. Pick based on budget.</p>
+    <p class="alternatives"><strong>Alternatives:</strong> Auth.js (self-hosted), Lucia (lightweight)</p>
+  </div>
+
+  <div class="stack-card">
+    <h4>Payments <span class="tier essential">Essential</span></h4>
+    <p class="pick">Stripe</p>
+    <p class="why">Industry standard. Subscriptions, one-time payments, customer portal, invoicing. 2.9% + 30¢ per transaction. Excellent documentation.</p>
+    <p class="alternatives"><strong>Alternatives:</strong> Lemon Squeezy (handles tax/VAT), Paddle (merchant of record)</p>
+  </div>
+
+  <div class="stack-card">
+    <h4>Hosting <span class="tier essential">Essential</span></h4>
+    <p class="pick">Vercel</p>
+    <p class="why">Zero-config Next.js deployment, edge functions, preview deployments, generous free tier. The obvious choice for Next.js apps.</p>
+    <p class="alternatives"><strong>Alternatives:</strong> Netlify, Railway, Cloudflare Pages, Fly.io</p>
+  </div>
+
+  <h2>Recommended Additions</h2>
+
+  <div class="stack-card">
+    <h4>Email <span class="tier recommended">Recommended</span></h4>
+    <p class="pick">Resend</p>
+    <p class="why">Developer-first email API. React Email for templates. 3,000 emails/month free. Simple pricing, great DX.</p>
+    <p class="alternatives"><strong>Alternatives:</strong> Postmark, SendGrid, AWS SES (cheapest at scale)</p>
+  </div>
+
+  <div class="stack-card">
+    <h4>Analytics <span class="tier recommended">Recommended</span></h4>
+    <p class="pick">PostHog or Plausible</p>
+    <p class="why">PostHog: Full product analytics, session replay, feature flags. Free up to 1M events. Plausible: Privacy-focused, lightweight, EU-hosted option.</p>
+    <p class="alternatives"><strong>Alternatives:</strong> Mixpanel, Amplitude, Google Analytics (free but privacy concerns)</p>
+  </div>
+
+  <div class="stack-card">
+    <h4>Error Monitoring <span class="tier recommended">Recommended</span></h4>
+    <p class="pick">Sentry</p>
+    <p class="why">Catch errors before users report them. Stack traces, breadcrumbs, release tracking. 5,000 errors/month free.</p>
+    <p class="alternatives"><strong>Alternatives:</strong> LogRocket (includes session replay), Bugsnag</p>
+  </div>
+
+  <div class="stack-card">
+    <h4>File Storage <span class="tier optional">Optional</span></h4>
+    <p class="pick">Cloudflare R2 or Supabase Storage</p>
+    <p class="why">R2: S3-compatible, no egress fees. Supabase Storage: Integrated with your database, simpler setup.</p>
+    <p class="alternatives"><strong>Alternatives:</strong> AWS S3, Uploadthing (simpler API)</p>
+  </div>
+
+  <div class="stack-card">
+    <h4>Background Jobs <span class="tier optional">Optional</span></h4>
+    <p class="pick">Inngest or Trigger.dev</p>
+    <p class="why">Serverless background jobs without managing infrastructure. Retries, scheduling, event-driven workflows.</p>
+    <p class="alternatives"><strong>Alternatives:</strong> Vercel Cron, BullMQ (self-hosted Redis)</p>
+  </div>
+
+  <div class="stack-card">
+    <h4>AI/LLM <span class="tier optional">Optional</span></h4>
+    <p class="pick">OpenRouter or Vercel AI SDK</p>
+    <p class="why">OpenRouter: Access multiple models (GPT-4, Claude, Llama) through one API. Vercel AI SDK: Streaming, hooks, edge-ready.</p>
+    <p class="alternatives"><strong>Alternatives:</strong> Direct OpenAI/Anthropic APIs, Replicate (for open models)</p>
+  </div>
+
+  <h2>Monthly Cost Breakdown</h2>
+  <p>What this stack costs at different stages:</p>
+
+  <table class="cost-table">
+    <thead>
+      <tr>
+        <th>Stage</th>
+        <th>Users</th>
+        <th>Estimated Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>MVP / Side Project</td>
+        <td>0-100</td>
+        <td><strong>$0-20/mo</strong> (free tiers)</td>
+      </tr>
+      <tr>
+        <td>Early Traction</td>
+        <td>100-1,000</td>
+        <td><strong>$20-100/mo</strong></td>
+      </tr>
+      <tr>
+        <td>Growing</td>
+        <td>1,000-10,000</td>
+        <td><strong>$100-500/mo</strong></td>
+      </tr>
+      <tr>
+        <td>Scaling</td>
+        <td>10,000+</td>
+        <td><strong>$500+/mo</strong> (good problem to have)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip">
+    <strong>Key Principle:</strong> Start with free tiers, upgrade only when you hit limits. Most indie projects never need to pay for infrastructure until they're profitable.
+  </div>
+
+  <h2>What I'd Skip</h2>
+  <ul>
+    <li><strong>Kubernetes:</strong> Overkill for 99% of indie projects. Vercel/Railway handle scaling.</li>
+    <li><strong>GraphQL:</strong> REST or tRPC is simpler for most apps. GraphQL adds complexity without proportional benefit.</li>
+    <li><strong>Microservices:</strong> Start monolithic. Split later if you actually need to.</li>
+    <li><strong>Self-hosted everything:</strong> Your time is worth more than saving $20/month.</li>
+  </ul>
+
+  <h2>Quick Start Commands</h2>
+  <pre style="background: #1a1a2e; color: #e5e5e5; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem;">
+# Create Next.js app with TypeScript
+npx create-next-app@latest my-saas --typescript --tailwind --app
+
+# Add shadcn/ui
+npx shadcn@latest init
+
+# Add common components
+npx shadcn@latest add button card form input
+
+# Install essentials
+npm install @supabase/supabase-js stripe zod react-hook-form</pre>
+
+  <div class="footer">
+    <p>Created by <a href="https://six1five.dev">Six1Five Devs</a></p>
+    <p>Build. Ship. Document.</p>
+  </div>
+</body>
+</html>

@@ -42,9 +42,8 @@ export const leadMagnets: Record<string, LeadMagnet> = {
   "saas-checklist": {
     id: "saas-checklist",
     name: "SaaS Launch Checklist",
-    description: "50-point checklist covering everything from MVP to first paying customer",
-    deliverable: "PDF + Notion template",
-    downloadUrl: "/downloads/saas-launch-checklist.pdf",
+    description: "Complete pre-launch checklist for indie hackers and solo founders",
+    deliverable: "Interactive HTML guide",
     previewPoints: [
       "Pre-launch validation steps",
       "Technical infrastructure checklist",
@@ -56,9 +55,8 @@ export const leadMagnets: Record<string, LeadMagnet> = {
   "tech-stack-guide": {
     id: "tech-stack-guide",
     name: "2026 Indie Hacker Tech Stack",
-    description: "The exact tools I use to build and ship products fast",
-    deliverable: "PDF guide",
-    downloadUrl: "/downloads/tech-stack-guide-2026.pdf",
+    description: "The modern indie hacker stack for shipping fast and scaling smart",
+    deliverable: "Interactive HTML guide",
     previewPoints: [
       "Frontend & backend recommendations",
       "Database & auth solutions",
@@ -69,15 +67,14 @@ export const leadMagnets: Record<string, LeadMagnet> = {
   },
   "automation-starter": {
     id: "automation-starter",
-    name: "5 Automation Workflows",
-    description: "Ready-to-import workflows that save 10+ hours per week",
-    deliverable: "JSON templates",
-    downloadUrl: "/downloads/automation-workflows.zip",
+    name: "Automation Workflows Starter Kit",
+    description: "Copy-paste automation patterns for Claude Code, GitHub Actions, Vercel, and notifications",
+    deliverable: "Interactive HTML guide",
     previewPoints: [
-      "Lead capture to CRM automation",
-      "Social media scheduling flow",
-      "Customer onboarding sequence",
-      "Weekly metrics digest",
+      "Claude Code automation patterns",
+      "GitHub Actions CI/CD templates",
+      "Vercel deployment workflows",
+      "Slack & Discord notifications",
     ],
     badge: "Plug & Play",
   },
@@ -267,16 +264,11 @@ function LeadMagnetModal({ magnet, placement }: LeadMagnetModalProps) {
           </div>
           <h3 className="mt-4 text-lg font-semibold text-foreground">Check Your Email!</h3>
           <p className="mt-2 text-sm text-muted-foreground">
-            We&apos;ve sent the {magnet.deliverable} to your inbox.
+            We&apos;ve sent a secure download link to your inbox.
           </p>
-          {magnet.downloadUrl && (
-            <Button asChild className="mt-4" variant="outline">
-              <a href={magnet.downloadUrl} download>
-                <Download className="mr-2 size-4" aria-hidden="true" />
-                Download Now
-              </a>
-            </Button>
-          )}
+          <p className="mt-1 text-xs text-muted-foreground">
+            The link expires in 7 days.
+          </p>
         </div>
       ) : (
         <>

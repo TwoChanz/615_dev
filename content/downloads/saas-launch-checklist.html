@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SaaS Launch Checklist - Six1Five Devs</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; color: #1a1a2e; max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #14b8a6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .subtitle { color: #666; font-size: 1.1rem; margin-bottom: 2rem; }
+    h2 { font-size: 1.5rem; color: #14b8a6; margin: 2rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #e5e5e5; }
+    h3 { font-size: 1.1rem; color: #333; margin: 1.5rem 0 0.75rem; }
+    .checklist { list-style: none; }
+    .checklist li { padding: 0.5rem 0; padding-left: 2rem; position: relative; }
+    .checklist li::before { content: "☐"; position: absolute; left: 0; color: #14b8a6; font-size: 1.2rem; }
+    .tip { background: #f0fdfa; border-left: 4px solid #14b8a6; padding: 1rem; margin: 1rem 0; border-radius: 0 8px 8px 0; }
+    .tip strong { color: #14b8a6; }
+    .footer { margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid #e5e5e5; text-align: center; color: #666; }
+    .footer a { color: #14b8a6; text-decoration: none; }
+    @media print { body { padding: 20px; } }
+  </style>
+</head>
+<body>
+  <h1>SaaS Launch Checklist</h1>
+  <p class="subtitle">The complete pre-launch checklist for indie hackers and solo founders</p>
+
+  <h2>1. Pre-Development</h2>
+
+  <h3>Validation</h3>
+  <ul class="checklist">
+    <li>Problem statement documented (who, what problem, why it matters)</li>
+    <li>Talked to 5+ potential customers about the problem</li>
+    <li>Competitor analysis completed (features, pricing, gaps)</li>
+    <li>Unique value proposition defined in one sentence</li>
+    <li>MVP scope defined (core features only, no nice-to-haves)</li>
+  </ul>
+
+  <h3>Business Foundation</h3>
+  <ul class="checklist">
+    <li>Domain name purchased</li>
+    <li>Brand name validated (trademark search, social handles available)</li>
+    <li>Pricing strategy decided (freemium, trial, paid-only)</li>
+    <li>Target customer persona documented</li>
+  </ul>
+
+  <h2>2. Development Phase</h2>
+
+  <h3>Technical Setup</h3>
+  <ul class="checklist">
+    <li>Git repository initialized with proper .gitignore</li>
+    <li>Environment variables structure defined (.env.example)</li>
+    <li>CI/CD pipeline configured (GitHub Actions, Vercel, etc.)</li>
+    <li>Error monitoring set up (Sentry or similar)</li>
+    <li>Analytics integrated (PostHog, Plausible, or GA)</li>
+  </ul>
+
+  <h3>Core Features</h3>
+  <ul class="checklist">
+    <li>User authentication working (sign up, login, logout, password reset)</li>
+    <li>Core value feature functional and tested</li>
+    <li>Onboarding flow guides new users</li>
+    <li>Settings page allows profile updates</li>
+    <li>Data can be exported (GDPR compliance)</li>
+  </ul>
+
+  <h3>Payments</h3>
+  <ul class="checklist">
+    <li>Stripe account verified and connected</li>
+    <li>Products and prices created in Stripe</li>
+    <li>Checkout flow working (test mode)</li>
+    <li>Webhook handling subscription events</li>
+    <li>Customer portal accessible for plan management</li>
+    <li>Invoice emails configured</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Pro Tip:</strong> Use Stripe's test clock feature to simulate subscription renewals and test your webhook handling before going live.
+  </div>
+
+  <h2>3. Pre-Launch Essentials</h2>
+
+  <h3>Legal & Compliance</h3>
+  <ul class="checklist">
+    <li>Privacy Policy published</li>
+    <li>Terms of Service published</li>
+    <li>Cookie consent banner (if applicable)</li>
+    <li>GDPR data deletion request process defined</li>
+    <li>Business entity formed (LLC, etc.) - optional but recommended</li>
+  </ul>
+
+  <h3>SEO & Marketing Site</h3>
+  <ul class="checklist">
+    <li>Landing page with clear value proposition</li>
+    <li>Feature/benefit sections</li>
+    <li>Pricing page with FAQ</li>
+    <li>Meta tags and Open Graph images</li>
+    <li>Sitemap.xml generated</li>
+    <li>Google Search Console connected</li>
+  </ul>
+
+  <h3>Support Infrastructure</h3>
+  <ul class="checklist">
+    <li>Contact form or support email configured</li>
+    <li>FAQ/Help documentation started</li>
+    <li>Response time expectations set</li>
+  </ul>
+
+  <h2>4. Launch Week</h2>
+
+  <h3>Final Testing</h3>
+  <ul class="checklist">
+    <li>Full user journey tested (signup → payment → core feature → cancel)</li>
+    <li>Mobile responsiveness verified</li>
+    <li>Load testing completed (basic)</li>
+    <li>All environment variables set in production</li>
+    <li>Database backups configured</li>
+    <li>SSL certificate active</li>
+  </ul>
+
+  <h3>Go Live</h3>
+  <ul class="checklist">
+    <li>Stripe switched to live mode</li>
+    <li>DNS propagated</li>
+    <li>Monitoring dashboards open</li>
+    <li>First payment tested with real card</li>
+  </ul>
+
+  <h2>5. Post-Launch (Week 1)</h2>
+
+  <h3>Distribution</h3>
+  <ul class="checklist">
+    <li>Product Hunt launch scheduled/completed</li>
+    <li>Hacker News Show HN posted</li>
+    <li>Reddit relevant subreddits posted</li>
+    <li>Twitter/X announcement thread</li>
+    <li>LinkedIn post for professional network</li>
+    <li>Indie Hackers milestone posted</li>
+  </ul>
+
+  <h3>Feedback Loop</h3>
+  <ul class="checklist">
+    <li>User feedback collection method active</li>
+    <li>Bug reports triaged and prioritized</li>
+    <li>First customer testimonial requested</li>
+    <li>Analytics reviewed for drop-off points</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Remember:</strong> Launch is just the beginning. The real work starts when you have paying customers. Focus on retention before acquisition.
+  </div>
+
+  <div class="footer">
+    <p>Created by <a href="https://six1five.dev">Six1Five Devs</a></p>
+    <p>Build. Ship. Document.</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+/* Logo Loader Animation Styles */
+
+.loader {
+  overflow: visible;
+}
+
+.digit {
+  opacity: 0.4;
+}
+
+/* Sequential glow animation - 1.4s total cycle */
+.digit6 {
+  animation: pulse6 1.4s ease-in-out infinite;
+}
+
+.digit1 {
+  animation: pulse1 1.4s ease-in-out infinite;
+}
+
+.digit5 {
+  animation: pulse5 1.4s ease-in-out infinite;
+}
+
+/* "6" pulses first (0% - 35%) */
+@keyframes pulse6 {
+  0%, 100% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  8% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.6)) drop-shadow(0 0 16px rgba(139, 92, 246, 0.4));
+  }
+  25% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.6)) drop-shadow(0 0 16px rgba(139, 92, 246, 0.4));
+  }
+  35% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+}
+
+/* "1" pulses second (30% - 65%) */
+@keyframes pulse1 {
+  0%, 30% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  38% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.5)) drop-shadow(0 0 16px rgba(139, 92, 246, 0.5));
+  }
+  55% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.5)) drop-shadow(0 0 16px rgba(139, 92, 246, 0.5));
+  }
+  65% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  100% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+}
+
+/* "5" pulses last (60% - 95%) */
+@keyframes pulse5 {
+  0%, 60% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  68% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.6)) drop-shadow(0 0 16px rgba(20, 184, 166, 0.4));
+  }
+  85% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.6)) drop-shadow(0 0 16px rgba(20, 184, 166, 0.4));
+  }
+  95% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+  100% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 0 transparent);
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .digit6,
+  .digit1,
+  .digit5 {
+    animation: none;
+    opacity: 0.7;
+    filter: none;
+  }
+}
