@@ -47,12 +47,12 @@ export const toolsData: Tool[] = [
     status: "live",
     logo: "/tools/subsense.png",
     screenshots: [
-      "/tools/screenshots/subsense/subsense-premium-hero.png", // Premium hero for homepage feature
-      "/tools/screenshots/subsense/subsense-dashboard.png",    // Command Center Dashboard
-      "/tools/screenshots/subsense/subsense-categories.png",   // Smart Categorization
-      "/tools/screenshots/subsense/subsense-analytics.png",    // Analytics & ROI
-      "/tools/screenshots/subsense/subsense-alerts.png",       // Intelligent Alerts
-      "/tools/screenshots/subsense/subsense-security.png",     // Security & Privacy
+      "/tools/screenshots/subsense/subsense-dashboard.png",        // Premium hero - Dashboard with action queue
+      "/tools/screenshots/subsense/subsense-reports.png",          // Reports view with savings
+      "/tools/screenshots/subsense/subsense-calendar.png",         // Renewal calendar
+      "/tools/screenshots/subsense/subsense-analytics.png",        // Analytics with insights
+      "/tools/screenshots/subsense/subsense-charts.png",           // Category breakdown & ROI charts
+      "/tools/screenshots/subsense/subsense-add-subscription.png", // Add subscription form
     ],
     tagline: "AI-Powered Subscription Tracker",
     description: "Monitor your recurring payments, predict billing dates, and cut unwanted subscriptions. SubSense uses AI to analyze your spending patterns and help you save money on subscriptions you forgot about.",
