@@ -154,6 +154,35 @@ export const toolsData: Tool[] = [
     metaTitle: "DevDash - Personal Developer Dashboard | Track Your Progress",
     metaDescription: "Unified dashboard for tracking GitHub contributions, project metrics, and learning goals. Built for developers who want to level up.",
   },
+  {
+    slug: "receiptrider",
+    name: "ReceiptRider",
+    status: "coming-soon",
+    logo: "/tools/receiptrider.svg",
+    screenshots: ["/tools/screenshots/receiptrider-hero.png"],
+    tagline: "Smart Receipt & Expense Tracking",
+    description: "Snap, scan, and organize your receipts effortlessly. ReceiptRider uses AI to extract data from receipts, categorize expenses, and generate reports for tax time or reimbursements.",
+    websiteUrl: "https://receiptrider.com",
+    tags: ["fintech", "ai", "receipts", "expense-tracking", "productivity"],
+    comingSoon: true,
+    features: [
+      "AI-powered receipt scanning and data extraction",
+      "Automatic expense categorization",
+      "Multi-currency support",
+      "Tax-ready expense reports",
+      "Cloud sync across devices",
+      "Integration with accounting software",
+    ],
+    techStack: ["Next.js", "TypeScript", "Supabase", "OpenAI Vision", "Vercel"],
+    useCases: [
+      "Track business expenses for tax deductions",
+      "Manage personal spending receipts",
+      "Submit expense reports for reimbursement",
+      "Organize receipts for small business accounting",
+    ],
+    metaTitle: "ReceiptRider - Smart Receipt & Expense Tracking | AI-Powered",
+    metaDescription: "Snap, scan, and organize receipts with AI. ReceiptRider extracts data, categorizes expenses, and generates tax-ready reports automatically.",
+  },
 ]
 
 // ============================================================================

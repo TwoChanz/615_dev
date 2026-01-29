@@ -42,6 +42,12 @@ const tools = [
     url: 'https://devdash.dev',
     waitForSelector: 'body',
   },
+  {
+    slug: 'receiptrider',
+    name: 'ReceiptRider',
+    url: 'https://receiptrider.com',
+    waitForSelector: 'body',
+  },
 ]
 
 // Screenshot configuration
