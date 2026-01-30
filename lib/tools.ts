@@ -154,6 +154,35 @@ export const toolsData: Tool[] = [
     metaTitle: "DevDash - Personal Developer Dashboard | Track Your Progress",
     metaDescription: "Unified dashboard for tracking GitHub contributions, project metrics, and learning goals. Built for developers who want to level up.",
   },
+  {
+    slug: "receiptrider",
+    name: "ReceiptRider",
+    status: "coming-soon",
+    logo: "/tools/receiptrider.svg",
+    screenshots: ["/tools/screenshots/receiptrider-hero.png"],
+    tagline: "Smart Vehicle Maintenance Tracker",
+    description: "Track every vehicle receipt from oil changes to new tires. ReceiptRider scans your receipts, predicts upcoming maintenance, and keeps a complete service history—perfect for staying on schedule or impressing buyers when you sell.",
+    websiteUrl: "https://receiptrider.com",
+    tags: ["automotive", "ai", "vehicle-maintenance", "receipts", "productivity"],
+    comingSoon: true,
+    features: [
+      "AI-powered receipt scanning for auto services",
+      "Smart maintenance predictions based on purchase history",
+      "Automatic service interval reminders",
+      "Complete vehicle service history log",
+      "Resale-ready maintenance reports for buyers",
+      "Multi-vehicle support",
+    ],
+    techStack: ["Next.js", "TypeScript", "Supabase", "OpenAI Vision", "Vercel"],
+    useCases: [
+      "Track oil changes and predict next service date",
+      "Log tire purchases and monitor tread life",
+      "Keep organized records for vehicle resale",
+      "Never miss scheduled maintenance again",
+    ],
+    metaTitle: "ReceiptRider - Smart Vehicle Maintenance Tracker | AI-Powered",
+    metaDescription: "Scan vehicle receipts, track maintenance history, and get smart reminders for oil changes, tires, and more. Perfect for car owners and resale prep.",
+  },
 ]
 
 // ============================================================================

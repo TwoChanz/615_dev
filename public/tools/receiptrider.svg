@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#g)"/>
+  <!-- Car silhouette with receipt -->
+  <g stroke="#0a0a0f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <!-- Car body -->
+    <path d="M12 38h8l3-6h18l3 6h8"/>
+    <path d="M14 38v6h6v-6"/>
+    <path d="M44 38v6h6v-6"/>
+    <path d="M20 38h24"/>
+    <!-- Receipt/checklist above -->
+    <rect x="26" y="14" width="12" height="16" rx="1"/>
+    <line x1="29" y1="19" x2="35" y2="19"/>
+    <line x1="29" y1="23" x2="35" y2="23"/>
+    <line x1="29" y1="27" x2="33" y2="27"/>
+  </g>
+</svg>
