@@ -160,6 +160,34 @@ export const toolsData: Tool[] = [
     metaTitle: "DevDash - Personal Developer Dashboard | Track Your Progress",
     metaDescription: "Unified dashboard for tracking GitHub contributions, project metrics, and learning goals. Built for developers who want to level up.",
   },
+  {
+    slug: "receiptrider",
+    name: "ReceiptRider",
+    status: "coming-soon",
+    logo: "/tools/receiptrider.png",
+    tagline: "Vehicle Maintenance Tracker for Your Pocket",
+    description: "Scan vehicle-related receipts—oil changes, repairs, tires, inspections—and automatically build a clean, searchable maintenance history. Everything organized by vehicle with mileage tracking, spending insights, and smart reminders for upcoming maintenance.",
+    websiteUrl: "https://receiptrider.com",
+    tags: ["mobile", "automotive", "receipts", "maintenance", "ocr", "ios", "android"],
+    comingSoon: true,
+    features: [
+      "Receipt scanning with OCR extraction",
+      "Automatic maintenance categorization",
+      "Per-vehicle maintenance history",
+      "Mileage tracking and logging",
+      "Spending insights and analytics",
+      "Smart maintenance reminders",
+    ],
+    techStack: ["React Native", "TypeScript", "Supabase", "OCR/Vision API", "Expo"],
+    useCases: [
+      "Track maintenance for personal vehicles",
+      "Manage fleet service records",
+      "Prepare vehicle history for resale",
+      "Never miss scheduled maintenance",
+    ],
+    metaTitle: "ReceiptRider - Vehicle Maintenance Tracker | Scan Receipts, Build History",
+    metaDescription: "Mobile app that turns vehicle receipts into organized maintenance history. Mileage tracking, spending insights, and smart reminders. Coming soon to iOS and Android.",
+  },
 ]
 
 // ============================================================================
