@@ -14,10 +14,10 @@ export const tools = getAllTools()
 
 export const blogPosts: Article[] = [
   {
-    title: "How I Built SubSense in 30 Days While Working Full-Time",
+    title: "How We Built SubSense in 30 Days",
     slug: "building-subsense-30-days",
     description:
-      "A deep dive into the architecture, tech stack decisions, and lessons learned while building a SaaS product in my spare time. Includes revenue numbers and growth strategies.",
+      "A deep dive into the architecture, tech stack decisions, and lessons learned while building a SaaS product. Includes revenue numbers and growth strategies.",
     date: "2026-01-15",
     readingTime: "12 min read",
     tags: ["build-in-public", "saas", "nextjs", "indie-hacker"],
@@ -28,7 +28,7 @@ export const blogPosts: Article[] = [
     title: "The Stack That Powers Six1Five Devs",
     slug: "six1five-tech-stack",
     description:
-      "Breaking down every tool, framework, and service I use to build and ship products. From Next.js to Vercel to Stripe and beyond.",
+      "Breaking down every tool, framework, and service we use to build and ship products. From Next.js to Vercel to Stripe and beyond.",
     date: "2026-01-10",
     readingTime: "8 min read",
     tags: ["tech-stack", "nextjs", "vercel", "tools"],
@@ -36,10 +36,10 @@ export const blogPosts: Article[] = [
     type: "blog",
   },
   {
-    title: "Why I Stopped Using Traditional ORMs",
+    title: "Why We Stopped Using Traditional ORMs",
     slug: "ditching-traditional-orms",
     description:
-      "After years of fighting with Prisma migrations, I switched to a simpler approach. Here's what I learned and why raw SQL might be the answer.",
+      "After years of fighting with Prisma migrations, we switched to a simpler approach. Here's what we learned and why raw SQL might be the answer.",
     date: "2026-01-05",
     readingTime: "6 min read",
     tags: ["database", "orm", "sql", "performance"],

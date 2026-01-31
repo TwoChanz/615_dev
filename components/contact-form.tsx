@@ -45,7 +45,7 @@ export function ContactForm() {
       }
 
       setStatus("success")
-      toast.success("Message sent!", { description: "I'll get back to you soon." })
+      toast.success("Message sent!", { description: "We'll get back to you soon." })
       reset()
     } catch (error) {
       setStatus("error")
@@ -63,7 +63,7 @@ export function ContactForm() {
         </div>
         <h3 className="mt-4 text-lg font-semibold">Message Sent!</h3>
         <p className="mt-2 text-muted-foreground">
-          Thanks for reaching out. I&apos;ll get back to you soon.
+          Thanks for reaching out. We&apos;ll get back to you soon.
         </p>
         <Button
           variant="outline"

@@ -119,15 +119,15 @@ export default async function LabPage({ params }: LabPageProps) {
         </p>
 
         <p>
-          This is an experiment log documenting my exploration of this concept. 
-          Expect raw thoughts, incomplete ideas, and real-time updates as I work 
+          This is an experiment log documenting our exploration of this concept.
+          Expect raw thoughts, incomplete ideas, and real-time updates as we work
           through the problem.
         </p>
 
         <h2>The Hypothesis</h2>
         <p>
-          I believe we can achieve better results by approaching this problem 
-          from a different angle. Here&apos;s what I&apos;m testing.
+          We believe we can achieve better results by approaching this problem
+          from a different angle. Here&apos;s what we&apos;re testing.
         </p>
 
         <h2>Week 1 Progress</h2>
@@ -145,8 +145,8 @@ export default async function LabPage({ params }: LabPageProps) {
 
         <h2>Next Steps</h2>
         <p>
-          I&apos;ll continue iterating on the core algorithm and share updates 
-          as I make progress. Subscribe to follow along.
+          We&apos;ll continue iterating on the core algorithm and share updates
+          as we make progress. Subscribe to follow along.
         </p>
       </div>
 
