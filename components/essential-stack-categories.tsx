@@ -116,10 +116,10 @@ export function EssentialStackCategories({
           <div className="flex size-9 items-center justify-center rounded-lg bg-primary/10">
             <Sparkles className="size-4 text-primary" />
           </div>
-          <h3 className="font-semibold text-foreground">My Essential Stack</h3>
+          <h3 className="font-semibold text-foreground">Our Essential Stack</h3>
         </div>
         <p className="mt-2 text-sm text-muted-foreground">
-          The core tools I use on every project, organized by category.
+          The core tools we use on every project, organized by category.
         </p>
       </div>
 

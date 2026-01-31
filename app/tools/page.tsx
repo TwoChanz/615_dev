@@ -18,10 +18,10 @@ async function devDelay() {
 export const metadata: Metadata = {
   title: "Tools",
   description:
-    "Real products I've built and shipped. Explore SubSense, AppPilot, FlightWindow and more tools designed to solve real problems.",
+    "Real products we've built and shipped. Explore SubSense, AppPilot, FlightWindow and more tools designed to solve real problems.",
   openGraph: {
     title: "Tools | Six1Five Devs",
-    description: "Real products I've built and shipped. Explore tools designed to solve real problems.",
+    description: "Real products we've built and shipped. Explore tools designed to solve real problems.",
   },
 }
 
@@ -62,7 +62,7 @@ export default async function ToolsPage() {
 
             {/* Title with gradient */}
             <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              Tools I&apos;ve{" "}
+              Tools We&apos;ve{" "}
               <span className="text-gradient">Built</span>
             </h1>
 

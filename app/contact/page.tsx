@@ -25,7 +25,7 @@ export default function ContactPage() {
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
           Have a question, collaboration idea, or just want to say hi?
-          I&apos;d love to hear from you.
+          We&apos;d love to hear from you.
         </p>
       </div>
 
@@ -95,7 +95,7 @@ export default function ContactPage() {
         <div className="mt-8 space-y-6">
           <FaqItem
             question="Are you available for freelance work?"
-            answer="I'm currently focused on my own products, but I'm open to discussing interesting projects. Email me with details about what you're building."
+            answer="We're currently focused on our own products, but we're open to discussing interesting projects. Email us with details about what you're building."
           />
           <FaqItem
             question="Can I use your guides/code in my projects?"
@@ -103,11 +103,11 @@ export default function ContactPage() {
           />
           <FaqItem
             question="How can I support your work?"
-            answer="The best way is to try the tools I build and share them with others. Subscribing to the newsletter and following along also helps a lot."
+            answer="The best way is to try the tools we build and share them with others. Subscribing to the newsletter and following along also helps a lot."
           />
           <FaqItem
             question="Do you offer consulting or mentorship?"
-            answer="Not formally, but I'm always happy to answer questions. Send me a message and I'll do my best to help."
+            answer="Not formally, but we're always happy to answer questions. Send us a message and we'll do our best to help."
           />
         </div>
       </div>

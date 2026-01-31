@@ -28,7 +28,7 @@ export default function GuidesPage() {
           Guides
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Deep-dive tutorials on the patterns and technologies I use to build 
+          Deep-dive tutorials on the patterns and technologies we use to build
           products. Real code from real projects.
         </p>
       </div>

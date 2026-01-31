@@ -26,7 +26,7 @@ import {
 export const metadata: Metadata = {
   title: "Resources | Six1Five Devs",
   description:
-    "Curated tools, templates, and resources I use to build products. Hosting, databases, payments, and development tools.",
+    "Curated tools, templates, and resources we use to build products. Hosting, databases, payments, and development tools.",
   openGraph: {
     title: "Developer Resources | Six1Five Devs",
     description: "The complete stack for building and shipping SaaS products.",
@@ -106,7 +106,7 @@ export default async function ResourcesPage() {
             </div>
             <h1 className="mt-6">Resources</h1>
             <p className="mt-4 text-lg text-muted-foreground">
-              The tools, services, and resources I use to build and ship products.
+              The tools, services, and resources we use to build and ship products.
               Curated from years of trying different options.
             </p>
           </div>
@@ -189,7 +189,7 @@ export default async function ResourcesPage() {
             <NewsletterForm
               placement="resources-footer"
               title="Get Tool Updates"
-              description="Be the first to know when I discover new tools or update my stack."
+              description="Be the first to know when we discover new tools or update our stack."
             />
           </div>
         </div>

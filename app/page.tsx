@@ -73,9 +73,9 @@ export default async function HomePage() {
             </h1>
 
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl">
-              Six1Five Devs is where I build real tools, share honest build logs,
-              and document everything I learn along the way. Follow the journey
-              from idea to shipped product.
+              Six1Five Devs is an independent studio where we build real tools,
+              share honest build logs, and document everything we learn along
+              the way. Follow the journey from idea to shipped product.
             </p>
 
             <div className="mt-10 flex items-center justify-center gap-4 flex-wrap">
@@ -139,7 +139,7 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* What I Do Section */}
+      {/* What We Do Section */}
       <section className="section border-b border-border">
         <div className="container-page">
           <div className="mx-auto max-w-2xl text-center">
@@ -153,7 +153,7 @@ export default async function HomePage() {
             <FeatureCard
               icon={<Wrench className="size-5" />}
               title="Tools"
-              description="Real products I've built and shipped. Try them, break them, give feedback."
+              description="Real products we've built and shipped. Try them, break them, give feedback."
               href="/tools"
             />
             <FeatureCard
@@ -165,13 +165,13 @@ export default async function HomePage() {
             <FeatureCard
               icon={<BookOpen className="size-5" />}
               title="Guides"
-              description="Deep-dive tutorials on the tech and patterns I use to build products."
+              description="Deep-dive tutorials on the tech and patterns we use to build products."
               href="/guides"
             />
             <FeatureCard
               icon={<Zap className="size-5" />}
               title="Resources"
-              description="Curated tools, templates, and resources I actually use and recommend."
+              description="Curated tools, templates, and resources we actually use and recommend."
               href="/resources"
             />
           </div>
@@ -252,8 +252,8 @@ export default async function HomePage() {
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Affiliate Block */}
             <AffiliateBlock
-              title="My Essential Stack"
-              description="The tools that power everything I build. Battle-tested and developer-approved."
+              title="Our Essential Stack"
+              description="The tools that power everything we build. Battle-tested and developer-approved."
               affiliates={featuredAffiliates.slice(0, 4)}
               placement="homepage-sidebar"
               variant="featured"
