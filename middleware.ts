@@ -88,17 +88,21 @@ const securityHeaders = {
   "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
 }
 
-// CSP for production
+// Content Security Policy
+// Note: 'unsafe-inline' is required for Next.js hydration scripts and Tailwind styles
+// TODO: Implement nonce-based CSP for stricter security in future iteration
+// See: https://nextjs.org/docs/app/building-your-application/configuring/content-security-policy
 const cspHeader = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com;
+  script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://*.posthog.com;
   style-src 'self' 'unsafe-inline';
   img-src 'self' data: https: blob:;
   font-src 'self' data:;
-  connect-src 'self' https://va.vercel-scripts.com https://vitals.vercel-insights.com;
+  connect-src 'self' https://va.vercel-scripts.com https://vitals.vercel-insights.com https://*.posthog.com https://*.sentry.io;
   frame-ancestors 'none';
   base-uri 'self';
   form-action 'self';
+  upgrade-insecure-requests;
 `.replace(/\s{2,}/g, " ").trim()
 
 export function middleware(request: NextRequest) {

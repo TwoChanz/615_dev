@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "screenshots": "npx tsx scripts/capture-screenshots.ts",
-    "screenshots:install": "npx playwright install chromium",
     "build": "next build",
     "dev": "next dev",
     "icons": "node scripts/generate-icons.mjs --input public/icon-source.png --out public/icons",
@@ -15,6 +13,7 @@
     "test:coverage": "vitest run --coverage",
     "analyze": "ANALYZE=true next build",
     "screenshots": "npx tsx scripts/capture-screenshots.ts",
+    "screenshots:subsense": "npx tsx scripts/capture-subsense.ts",
     "screenshots:install": "npx playwright install chromium"
   },
   "dependencies": {
