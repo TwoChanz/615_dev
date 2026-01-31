@@ -44,7 +44,7 @@ const statusConfig: Record<ToolStatus, { label: string; className: string; icon?
 
 export function ToolCard({ tool, className, featured = false }: ToolCardProps) {
   const status = statusConfig[tool.status]
-  const isAccessible = tool.status !== "coming-soon" && !tool.comingSoon
+  const isAccessible = tool.status !== "coming-soon"
 
   return (
     <Card

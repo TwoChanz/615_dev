@@ -36,7 +36,7 @@ export function FeaturedToolSpotlight({
   className,
 }: FeaturedToolSpotlightProps) {
   const status = statusConfig[tool.status]
-  const isAccessible = tool.status !== "coming-soon" && !tool.comingSoon
+  const isAccessible = tool.status !== "coming-soon"
 
   return (
     <div

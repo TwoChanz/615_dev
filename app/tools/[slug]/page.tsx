@@ -144,7 +144,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
 
   const status = statusConfig[tool.status]
   const relatedTools = getRelatedTools(slug, 3)
-  const isAccessible = tool.status !== "coming-soon" && !tool.comingSoon
+  const isAccessible = tool.status !== "coming-soon"
 
   return (
     <>

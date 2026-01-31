@@ -24,7 +24,6 @@ export interface Tool {
   screenshots?: string[]
   repoUrl?: string
   docsUrl?: string
-  comingSoon?: boolean
   
   // SEO fields
   metaTitle?: string
@@ -126,7 +125,6 @@ export const toolsData: Tool[] = [
     description: "A beautiful, real-time flight tracking dashboard for aviation enthusiasts and frequent travelers. Track flights worldwide, get delay predictions, and receive smart notifications.",
     websiteUrl: "https://flightwindow.app",
     tags: ["aviation", "real-time", "dashboard", "tracking", "travel"],
-    comingSoon: false,
     features: [
       "Real-time global flight tracking",
       "Delay prediction using ML models",
@@ -154,7 +152,6 @@ export const toolsData: Tool[] = [
     description: "Track GitHub contributions, project metrics, and learning goals in one unified view. DevDash is your personal command center for developer productivity.",
     websiteUrl: "https://devdash.dev",
     tags: ["dashboard", "productivity", "github", "metrics", "developer-tools"],
-    comingSoon: true,
     features: [
       "GitHub contribution analytics",
       "Project health metrics",
@@ -187,7 +184,6 @@ export const toolsData: Tool[] = [
     description: "Scan vehicle-related receipts—oil changes, repairs, tires, inspections—and automatically build a clean, searchable maintenance history. Everything organized by vehicle with mileage tracking, spending insights, and smart reminders for upcoming maintenance.",
     websiteUrl: "https://receiptrider.com",
     tags: ["mobile", "automotive", "receipts", "maintenance", "ocr", "ios", "android"],
-    comingSoon: true,
     features: [
       "Receipt scanning with OCR extraction",
       "Automatic maintenance categorization",
@@ -271,7 +267,7 @@ export function getLiveTools(): Tool[] {
  * Get tools that are not coming soon (for active display)
  */
 export function getActiveTools(): Tool[] {
-  return toolsData.filter((tool) => !tool.comingSoon)
+  return toolsData.filter((tool) => tool.status !== "coming-soon")
 }
 
 /**
