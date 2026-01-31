@@ -19,8 +19,9 @@ npm run test:coverage # Run tests with coverage report
 npx vitest lib/validation.test.ts  # Run a single test file
 npm run analyze       # Production build with bundle analyzer (ANALYZE=true)
 npm run icons         # Generate PWA icons from public/icon-source.png
-npm run screenshots   # Capture tool website screenshots (requires Playwright)
-npm run screenshots:install  # One-time Playwright chromium setup
+npm run screenshots           # Capture tool website screenshots (requires Playwright)
+npm run screenshots:subsense  # Capture SubSense-specific screenshots
+npm run screenshots:install   # One-time Playwright chromium setup
 ```
 
 ## Architecture
@@ -78,15 +79,29 @@ All integrations are optional - site works without any env vars. Copy `.env.exam
 
 | Variable | Purpose |
 |----------|---------|
-| `SUPABASE_URL`, `SUPABASE_ANON_KEY` | Database for form storage |
+| `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` | Database for form storage |
 | `RESEND_API_KEY`, `RESEND_AUDIENCE_ID` | Email sending and newsletter |
 | `ADMIN_EMAIL` | Contact form notifications |
-| `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST` | Product analytics |
-| `SENTRY_DSN`, `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` | Error monitoring |
+| `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST`, `POSTHOG_API_KEY` | Product analytics (client + server) |
+| `SENTRY_DSN`, `NEXT_PUBLIC_SENTRY_DSN`, `SENTRY_AUTH_TOKEN`, `SENTRY_ORG`, `SENTRY_PROJECT` | Error monitoring |
 | `NEXT_PUBLIC_GA_ID` | Google Analytics |
+
+### Middleware
+`middleware.ts` handles:
+- **Rate limiting** for API routes (in-memory, per-IP): `/api/newsletter/subscribe` (5/min), `/api/contact` (3/min), `/api/analytics/track` (30/min)
+- **Security headers**: CSP, X-Frame-Options, HSTS (production only), etc.
+
+### Component Organization
+- `components/ui/` - shadcn/ui primitives (Button, Card, Dialog, etc.)
+- `components/` - App-specific components (SiteHeader, ToolCard, NewsletterForm, etc.)
+- `components/loading/` - Skeleton loaders for streaming UX
+
+### Testing
+Vitest with jsdom environment. Setup file: `vitest.setup.tsx`. Tests colocated with source files (`*.test.ts`).
 
 ### Build Configuration
 - TypeScript build errors enabled (`ignoreBuildErrors: false`)
 - Images unoptimized (static export compatible)
 - Sentry integration conditional on `SENTRY_DSN` being set
 - `www.` subdomain redirects to apex domain
+- Bundle analyzer available via `npm run analyze`
