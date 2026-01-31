@@ -1,0 +1,50 @@
+name: Refresh Tool Screenshots
+
+on:
+  # Run weekly on Sundays at 2am UTC
+  schedule:
+    - cron: '0 2 * * 0'
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  capture-screenshots:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install chromium
+
+      - name: Capture hero screenshots
+        run: npm run screenshots
+        continue-on-error: true
+
+      - name: Capture gallery screenshots
+        run: npm run screenshots:galleries
+        continue-on-error: true
+
+      - name: Check for changes
+        id: git-check
+        run: |
+          git diff --quiet public/tools/screenshots/ || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push if changed
+        if: steps.git-check.outputs.changes == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add public/tools/screenshots/
+          git commit -m "chore: refresh tool screenshots [automated]"
+          git push

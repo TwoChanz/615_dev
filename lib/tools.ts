@@ -22,9 +22,11 @@ export interface Tool {
   // Optional fields
   logo?: string
   screenshots?: string[]
+  screenshotAlts?: string[]  // Alt text for screenshots (accessibility)
+  videoUrl?: string          // Demo video (YouTube, Loom, etc.)
   repoUrl?: string
   docsUrl?: string
-  
+
   // SEO fields
   metaTitle?: string
   metaDescription?: string
@@ -51,6 +53,13 @@ export const toolsData: Tool[] = [
       "/tools/screenshots/subsense/analytics.png",
       "/tools/screenshots/subsense/dashboard3.png",
       "/tools/screenshots/subsense/dashboard4.png",
+    ],
+    screenshotAlts: [
+      "SubSense dashboard showing monthly spend overview and upcoming bills",
+      "Subscription list with brand logos and billing dates",
+      "Spending analytics with charts and potential savings",
+      "Category breakdown of subscription spending",
+      "Subscription detail view with cancellation options",
     ],
     tagline: "AI-Powered Subscription Tracker",
     description: "Monitor your recurring payments, predict billing dates, and cut unwanted subscriptions. SubSense uses AI to analyze your spending patterns and help you save money on subscriptions you forgot about.",
@@ -84,6 +93,13 @@ export const toolsData: Tool[] = [
       "/tools/screenshots/apppilot/section2.png",
       "/tools/screenshots/apppilot/section3.png",
       "/tools/screenshots/apppilot/section4.png",
+    ],
+    screenshotAlts: [
+      "AppPilot landing page with Ship faster tagline",
+      "Feature overview showing authentication and billing components",
+      "Tech stack section with Next.js, Stripe, and Tailwind logos",
+      "Pricing plans comparison table",
+      "Getting started documentation preview",
     ],
     tagline: "SaaS Starter Kit for Indie Hackers",
     description: "Launch your SaaS faster with pre-built authentication, billing, and dashboard components. AppPilot gives you a production-ready foundation so you can focus on your unique features instead of boilerplate.",
@@ -121,6 +137,13 @@ export const toolsData: Tool[] = [
       "/tools/screenshots/flightwindow/section3.png",
       "/tools/screenshots/flightwindow/section4.png",
     ],
+    screenshotAlts: [
+      "FlightWindow hero with real-time tracking tagline",
+      "Live flight map with aircraft positions worldwide",
+      "Flight details panel with delay predictions",
+      "Watchlist feature for tracking multiple flights",
+      "Push notification settings and alerts",
+    ],
     tagline: "Real-Time Flight Tracking Dashboard",
     description: "A beautiful, real-time flight tracking dashboard for aviation enthusiasts and frequent travelers. Track flights worldwide, get delay predictions, and receive smart notifications.",
     websiteUrl: "https://flightwindow.app",
@@ -148,6 +171,7 @@ export const toolsData: Tool[] = [
     status: "coming-soon",
     logo: "/tools/devdash.svg",
     screenshots: ["/tools/screenshots/devdash-hero.png"],
+    screenshotAlts: ["DevDash dashboard concept with GitHub stats and project metrics"],
     tagline: "Personal Developer Dashboard",
     description: "Track GitHub contributions, project metrics, and learning goals in one unified view. DevDash is your personal command center for developer productivity.",
     websiteUrl: "https://devdash.dev",
@@ -179,6 +203,12 @@ export const toolsData: Tool[] = [
       "/tools/screenshots/receiptrider/section1.png",
       "/tools/screenshots/receiptrider/section2.png",
       "/tools/screenshots/receiptrider/section3.png",
+    ],
+    screenshotAlts: [
+      "ReceiptRider landing page with scan receipts tagline",
+      "Receipt scanning feature with OCR extraction preview",
+      "Vehicle maintenance history timeline view",
+      "Spending insights and maintenance reminders dashboard",
     ],
     tagline: "Vehicle Maintenance Tracker for Your Pocket",
     description: "Scan vehicle-related receipts—oil changes, repairs, tires, inspections—and automatically build a clean, searchable maintenance history. Everything organized by vehicle with mileage tracking, spending insights, and smart reminders for upcoming maintenance.",

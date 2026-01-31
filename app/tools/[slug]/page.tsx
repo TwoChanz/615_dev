@@ -304,6 +304,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
               <div>
                 <ToolScreenshotGallery
                   screenshots={tool.screenshots || []}
+                  screenshotAlts={tool.screenshotAlts}
                   toolName={tool.name}
                 />
               </div>

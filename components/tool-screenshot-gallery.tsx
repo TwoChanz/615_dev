@@ -14,15 +14,20 @@ import {
 
 interface ToolScreenshotGalleryProps {
   screenshots: string[]
+  screenshotAlts?: string[]
   toolName: string
   className?: string
 }
 
 export function ToolScreenshotGallery({
   screenshots,
+  screenshotAlts,
   toolName,
   className,
 }: ToolScreenshotGalleryProps) {
+  // Helper to get alt text for a screenshot
+  const getAlt = (index: number) =>
+    screenshotAlts?.[index] || `${toolName} screenshot ${index + 1}`
   const [activeIndex, setActiveIndex] = useState(0)
 
   if (!screenshots || screenshots.length === 0) {
@@ -73,7 +78,7 @@ export function ToolScreenshotGallery({
           <DialogContent className="max-w-5xl border-none bg-transparent p-0">
             <Image
               src={screenshots[activeIndex]}
-              alt={`${toolName} screenshot ${activeIndex + 1}`}
+              alt={getAlt(activeIndex)}
               width={1920}
               height={1080}
               className="rounded-lg"
@@ -83,7 +88,7 @@ export function ToolScreenshotGallery({
 
         <Image
           src={screenshots[activeIndex]}
-          alt={`${toolName} screenshot ${activeIndex + 1}`}
+          alt={getAlt(activeIndex)}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
@@ -147,7 +152,7 @@ export function ToolScreenshotGallery({
             >
               <Image
                 src={screenshot}
-                alt={`${toolName} thumbnail ${index + 1}`}
+                alt={getAlt(index)}
                 fill
                 className="object-cover"
               />
