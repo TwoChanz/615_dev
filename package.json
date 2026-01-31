@@ -14,6 +14,7 @@
     "analyze": "ANALYZE=true next build",
     "screenshots": "npx tsx scripts/capture-screenshots.ts",
     "screenshots:subsense": "npx tsx scripts/capture-subsense.ts",
+    "screenshots:galleries": "npx tsx scripts/capture-tool-galleries.ts",
     "screenshots:install": "npx playwright install chromium"
   },
   "dependencies": {
