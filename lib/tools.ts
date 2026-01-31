@@ -165,6 +165,7 @@ export const toolsData: Tool[] = [
     name: "ReceiptRider",
     status: "coming-soon",
     logo: "/tools/receiptrider.png",
+    screenshots: ["/tools/screenshots/receiptrider-hero.png"],
     tagline: "Vehicle Maintenance Tracker for Your Pocket",
     description: "Scan vehicle-related receipts—oil changes, repairs, tires, inspections—and automatically build a clean, searchable maintenance history. Everything organized by vehicle with mileage tracking, spending insights, and smart reminders for upcoming maintenance.",
     websiteUrl: "https://receiptrider.com",
