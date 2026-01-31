@@ -28,20 +28,20 @@ export default function AboutPage() {
         {/* Main Content */}
         <div className="mt-12 prose prose-gray dark:prose-invert max-w-none">
           <p className="text-xl text-muted-foreground leading-relaxed">
-            Six1Five Devs is my corner of the internet where I build things, 
-            break things, and document everything along the way. It&apos;s a 
+            Six1Five Devs is an independent studio where we build things,
+            break things, and document everything along the way. It&apos;s a
             developer brand built on transparency and shipping.
           </p>
 
           <h2 className="text-2xl font-bold mt-12 mb-4">The Philosophy</h2>
           <p className="text-muted-foreground leading-relaxed">
-            I believe the best way to learn is by doing, and the best way to 
-            grow is by sharing. Every tool I build, every experiment I run, 
-            and every lesson I learn gets documented here. No gatekeeping, no 
+            We believe the best way to learn is by doing, and the best way to
+            grow is by sharing. Every tool we build, every experiment we run,
+            and every lesson we learn gets documented here. No gatekeeping, no
             fluff&mdash;just real insights from real builds.
           </p>
 
-          <h2 className="text-2xl font-bold mt-12 mb-4">What I&apos;m Building</h2>
+          <h2 className="text-2xl font-bold mt-12 mb-4">What We&apos;re Building</h2>
           <ul className="space-y-3 text-muted-foreground">
             <li className="flex items-start gap-3">
               <span className="mt-1.5 size-1.5 rounded-full bg-primary shrink-0" />
@@ -71,24 +71,24 @@ export default function AboutPage() {
 
           <h2 className="text-2xl font-bold mt-12 mb-4">The Stack</h2>
           <p className="text-muted-foreground leading-relaxed">
-            Everything I build runs on a modern TypeScript stack. Next.js for 
-            the frontend, Vercel for hosting, Supabase or Neon for databases, 
-            and Stripe for payments. I&apos;m a big believer in using boring, 
+            Everything we build runs on a modern TypeScript stack. Next.js for
+            the frontend, Vercel for hosting, Supabase or Neon for databases,
+            and Stripe for payments. We&apos;re big believers in using boring,
             proven technology and focusing energy on solving actual problems.
           </p>
 
           <h2 className="text-2xl font-bold mt-12 mb-4">Building in Public</h2>
           <p className="text-muted-foreground leading-relaxed">
-            I share revenue numbers, user metrics, and honest post-mortems on 
-            what works and what doesn&apos;t. Following along means you get to 
-            see behind the curtain&mdash;the wins, the failures, and everything 
+            We share revenue numbers, user metrics, and honest post-mortems on
+            what works and what doesn&apos;t. Following along means you get to
+            see behind the curtain&mdash;the wins, the failures, and everything
             in between.
           </p>
 
           <h2 className="text-2xl font-bold mt-12 mb-4">Connect</h2>
           <p className="text-muted-foreground leading-relaxed">
-            I&apos;m always happy to chat about building products, indie 
-            hacking, or tech in general. Find me on the platforms below or 
+            We&apos;re always happy to chat about building products, indie
+            hacking, or tech in general. Find us on the platforms below or
             subscribe to the newsletter for weekly updates.
           </p>
         </div>

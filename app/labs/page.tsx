@@ -25,8 +25,8 @@ export default function LabsPage() {
           Labs
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Raw experiments and build logs. This is where I test ideas, document 
-          failures, and share what I learn in real-time.
+          Raw experiments and build logs. This is where we test ideas, document
+          failures, and share what we learn in real-time.
         </p>
       </div>
 

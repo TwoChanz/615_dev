@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: "%s | Six1Five Devs",
   },
   description:
-    "Developer brand building in public. Shipping real tools like SubSense and AppPilot. Explore guides, build logs, and resources for indie hackers and developers.",
+    "Independent dev studio building in public. Shipping real tools like SubSense and AppPilot. Explore guides, build logs, and resources for indie hackers and developers.",
   keywords: [
     "developer",
     "indie hacker",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     siteName: "Six1Five Devs",
     title: "Six1Five Devs | Build. Ship. Document.",
     description:
-      "Developer brand building in public. Shipping real tools like SubSense and AppPilot.",
+      "Independent dev studio building in public. Shipping real tools like SubSense and AppPilot.",
     images: [
       {
         url: "/og-image.png",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Six1Five Devs | Build. Ship. Document.",
     description:
-      "Developer brand building in public. Shipping real tools like SubSense and AppPilot.",
+      "Independent dev studio building in public. Shipping real tools like SubSense and AppPilot.",
     images: ["/og-image.png"],
     creator: "@six1five",
   },
