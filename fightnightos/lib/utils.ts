@@ -1,24 +1,9 @@
 /**
  * Utility functions used throughout FightNight OS
- */
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
-
-/**
- * Combines CSS class names intelligently.
  *
- * WHY THIS EXISTS:
- * When building components, you often need to merge CSS classes from
- * different sources (default styles + custom overrides). This function
- * handles conflicts properly. For example:
- *   cn("p-4", "p-2") → "p-2" (not "p-4 p-2" which would conflict)
- *
- * USAGE:
- *   <div className={cn("bg-red-500", isActive && "bg-green-500")} />
+ * These are pure functions with no platform dependencies —
+ * they work the same in React Native as they did in Next.js.
  */
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
 
 /**
  * Formats a fighter's record as "W-L-D" (e.g., "27-1-0")
@@ -63,4 +48,19 @@ export function slugify(text: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "")
+}
+
+/**
+ * Formats an event date for display.
+ * Returns something like "Sat, Mar 8 · 6:00 PM"
+ */
+export function formatEventDate(dateString: string): string {
+  const date = new Date(dateString)
+  return date.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  })
 }
