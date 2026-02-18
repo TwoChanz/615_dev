@@ -36,6 +36,17 @@ export const blogPosts: Article[] = [
     type: "blog",
   },
   {
+    title: "Announcing FightNight OS — A Fan Command Center for UFC Fight Nights",
+    slug: "announcing-fightnightos",
+    description:
+      "We're building FightNight OS, a mobile-first PWA that unifies fight tracking, fighter following, prediction polls, and watch party coordination for UFC fans and their crews.",
+    date: "2026-02-18",
+    readingTime: "7 min read",
+    tags: ["build-in-public", "pwa", "sports", "product-launch"],
+    featured: false,
+    type: "blog",
+  },
+  {
     title: "Why I Stopped Using Traditional ORMs",
     slug: "ditching-traditional-orms",
     description:
