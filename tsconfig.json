@@ -40,6 +40,7 @@
     "vitest.config.ts",
     "vitest.setup.tsx",
     "**/*.test.ts",
-    "**/*.test.tsx"
+    "**/*.test.tsx",
+    "fightnightos"
   ]
 }

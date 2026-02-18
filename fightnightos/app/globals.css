@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+/*
+ * FightNight OS Design System
+ *
+ * The app uses a dark-first design with red/orange fight-themed accents.
+ * Dark backgrounds feel right for a fight night app — think arena lighting.
+ *
+ * CSS custom properties (variables) let us define colors once and reuse
+ * them everywhere. Tailwind picks these up automatically.
+ */
+
+:root {
+  /* Light mode colors (used when phone is in light mode) */
+  --background: oklch(0.98 0.00 0);
+  --foreground: oklch(0.15 0.00 0);
+  --card: oklch(1.00 0.00 0);
+  --card-foreground: oklch(0.15 0.00 0);
+  --primary: oklch(0.55 0.20 25);       /* Deep red — the fight brand color */
+  --primary-foreground: oklch(0.98 0.00 0);
+  --secondary: oklch(0.92 0.02 80);
+  --secondary-foreground: oklch(0.25 0.00 0);
+  --muted: oklch(0.94 0.01 260);
+  --muted-foreground: oklch(0.50 0.02 260);
+  --accent: oklch(0.65 0.18 45);        /* Orange accent — energy, excitement */
+  --accent-foreground: oklch(0.15 0.00 0);
+  --destructive: oklch(0.55 0.22 28);
+  --border: oklch(0.88 0.01 260);
+  --ring: oklch(0.55 0.20 25);
+  --radius: 0.75rem;
+}
+
+.dark {
+  /* Dark mode — the primary experience for fight night */
+  --background: oklch(0.12 0.02 260);
+  --foreground: oklch(0.95 0.00 0);
+  --card: oklch(0.17 0.02 260);
+  --card-foreground: oklch(0.95 0.00 0);
+  --primary: oklch(0.62 0.22 25);       /* Brighter red in dark mode */
+  --primary-foreground: oklch(0.98 0.00 0);
+  --secondary: oklch(0.22 0.02 260);
+  --secondary-foreground: oklch(0.90 0.00 0);
+  --muted: oklch(0.25 0.02 260);
+  --muted-foreground: oklch(0.60 0.02 260);
+  --accent: oklch(0.70 0.20 45);        /* Bright orange in dark mode */
+  --accent-foreground: oklch(0.12 0.00 0);
+  --destructive: oklch(0.60 0.24 28);
+  --border: oklch(0.28 0.02 260);
+  --ring: oklch(0.62 0.22 25);
+}
+
+/*
+ * Base styles applied to every page
+ */
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, sans-serif;
+  /* Prevent rubber-banding/overscroll on mobile for app-like feel */
+  overscroll-behavior: none;
+}
+
+/*
+ * Utility classes specific to FightNight OS
+ */
+
+/* Red-to-orange gradient text — used for headings and emphasis */
+.text-gradient-fire {
+  background: linear-gradient(135deg, oklch(0.62 0.22 25), oklch(0.70 0.20 45));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle red glow effect — used on cards and interactive elements */
+.glow-fight {
+  box-shadow:
+    0 0 15px oklch(0.55 0.20 25 / 0.15),
+    0 0 30px oklch(0.55 0.20 25 / 0.05);
+}
+
+/* Pulsing live indicator — shows when an event is currently happening */
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-live {
+  animation: pulse-live 2s ease-in-out infinite;
+}
+
+/* Safe area padding for phones with notches (iPhone, etc.) */
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
